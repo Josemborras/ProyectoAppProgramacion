@@ -19,10 +19,5 @@
         android:id="@+id/ShoppingListFragment"
         android:name="com.example.tabajo_finalt3.ui.fragment.ShoppingListFragment"
         android:label="Shopping list"
-        tools:layout="@layout/fragment_shopping_list">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_shopping_list"/>
 </navigation>

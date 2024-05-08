@@ -3,6 +3,7 @@ package com.example.tabajo_finalt3.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.navContainer) as NavHost
         val navController = navHost.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        //setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
     }
 
@@ -36,9 +36,10 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    fun changeToolbar(toolbarNew: Toolbar, showBack: Boolean){
+    fun changeToolbar(toolbarNew: Toolbar, showBack: Boolean, navController: NavController){
         setSupportActionBar(toolbarNew)
         supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     fun changeToolbarTitle(title: String){
