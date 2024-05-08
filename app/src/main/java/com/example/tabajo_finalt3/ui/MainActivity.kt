@@ -6,7 +6,6 @@ import androidx.navigation.NavHost
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tabajo_finalt3.R
 import com.example.tabajo_finalt3.databinding.MainActivityBinding
