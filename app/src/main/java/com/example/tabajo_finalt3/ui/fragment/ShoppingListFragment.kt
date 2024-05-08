@@ -47,7 +47,7 @@ class ShoppingListFragment : Fragment() {
             val aisleList = it.aisles
 
             if (aisleList != null) {
-                for(i in aisleList.indices){
+                for(i in 0 until aisleList.size){
                     if(i == 0){
                         aisleList[i].items?.let { itemList -> adapterToBuy.newList(itemList) }
                     } else {
@@ -61,20 +61,19 @@ class ShoppingListFragment : Fragment() {
             binding.constraintLayout.visibility = View.GONE
             binding.scrollView.visibility = View.VISIBLE
             binding.cardToBuy.visibility = View.VISIBLE
-            binding.cardBought.visibility = View.VISIBLE
+            binding.cardToBuy.visibility = View.VISIBLE
         } else if(adapterToBuy.itemCount > 0){
             binding.constraintLayout.visibility = View.GONE
             binding.scrollView.visibility = View.VISIBLE
             binding.cardToBuy.visibility = View.VISIBLE
-            binding.cardBought.visibility = View.GONE
-        } else {
+            binding.cardToBuy.visibility = View.GONE
+        }else{
             binding.constraintLayout.visibility = View.VISIBLE
             binding.scrollView.visibility = View.GONE
             binding.cardToBuy.visibility = View.GONE
-            binding.cardBought.visibility = View.GONE
+            binding.cardToBuy.visibility = View.GONE
         }
     }
-
     private fun configRecycler(){
         adapterToBuy = AdapterShoppingList(object: AdapterShoppingList.Listener{
             override fun onCheckListener(isChecked: Boolean, position: Int, item: Item) {

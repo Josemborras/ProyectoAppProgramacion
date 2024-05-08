@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         binding.buttonRandom.setOnClickListener {
             //findNavController().navigate()
         }
-        binding.IVcardShoppingList.setOnClickListener {
+        binding.buttonShoppingList.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

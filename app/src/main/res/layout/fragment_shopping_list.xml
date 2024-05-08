@@ -7,7 +7,7 @@
     tools:context=".ShoppingListFragment" >
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbarShopphingList"
+        android:id="@+id/appbarShoppingList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -23,7 +23,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout+"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -48,6 +48,8 @@
             android:id="@+id/TVnoList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/lexend_bold"
             android:text="Add something to your shopping list!"
             android:textAlignment="center"

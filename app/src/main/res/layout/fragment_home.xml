@@ -20,7 +20,7 @@
             app:collapsedTitleTextColor="@color/white"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginStart="32dp"
             app:expandedTitleTextColor="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbarHome">
