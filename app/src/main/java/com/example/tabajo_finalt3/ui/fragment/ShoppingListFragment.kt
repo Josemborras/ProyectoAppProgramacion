@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.tabajo_finalt3.databinding.FragmentShoppingListBinding
+import com.example.tabajo_finalt3.ui.MainActivity
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -22,8 +23,9 @@ class ShoppingListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbarShoppingList, false)
+        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
 
     }
