@@ -1,6 +1,5 @@
-package com.example.tabajo_finalt3.ui.fragment
+package com.example.trabajo_finalt3.ui.fragment
 
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,12 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tabajo_finalt3.data.models.ResponseGetShoppingList
-import com.example.tabajo_finalt3.databinding.DialogBinding
-import com.example.tabajo_finalt3.databinding.FragmentShoppingListBinding
-import com.example.tabajo_finalt3.ui.MainActivity
-import com.example.tabajo_finalt3.ui.adapter.AdapterAisles
-import com.example.tabajo_finalt3.viewmodel.ViewModel
+import com.example.trabajo_finalt3.R
+import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
+import com.example.trabajo_finalt3.databinding.DialogBinding
+import com.example.trabajo_finalt3.databinding.FragmentShoppingListBinding
+import com.example.trabajo_finalt3.ui.MainActivity
+import com.example.trabajo_finalt3.ui.adapter.AdapterAisles
+import com.example.trabajo_finalt3.viewmodel.ViewModel
 
 /**
  * @author Sandra Martinez
@@ -42,12 +42,21 @@ class ShoppingListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.swipeShoppingList.setColorSchemeResources(R.color.green)
 
         configRecycler()
 
+        binding.swipeShoppingList.isRefreshing = true
         viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
 
+        binding.swipeShoppingList.setOnRefreshListener {
+            binding.swipeShoppingList.isRefreshing = true
+            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+        }
 
+        binding.buttonForm.setOnClickListener {
+            BottomSheet().show((activity as MainActivity).supportFragmentManager, BottomSheet.TAG)
+        }
     }
 
     private val observer = Observer<ResponseGetShoppingList>{
@@ -62,6 +71,8 @@ class ShoppingListFragment : Fragment() {
             binding.constraintNoList.visibility = View.VISIBLE
             binding.constraintList.visibility = View.GONE
         }
+
+        binding.swipeShoppingList.isRefreshing = false
     }
 
     private fun configRecycler(){

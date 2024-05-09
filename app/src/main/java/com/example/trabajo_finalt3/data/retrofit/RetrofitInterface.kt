@@ -1,7 +1,7 @@
-package com.example.tabajo_finalt3.data.retrofit
+package com.example.trabajo_finalt3.data.retrofit
 
-import com.example.tabajo_finalt3.data.models.ResponseDeleteItem
-import com.example.tabajo_finalt3.data.models.ResponseGetShoppingList
+import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
+import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET

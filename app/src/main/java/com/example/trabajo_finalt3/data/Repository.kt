@@ -1,7 +1,7 @@
-package com.example.tabajo_finalt3.data
+package com.example.trabajo_finalt3.data
 
-import com.example.tabajo_finalt3.data.models.ResponseDeleteItem
-import com.example.tabajo_finalt3.data.retrofit.RetrofitObjeto
+import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
+import com.example.trabajo_finalt3.data.retrofit.RetrofitObjeto
 import retrofit2.Response
 
 class Repository {

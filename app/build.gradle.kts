@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tabajo_finalt3"
+    namespace = "com.example.trabajo_finalt3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.tabajo_finalt3"
+        applicationId = "com.example.trabajo_finalt3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

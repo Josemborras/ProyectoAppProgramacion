@@ -1,4 +1,4 @@
-package com.example.tabajo_finalt3.data.retrofit
+package com.example.trabajo_finalt3.data.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

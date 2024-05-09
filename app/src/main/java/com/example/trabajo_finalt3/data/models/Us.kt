@@ -1,9 +1,9 @@
-package com.example.tabajo_finalt3.data.models
+package com.example.trabajo_finalt3.data.models
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Metric(
+data class Us(
     @SerializedName("amount")
     val amount: Double?,
     @SerializedName("unit")

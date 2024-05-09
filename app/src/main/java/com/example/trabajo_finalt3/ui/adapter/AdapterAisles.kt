@@ -1,4 +1,4 @@
-package com.example.tabajo_finalt3.ui.adapter
+package com.example.trabajo_finalt3.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.tabajo_finalt3.data.models.Aisle
-import com.example.tabajo_finalt3.databinding.HolderAisleBinding
-import com.example.tabajo_finalt3.viewmodel.ViewModel
+import com.example.trabajo_finalt3.data.models.Aisle
+import com.example.trabajo_finalt3.databinding.HolderAisleBinding
 
 class AdapterAisles(val listener: Listener) : RecyclerView.Adapter<AdapterAisles.AislesHolder>() {
     private val list = ArrayList<Aisle>()
@@ -46,9 +45,6 @@ class AdapterAisles(val listener: Listener) : RecyclerView.Adapter<AdapterAisles
         list[position].items?.let {list ->
             adapterItems.newList(list)
         }
-
-
-
     }
 
     fun newList(newList: List<Aisle>){

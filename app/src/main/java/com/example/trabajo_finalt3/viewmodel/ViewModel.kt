@@ -1,11 +1,11 @@
-package com.example.tabajo_finalt3.viewmodel
+package com.example.trabajo_finalt3.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.example.tabajo_finalt3.data.Repository
-import com.example.tabajo_finalt3.data.models.ResponseGetShoppingList
+import com.example.trabajo_finalt3.data.Repository
+import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabajo_finalt3.data.models.ResponseDeleteItem
+import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
 import kotlinx.coroutines.launch
 
 class ViewModel : ViewModel() {

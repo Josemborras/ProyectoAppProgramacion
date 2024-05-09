@@ -1,12 +1,11 @@
-package com.example.tabajo_finalt3.ui.adapter
+package com.example.trabajo_finalt3.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.tabajo_finalt3.data.models.Item
-import com.example.tabajo_finalt3.databinding.HolderItemBinding
+import com.example.trabajo_finalt3.data.models.Item
+import com.example.trabajo_finalt3.databinding.HolderItemBinding
 
 class AdapterItems(val listener: Listener) : RecyclerView.Adapter<AdapterItems.ItemHolder>() {
     private val list = ArrayList<Item>()
