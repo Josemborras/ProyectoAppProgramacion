@@ -1,18 +1,21 @@
 package com.example.tabajo_finalt3.ui.fragment
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.example.tabajo_finalt3.data.models.Item
+import com.example.tabajo_finalt3.data.models.ResponseGetShoppingList
+import com.example.tabajo_finalt3.databinding.DialogBinding
 import com.example.tabajo_finalt3.databinding.FragmentShoppingListBinding
 import com.example.tabajo_finalt3.ui.MainActivity
-import com.example.tabajo_finalt3.ui.adapter.AdapterShoppingList
+import com.example.tabajo_finalt3.ui.adapter.AdapterAisles
 import com.example.tabajo_finalt3.viewmodel.ViewModel
 
 /**
@@ -23,8 +26,7 @@ import com.example.tabajo_finalt3.viewmodel.ViewModel
 class ShoppingListFragment : Fragment() {
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapterToBuy: AdapterShoppingList
-    private lateinit var adapterBought: AdapterShoppingList
+    private lateinit var adapterAisles: AdapterAisles
     private val viewModel by activityViewModels<ViewModel>()
 
     override fun onCreateView(
@@ -43,61 +45,53 @@ class ShoppingListFragment : Fragment() {
 
         configRecycler()
 
-        viewModel.getShoppingList().observe(viewLifecycleOwner){
-            val aisleList = it.aisles
+        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
 
-            if (aisleList != null) {
-                for(i in 0 until aisleList.size){
-                    if(i == 0){
-                        aisleList[i].items?.let { itemList -> adapterToBuy.newList(itemList) }
-                    } else {
-                        aisleList[i].items?.let { itemList -> adapterToBuy.addList(itemList) }
-                    }
-                }
-            }
+
+    }
+
+    private val observer = Observer<ResponseGetShoppingList>{
+        it.aisles?.let {list ->
+            adapterAisles.newList(list)
         }
 
-        if(adapterToBuy.itemCount > 0 && adapterBought.itemCount > 0){
-            binding.constraintLayout.visibility = View.GONE
-            binding.scrollView.visibility = View.VISIBLE
-            binding.cardToBuy.visibility = View.VISIBLE
-            binding.cardToBuy.visibility = View.VISIBLE
-        } else if(adapterToBuy.itemCount > 0){
-            binding.constraintLayout.visibility = View.GONE
-            binding.scrollView.visibility = View.VISIBLE
-            binding.cardToBuy.visibility = View.VISIBLE
-            binding.cardToBuy.visibility = View.GONE
-        }else{
-            binding.constraintLayout.visibility = View.VISIBLE
-            binding.scrollView.visibility = View.GONE
-            binding.cardToBuy.visibility = View.GONE
-            binding.cardToBuy.visibility = View.GONE
+        if(adapterAisles.itemCount > 0){
+            binding.constraintNoList.visibility = View.GONE
+            binding.constraintList.visibility = View.VISIBLE
+        } else {
+            binding.constraintNoList.visibility = View.VISIBLE
+            binding.constraintList.visibility = View.GONE
         }
     }
+
     private fun configRecycler(){
-        adapterToBuy = AdapterShoppingList(object: AdapterShoppingList.Listener{
-            override fun onCheckListener(isChecked: Boolean, position: Int, item: Item) {
-                if(!isChecked){
-                    adapterToBuy.removeItem(position)
-                    adapterBought.addItem(item)
-                }
+        adapterAisles = AdapterAisles(object: AdapterAisles.Listener{
+            override fun onClickListener(itemId: Int) {
+                createDialogDelete(itemId)
             }
         })
 
-        binding.recyclerToBuy.adapter = adapterToBuy
-        binding.recyclerToBuy.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerAisles.adapter = adapterAisles
+        binding.recyclerAisles.layoutManager = LinearLayoutManager(requireContext())
+    }
 
-        adapterBought = AdapterShoppingList(object : AdapterShoppingList.Listener{
-            override fun onCheckListener(isChecked: Boolean, position: Int, item: Item) {
-                if(isChecked){
-                    adapterBought.removeItem(position)
-                    adapterToBuy.addItem(item)
-                }
-            }
-        })
+    private fun createDialogDelete(itemId: Int){
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = DialogBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
 
-        binding.recyclerBought.adapter = adapterBought
-        binding.recyclerBought.layoutManager = LinearLayoutManager(requireContext())
+        val dialog = builder.create()
+
+        dialogBinding.buttonDelete.setOnClickListener {
+            viewModel.deleteItemShoppingList(itemId)
+            dialog.dismiss()
+            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+        }
+        dialogBinding.buttonCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun onDestroyView() {
