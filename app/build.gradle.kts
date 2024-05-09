@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tabajo_finalt3"
+    namespace = "com.example.trabajo_finalt3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.tabajo_finalt3"
+        applicationId = "com.example.trabajo_finalt3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -47,6 +47,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 

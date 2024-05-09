@@ -1,0 +1,3 @@
+<blur xmlns:android="http://schemas.android.com/apk/res/android"
+    android:radius="25"
+    android:scale="0.5" />
