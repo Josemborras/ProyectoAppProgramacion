@@ -5,6 +5,8 @@ import com.example.trabajo_finalt3.data.Repository
 import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.trabajo_finalt3.data.models.Item
+import com.example.trabajo_finalt3.data.models.PostItem
 import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
 import kotlinx.coroutines.launch
 
@@ -41,5 +43,18 @@ class ViewModel : ViewModel() {
         }
 
         return deleteResLiveData
+    }
+
+    fun addItemShoppingList(item: PostItem): MutableLiveData<Item> {
+        val itemLiveData = MutableLiveData<Item>()
+
+        viewModelScope.launch {
+            val res = repository.addItemShoppingList(item)
+            if(res.code() == 200){
+                itemLiveData.postValue(res.body())
+            }
+        }
+
+        return itemLiveData
     }
 }

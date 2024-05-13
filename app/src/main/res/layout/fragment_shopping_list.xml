@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ShoppingListFragment">
+    tools:context="ui.fragment.ShoppingListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarShoppingList"
