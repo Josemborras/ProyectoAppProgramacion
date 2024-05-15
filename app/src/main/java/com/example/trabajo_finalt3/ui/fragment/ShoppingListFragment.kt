@@ -5,18 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trabajo_finalt3.databinding.FragmentShoppingListBinding
 import com.example.trabajo_finalt3.R
 import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import com.example.trabajo_finalt3.databinding.DialogBinding
-import com.example.trabajo_finalt3.databinding.FragmentShoppingListBinding
 import com.example.trabajo_finalt3.ui.MainActivity
 import com.example.trabajo_finalt3.ui.adapter.AdapterAisles
-import com.example.trabajo_finalt3.viewmodel.ViewModel
+import com.example.trabajo_finalt3.viewmodel.MyViewModel
 
 /**
  * @author Sandra Martinez
@@ -27,7 +28,7 @@ class ShoppingListFragment : Fragment() {
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapterAisles: AdapterAisles
-    private val viewModel by activityViewModels<ViewModel>()
+    private val viewModel by activityViewModels<MyViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +48,19 @@ class ShoppingListFragment : Fragment() {
         configRecycler()
 
         binding.swipeShoppingList.isRefreshing = true
-        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+        try {
+            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+        } catch(e: Exception){
+            Toast.makeText(requireContext(), "Timeout", Toast.LENGTH_SHORT).show()
+        }
 
         binding.swipeShoppingList.setOnRefreshListener {
             binding.swipeShoppingList.isRefreshing = true
-            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+            try {
+                viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+            } catch(e: Exception){
+                Toast.makeText(requireContext(), "Timeout", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.buttonForm.setOnClickListener {
@@ -65,11 +74,11 @@ class ShoppingListFragment : Fragment() {
         }
 
         if(adapterAisles.itemCount > 0){
-            binding.constraintNoList.visibility = View.GONE
-            binding.constraintList.visibility = View.VISIBLE
+            binding.IVnoList.visibility = View.GONE
+            binding.TVnoList.visibility = View.GONE
         } else {
-            binding.constraintNoList.visibility = View.VISIBLE
-            binding.constraintList.visibility = View.GONE
+            binding.IVnoList.visibility = View.VISIBLE
+            binding.TVnoList.visibility = View.VISIBLE
         }
 
         binding.swipeShoppingList.isRefreshing = false
@@ -95,8 +104,8 @@ class ShoppingListFragment : Fragment() {
 
         dialogBinding.buttonDelete.setOnClickListener {
             viewModel.deleteItemShoppingList(itemId)
-            dialog.dismiss()
             viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+            dialog.dismiss()
         }
         dialogBinding.buttonCancel.setOnClickListener {
             dialog.dismiss()

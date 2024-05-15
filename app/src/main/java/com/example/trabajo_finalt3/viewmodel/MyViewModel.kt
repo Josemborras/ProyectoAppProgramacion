@@ -10,7 +10,7 @@ import com.example.trabajo_finalt3.data.models.PostItem
 import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
 import kotlinx.coroutines.launch
 
-class ViewModel : ViewModel() {
+class MyViewModel : ViewModel() {
     private val repository by lazy {
         Repository()
     }

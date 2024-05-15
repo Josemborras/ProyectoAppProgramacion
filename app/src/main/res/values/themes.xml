@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Tabajo_finalT3" parent="android:Theme.Material.Light.NoActionBar" >
+    <style name="Theme.Trabajo_finalT3" parent="android:Theme.Material.Light.NoActionBar" >
         <item name="colorPrimary">#2BCB8A</item>
     </style>
-    <style name="Base.Theme.Tabajo_finalT3" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Trabajo_finalT3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#2BCB8A</item>
     </style>
 </resources>

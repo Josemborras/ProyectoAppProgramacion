@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.trabajo_finalt3.databinding.MockBottomSheetLayoutBinding
-import com.example.trabajo_finalt3.viewmodel.ViewModel
+import com.example.trabajo_finalt3.viewmodel.MyViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  */
 class BottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: MockBottomSheetLayoutBinding
-    private val viewModel by activityViewModels<ViewModel>()
+    private val viewModel by activityViewModels<MyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

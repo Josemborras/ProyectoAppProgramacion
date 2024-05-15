@@ -29,11 +29,10 @@ class AdapterItems(val listener: Listener) : RecyclerView.Adapter<AdapterItems.I
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         holder.binding.TVitem.text = "${list[position].measures?.original?.amount?.toInt().toString()} ${list[position].measures?.original?.unit!!} ${list[position].name}"
 
-        holder.itemView.setOnLongClickListener {
+        holder.itemView.setOnClickListener {
             list[position].id?.let {
                 listener.onClickListener(it)
             }
-            true
         }
     }
 
