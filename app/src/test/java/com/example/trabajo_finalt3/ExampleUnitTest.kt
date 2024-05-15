@@ -1,4 +1,4 @@
-package com.example.tabajo_finalt3
+package com.example.trabajo_finalt3
 
 import org.junit.Test
 

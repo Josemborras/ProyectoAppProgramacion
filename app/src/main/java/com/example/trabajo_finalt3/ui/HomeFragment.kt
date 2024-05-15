@@ -1,12 +1,11 @@
-package com.example.tabajo_finalt3.ui
+package com.example.trabajo_finalt3.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.tabajo_finalt3.databinding.FragmentHomeBinding
+import com.example.trabajo_finalt3.databinding.FragmentHomeBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

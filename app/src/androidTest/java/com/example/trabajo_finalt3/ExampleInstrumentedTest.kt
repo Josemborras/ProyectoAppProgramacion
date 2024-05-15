@@ -1,4 +1,4 @@
-package com.example.tabajo_finalt3
+package com.example.trabajo_finalt3
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
