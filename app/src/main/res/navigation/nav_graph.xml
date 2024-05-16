@@ -7,22 +7,34 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.trabajo_final_t3.ui.HomeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.HomeFragment"
         android:label="HOME"
         tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/ShoppingListFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_buscadorIngredientes2"
+            app:destination="@id/buscadorIngredientes2" />
     </fragment>
     <fragment
         android:id="@+id/ShoppingListFragment"
-        android:name="com.example.trabajo_final_t3.ui.ShoppingListFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.ShoppingListFragment"
         android:label="Shopping list"
         tools:layout="@layout/fragment_shopping_list">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buscadorIngredientes2"
+        android:name="com.example.trabajo_final_t3.ui.fragments.BuscadorIngredientes"
+        android:label="fragment_buscador_ingredientes"
+        tools:layout="@layout/fragment_buscador_ingredientes" >
+        <action
+            android:id="@+id/action_buscadorIngredientes2_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>
