@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trabajo_final_t3"
+    namespace = "com.example.trabajo_finalt3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trabajo_final_t3"
+        applicationId = "com.example.trabajo_finalt3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,11 +51,6 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,6 +63,13 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.retrofit)
+    implementation (libs.gson)
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation (libs.converter.gson)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation(libs.junit)

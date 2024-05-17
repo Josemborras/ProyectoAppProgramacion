@@ -1,14 +1,15 @@
-package com.example.trabajo_final_t3.ui
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.trabajo_final_t3.R
-import com.example.trabajo_final_t3.databinding.MainActivityBinding
+import com.example.trabajo_finalt3.R
+import com.example.trabajo_finalt3.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.navContainer) as NavHost
         val navController = navHost.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
-   //     setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
     }
 
@@ -32,5 +32,15 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.navContainer)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun changeToolbar(toolbarNew: Toolbar, showBack: Boolean, navController: NavController){
+        setSupportActionBar(toolbarNew)
+        supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    fun changeToolbarTitle(title: String){
+        supportActionBar?.title = title
     }
 }

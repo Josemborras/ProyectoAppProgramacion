@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarColoredBackArrow" parent="Base.Theme.Trabajo_finalT3">
+        <item name="android:textColorSecondary">@color/yellow</item>
+        <item name="android:statusBarColor">@color/green</item>
+    </style>
+</resources>

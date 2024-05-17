@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/HomeFragment"
-        android:icon="@drawable/button_home"
-        android:title="Home"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/ShoppingListFragment"
         android:icon="@drawable/button_list"
         android:title="List"
