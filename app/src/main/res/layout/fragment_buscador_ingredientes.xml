@@ -41,7 +41,6 @@
         android:id="@+id/tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="reemplazar"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/imvImagenBuscador"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
