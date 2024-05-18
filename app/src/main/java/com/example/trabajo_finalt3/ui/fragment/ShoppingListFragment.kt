@@ -48,19 +48,11 @@ class ShoppingListFragment : Fragment() {
         configRecycler()
 
         binding.swipeShoppingList.isRefreshing = true
-        try {
-            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
-        } catch(e: Exception){
-            Toast.makeText(requireContext(), "Timeout", Toast.LENGTH_SHORT).show()
-        }
+        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
 
         binding.swipeShoppingList.setOnRefreshListener {
             binding.swipeShoppingList.isRefreshing = true
-            try {
-                viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
-            } catch(e: Exception){
-                Toast.makeText(requireContext(), "Timeout", Toast.LENGTH_SHORT).show()
-            }
+            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
         }
 
         binding.buttonForm.setOnClickListener {
@@ -112,6 +104,12 @@ class ShoppingListFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
     }
 
     override fun onDestroyView() {

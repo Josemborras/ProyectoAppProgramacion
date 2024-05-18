@@ -19,7 +19,7 @@ class Repository {
     suspend fun getShoppingList(
         username: String = "sandra-m",
         usernameQuery: String = "sandra-m",
-        hash: String = "0a3d1774dec74565a4565e2877d195ac"
+        hash: String = "56d9160fc457a3d586fe75d3f885da91654a26cd"
     ) = retrofit.getShoppingList(username, usernameQuery, hash)
     suspend fun deleteItemShoppingList(itemId: Int): Response<ResponseDeleteItem> {
         val username = "sandra-m"
