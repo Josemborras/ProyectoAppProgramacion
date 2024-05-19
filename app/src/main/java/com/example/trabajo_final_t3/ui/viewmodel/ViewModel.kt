@@ -12,6 +12,8 @@ class ViewModel: ViewModel() {
     private val repositorio by lazy { Repository() }
 
     private val ingredientsListLiveData = MutableLiveData<IngredientsResponse>()
+    private var suggestionsLiveData = Result
+    private var ingredienteResultLiveData = Result
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
 
@@ -27,4 +29,14 @@ class ViewModel: ViewModel() {
         }
         return ingredientsListLiveData
     }
+
+    /*fun setSuggestions(ingrediente: Result) { suggestionsLiveData = ingrediente }
+
+    fun getSuggestions() = suggestionsLiveData
+
+
+    fun setIngredienteResult(ingrediente: Result) { ingredienteResultLiveData = ingrediente }
+
+    fun getIngredienteResult() = ingredienteResultLiveData*/
+
 }

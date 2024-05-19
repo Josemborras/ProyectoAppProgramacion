@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.BuscadorIngredientes">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -29,7 +21,7 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/svIngredientes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:defaultQueryHint="Search Ingredients"
@@ -37,23 +29,42 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBuscadorIngredientes"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/imvImagenBuscador"
+        android:layout_height="500dp"
+        android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/svIngredientes" />
 
     <ImageView
         android:id="@+id/imvImagenBuscador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/buscador_fondo"
+        app:layout_constraintBottom_toBottomOf="@+id/rvBuscadorIngredientes"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/rvBuscadorIngredientes" />
+
+    <Button
+        android:id="@+id/btnBuscarReceta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/rvBuscadorIngredientes" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="58dp"
+        android:layout_height="17dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btnBuscarReceta"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/rvBuscadorIngredientes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

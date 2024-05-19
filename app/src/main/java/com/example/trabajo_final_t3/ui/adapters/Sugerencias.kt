@@ -22,9 +22,9 @@ class Sugerencias(): RecyclerView.Adapter<Sugerencias.SugerenciasCelda>() {
     }
 
     override fun onBindViewHolder(holder: SugerenciasCelda, position: Int) {
-        val item = lista[position]
+        val item = lista[position].results[position]
 
-        holder.binding.searchItemID.text = item.results.get(position).name
+        holder.binding.searchItemID.text = item.name
     }
 
 }
