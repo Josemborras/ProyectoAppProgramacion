@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +18,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trabajo_final_t3.R
+import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorIngredientesBinding
+import com.example.trabajo_final_t3.databinding.IngredientesBinding
+import com.example.trabajo_final_t3.ui.adapters.Ingredientes
 import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
 
 class BuscadorIngredientes : Fragment() {
 
     private lateinit var binding: FragmentBuscadorIngredientesBinding
+    private lateinit var bindingIngredient: IngredientesBinding
     private val viewModel by activityViewModels<ViewModel>()
+    private lateinit var adaptador: Ingredientes
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -34,6 +41,7 @@ class BuscadorIngredientes : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentBuscadorIngredientesBinding.inflate(layoutInflater, container, false)
+        bindingIngredient = IngredientesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -50,7 +58,7 @@ class BuscadorIngredientes : Fragment() {
         binding.svIngredientes.setOnQueryTextListener(object : OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // esto se hace cuando pulsas la lupa del teclado al terminar de buscar
-                viewModel.getIngredients(query.toString()).observe(viewLifecycleOwner){
+                /*viewModel.getIngredients(query.toString()).observe(viewLifecycleOwner){
                     binding.tv.text = ""
                     binding.imvImagenBuscador.visibility = View.GONE
                     it.results.forEach {
@@ -58,7 +66,7 @@ class BuscadorIngredientes : Fragment() {
                         binding.tv.text = """${binding.tv.text} 
                             |${it.name}""".trimMargin()
                     }
-                }
+                }*/
 //                binding.tv.text = query.toString()
                 return true
             }
@@ -104,19 +112,42 @@ class BuscadorIngredientes : Fragment() {
                 val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
 
                 viewModel.getIngredients(selection).observe(viewLifecycleOwner){
-                    // viewModel.setSuggestions(it.results[0])
+                    var resultado = ArrayList<Resultado>()
+
+                    it.results.forEach { i ->
+                        if (i.name == selection) resultado.add(i)
+                    }
+
+                    viewModel.setSuggestions(resultado)
                 }
+
+                // todo lo que devuelve en las sugerencias lo mete en el rv
 
                 binding.rvBuscadorIngredientes.visibility = View.VISIBLE
                 binding.imvImagenBuscador.visibility = View.GONE
 
                 binding.rvBuscadorIngredientes.layoutManager = LinearLayoutManager(context)
-                // binding.rvBuscadorIngredientes.adapter = Ingredientes()
+                adaptador = Ingredientes(
+                    viewModel.getSuggestions(),
+                    selection,
+                )
+                binding.rvBuscadorIngredientes.adapter = adaptador
 
-                searchView.setQuery(selection, false)
+                Log.d("rv", viewModel.getSuggestions().toString())
+
+                searchView.setQuery(selection, true)
                 return true
             }
+
         })
+
+        binding.swipe.setOnRefreshListener {
+            binding.swipe.isRefreshing = true
+
+
+
+            binding.swipe.isRefreshing = false
+        }
 
     }
 }

@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.BuscadorIngredientes">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -29,25 +35,41 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBuscadorIngredientes"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="0dp"
-        android:layout_height="500dp"
+
+
+        android:layout_height="550dp"
         android:layout_marginTop="24dp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/svIngredientes" />
+        app:layout_constraintTop_toBottomOf="@+id/svIngredientes">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBuscadorIngredientes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/imvImagenBuscador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/buscador_fondo"
-        app:layout_constraintBottom_toBottomOf="@+id/rvBuscadorIngredientes"
+        app:layout_constraintBottom_toBottomOf="@+id/swipe"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/rvBuscadorIngredientes" />
+        app:layout_constraintStart_toStartOf="@+id/swipe"
+        app:layout_constraintTop_toTopOf="@+id/swipe" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="58dp"
+        android:layout_height="17dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btnBuscarReceta"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
         android:id="@+id/btnBuscarReceta"
@@ -57,14 +79,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/rvBuscadorIngredientes" />
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="58dp"
-        android:layout_height="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuscarReceta"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/rvBuscadorIngredientes" />
+        app:layout_constraintTop_toBottomOf="@+id/swipe" />
 </androidx.constraintlayout.widget.ConstraintLayout>

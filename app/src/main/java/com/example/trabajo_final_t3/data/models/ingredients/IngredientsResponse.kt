@@ -9,7 +9,7 @@ data class IngredientsResponse(
     @SerializedName("offset")
     val offset: Int,
     @SerializedName("results")
-    val results: List<Result>,
+    val results: List<Resultado>,
     @SerializedName("totalResults")
     val totalResults: Int
 )

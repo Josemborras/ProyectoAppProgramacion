@@ -3,7 +3,7 @@ package com.example.trabajo_final_t3.data.models.ingredients
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Resultado(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image")
