@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.currentComposer
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -45,6 +46,11 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //esta funcion la investige por google para que cuando bajes y te de pereza tener que subir que te suba automaticamente
+        binding.flSubir.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
+        }
+
         //se le pasa recipes(RecipesRandom) al configrecicler(configuracion del adaptador)
         //la funcion que viene del viewModel es para pasarle el listado que devuelve al config recicle
         viewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
@@ -52,7 +58,6 @@ class FirstFragment : Fragment() {
                 configRecicler(it.recipes)
             }
         }
-
     }
 
     //el onclick es para cuando pinches en la receta te lleve a la otra pantalla donde salgan los datos de la receta
