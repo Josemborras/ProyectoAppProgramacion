@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_receta"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:adjustViewBounds="true"
@@ -17,7 +17,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txNombrereceta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#A15FDD48"
@@ -29,7 +29,7 @@
         android:text="TextView"
         android:textSize="16sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/img_receta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

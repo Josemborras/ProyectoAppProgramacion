@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.tabajo_finalt3.R
 import com.example.tabajo_finalt3.databinding.FragmentHomeBinding
 
 /**
@@ -30,6 +32,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+//        binding.buttonRandom.setOnClickListener {
+//            findNavController().navigate(R.id.action_HomeFragment_to_firstFragment)
+//        }
 
 
     }
