@@ -32,25 +32,32 @@ class DetailRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRecipe().observe(viewLifecycleOwner){recipeListItem ->
-            (requireActivity() as MainActivity).supportActionBar?.title = recipeListItem.title
+//        viewModel.getRecipe().observe(viewLifecycleOwner){recipeListItem ->
+//            (requireActivity() as MainActivity).supportActionBar?.title = recipeListItem.title
+//
+//            viewModel.getRecipeInfo(recipeListItem.id).observe(viewLifecycleOwner){recipeComplete ->
+//                Glide.with(this).load(recipeComplete.image).into(binding.ivRecipe)
+//            }
+//
+//        }
+//
+//        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+//        binding.viewpager.adapter = viewPagerAdapter
+//
+//        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
+//            tab.text = when (position) {
+//                0 -> "Ingredients"
+//                1 -> "Steps"
+//                2 -> "Card"
+//                else -> null
+//            }
+//        }.attach()
 
-            viewModel.getRecipeInfo(recipeListItem.id).observe(viewLifecycleOwner){recipeComplete ->
-                Glide.with(this).load(recipeComplete.image).into(binding.ivRecipe)
-            }
+        val id = 324694
+        viewModel.getRecipeInfo(id).observe(viewLifecycleOwner){
+            (requireActivity() as MainActivity).supportActionBar?.title = it.title
+            Glide.with(this).load(it.image).into(binding.ivRecipe)
 
         }
-
-        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
-        binding.viewpager.adapter = viewPagerAdapter
-
-        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Ingredients"
-                1 -> "Steps"
-                2 -> "Card"
-                else -> null
-            }
-        }.attach()
     }
 }

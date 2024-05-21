@@ -1,3 +1,5 @@
 package com.example.trabajo_finalt3.model.data.Recipe
 
-class ListRecipe : ArrayList<ListRecipeItem>()
+import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
+
+class ListRecipe : ArrayList<List<RecipeItem>>()

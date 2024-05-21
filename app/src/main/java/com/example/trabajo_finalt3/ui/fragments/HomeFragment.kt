@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.trabajo_finalt3.databinding.FragmentHomeBinding
+import com.example.trabajo_finalT3.databinding.FragmentHomeBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

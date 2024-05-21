@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.trabajo_finalt3.databinding.FragmentShoppingListBinding
+import com.example.trabajo_finalT3.databinding.FragmentShoppingListBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

@@ -12,7 +12,7 @@ interface MyService {
 
     @Headers("x-api-key: 6ae3b4a55ffc4189ba718e387513a9f2","Content-Type: application/json")
     @GET("recipes/{id}/information")
-    suspend fun obtenerRecipe(id: Int): Response<RecipeResponse>
+    suspend fun obtenerRecipe(@Path("id") id: Int): Response<RecipeResponse>
 
     @Headers("x-api-key: 6ae3b4a55ffc4189ba718e387513a9f2","Content-Type: application/json")
     @GET("recipes/{id}/similar")
