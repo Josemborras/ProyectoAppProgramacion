@@ -12,7 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.tabajo_finalt3.R
+import com.example.tabajo_finalt3.data.models.Recipe
 import com.example.tabajo_finalt3.data.models.RecipesRandom
 import com.example.tabajo_finalt3.databinding.FragmentListadoBinding
 import com.example.tabajo_finalt3.ui.adapter.Adaptadorlistado
@@ -42,27 +45,30 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configRecicler()
-
-        viewModel.recipesRandomAddVw(10).observe(viewLifecycleOwner){
-
-
-
+        //se le pasa recipes(RecipesRandom) al configrecicler(configuracion del adaptador)
+        //la funcion que viene del viewModel es para pasarle el listado que devuelve al config recicle
+        viewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
+            if (it != null) {
+                configRecicler(it.recipes)
+            }
         }
 
     }
 
-    fun configRecicler(){
+    //el onclick es para cuando pinches en la receta te lleve a la otra pantalla donde salgan los datos de la receta
+    //se mete la lista dentro para pasarselo al adaptador
+    fun configRecicler(lista : ArrayList<Recipe>){
 
         val recyclerView = binding.recyclerView
-        adaptador = Adaptadorlistado( object : Adaptadorlistado.MyClick{
-            override fun onClick(receta: RecipesRandom) {
-               viewModel.recipesRandomAddVw(10)
-//                findNavController().navigate(R.id.)
+        //aqui se le esta pasando la lista
+        adaptador = Adaptadorlistado(lista, object : Adaptadorlistado.MyClick{
+            override fun onClick(receta: Recipe) {
+
             }
 
         })
-        val disenio = GridLayoutManager(requireContext(), 2)
+        //disenio de como se vera el recilcer view cuando los ejecutemos
+        val disenio = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = disenio
         recyclerView.adapter = adaptador
 

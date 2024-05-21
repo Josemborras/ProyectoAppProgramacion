@@ -17,6 +17,7 @@ class ViewModel: ViewModel() {
         Repository()
     }
 
+
     fun recipesRandomAddVw(number: Int): MutableLiveData<RecipesRandom?> {
 
         val liveData = MutableLiveData<RecipesRandom?>()

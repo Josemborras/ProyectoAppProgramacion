@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class RecipesRandom(
     @SerializedName("recipes")
-    var recipes: List<Recipe?>?
+    var recipes: ArrayList<Recipe>
 )

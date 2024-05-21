@@ -34,9 +34,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-//        binding.buttonRandom.setOnClickListener {
-//            findNavController().navigate(R.id.action_HomeFragment_to_firstFragment)
-//        }
+        binding.buttonRandom.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_firstFragment)
+        }
 
 
     }

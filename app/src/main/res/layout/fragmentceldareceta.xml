@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/img_receta"
@@ -20,14 +20,15 @@
         android:id="@+id/txNombrereceta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#A15FDD48"
+        android:background="#7C231847"
         android:fontFamily="@font/indie_flower"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="TextView"
-        android:textSize="16sp"
+        android:textColor="#FFF48A"
+        android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/img_receta"
         app:layout_constraintEnd_toEndOf="parent"
