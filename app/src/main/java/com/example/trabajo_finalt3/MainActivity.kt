@@ -7,8 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import com.example.trabajo_finalt3.R
-import com.example.trabajo_finalt3.databinding.MainActivityBinding
+import com.example.trabajo_finalT3.R
+import com.example.trabajo_finalT3.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 

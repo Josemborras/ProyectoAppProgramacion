@@ -48,6 +48,7 @@ class DetailRecipeFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "Ingredients"
                 1 -> "Steps"
+                2 -> "Card"
                 else -> null
             }
         }.attach()
