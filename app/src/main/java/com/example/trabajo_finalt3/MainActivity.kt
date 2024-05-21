@@ -1,4 +1,4 @@
-package com.example.trabajo_finalt3.ui
+package com.example.trabajo_finalt3
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

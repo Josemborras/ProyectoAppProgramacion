@@ -1,4 +1,4 @@
-package com.example.trabajo_finalt3
+package com.example.trabajo_finalt3.ui.fragments.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.trabajo_finalT3.R
 
 
-class DetailRecipeFragment : Fragment() {
+class StepsFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class DetailRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_recipe, container, false)
+        return inflater.inflate(R.layout.fragment_steps, container, false)
     }
 
 
