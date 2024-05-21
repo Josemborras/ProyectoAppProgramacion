@@ -11,6 +11,7 @@ import com.example.trabajo_finalT3.R
 import com.example.trabajo_finalT3.databinding.FragmentDetailRecipeBinding
 import com.example.trabajo_finalt3.MainActivity
 import com.example.trabajo_finalt3.MyViewModel
+import com.example.trabajo_finalt3.ui.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -39,5 +40,16 @@ class DetailRecipeFragment : Fragment() {
             }
 
         }
+
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+        binding.viewpager.adapter = viewPagerAdapter
+
+        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Ingredients"
+                1 -> "Steps"
+                else -> null
+            }
+        }.attach()
     }
 }
