@@ -5,24 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trabajo_finalT3.R
+import com.example.trabajo_finalT3.databinding.FragmentCardBinding
+import com.example.trabajo_finalT3.databinding.FragmentStepsBinding
+import com.example.trabajo_finalt3.MyViewModel
+import com.example.trabajo_finalt3.model.data.Recipe.ExtendedIngredient
+import com.example.trabajo_finalt3.model.data.Steps.Step
+import com.example.trabajo_finalt3.ui.adapters.IngredientsAdapter
+import com.example.trabajo_finalt3.ui.adapters.StepAdapter
 
 
 class StepsFragment : Fragment() {
 
+    private lateinit var binding: FragmentStepsBinding
+    private val viewModel by activityViewModels<MyViewModel>()
+    private lateinit var adapter: StepAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
+            override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_steps, container, false)
+        binding = FragmentStepsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val id = 324694
+        viewModel.getInstructions(id).observe(viewLifecycleOwner){
+            configRecyclerIngredients(it.steps)
+
+        }
+    }
+    private fun configRecyclerIngredients(list: List<Step>) {
+        adapter = StepAdapter()
+        adapter.setSteps(list)
+
+        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        binding.rv.adapter = adapter
+    }
 }

@@ -21,10 +21,10 @@
         android:id="@+id/tvCantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="250dp"
         android:text="1"
         app:layout_constraintBottom_toBottomOf="@+id/tvName"
-        app:layout_constraintEnd_toStartOf="@+id/tvUnit"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvName"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:text="tbsp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/tvCantidad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCantidad"

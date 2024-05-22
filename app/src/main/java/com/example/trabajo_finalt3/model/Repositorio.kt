@@ -18,4 +18,6 @@ class Repositorio {
         return retrofit.obtenerCardImage(id)
     }
     suspend fun listRecipes(id: Int) = retrofit.obtenerRecetasSimilares(id)
+
+    suspend fun getInstructions(id: Int) = retrofit.obtenerInstructions(id)
 }

@@ -8,15 +8,17 @@ import com.example.trabajo_finalt3.model.data.CardImage.CardImage
 import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
 import com.example.trabajo_finalt3.model.data.Recipe.ListRecipe
 import com.example.trabajo_finalt3.model.data.Recipe.RecipeResponse
+import com.example.trabajo_finalt3.model.data.Steps.StepsResponse
+import com.example.trabajo_finalt3.model.data.Steps.StepsResponseItem
 import kotlinx.coroutines.launch
 
 class MyViewModel: ViewModel() {
 
     private val repositorio = Repositorio()
-    private val listRecipe: MutableLiveData<ListRecipe> = MutableLiveData()
     private val selectedRecipeList = MutableLiveData<RecipeItem>()
     private val selectedRecipe = MutableLiveData<RecipeResponse>()
     private val cardImageRecipe = MutableLiveData<CardImage>()
+    private val stepsRecipe = MutableLiveData<StepsResponse>()
 
     fun setRecipe(recipe: RecipeItem) {
         selectedRecipeList.value = recipe
@@ -54,6 +56,22 @@ class MyViewModel: ViewModel() {
             }
         }
         return cardImageRecipe
+    }
+
+    fun getInstructions(id: Int): MutableLiveData<StepsResponse>{
+        viewModelScope.launch {
+            val respuesta = repositorio.getInstructions(id)
+
+            val code = respuesta.code()
+
+            if (code == 200){
+                val steps = respuesta.body()
+                steps?.let {
+                    stepsRecipe.postValue(it)
+                }
+            }
+        }
+        return stepsRecipe
     }
 
 }

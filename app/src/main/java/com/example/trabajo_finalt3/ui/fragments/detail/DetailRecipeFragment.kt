@@ -41,17 +41,17 @@ class DetailRecipeFragment : Fragment() {
 //
 //        }
 //
-//        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
-//        binding.viewpager.adapter = viewPagerAdapter
-//
-//        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
-//            tab.text = when (position) {
-//                0 -> "Ingredients"
-//                1 -> "Steps"
-//                2 -> "Card"
-//                else -> null
-//            }
-//        }.attach()
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+        binding.viewpager.adapter = viewPagerAdapter
+
+        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Ingredients"
+                1 -> "Steps"
+                2 -> "Card"
+                else -> null
+            }
+        }.attach()
 
         val id = 324694
         viewModel.getRecipeInfo(id).observe(viewLifecycleOwner){
