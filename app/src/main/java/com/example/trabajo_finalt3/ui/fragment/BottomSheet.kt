@@ -11,6 +11,8 @@ import com.example.trabajo_finalt3.databinding.ModalBottomSheetBinding
 import com.example.trabajo_finalt3.viewmodel.MyViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 /**
  * @author Sandra Martinez
@@ -59,9 +61,12 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
 
                 viewModel.addItemShoppingList(postItem)
                 bottomSheetListener?.reloadViewmodel()
-                dismiss()
+                //para hacer un delay en el dismiss y dar tiempo de que se ejecute el listener
+                Timer().schedule(1000){
+                    dismiss()
+                }
             } else {
-                Toast.makeText(requireContext(), "No food item introduced", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "No food item6 introduced", Toast.LENGTH_LONG).show()
             }
         }
     }
