@@ -5,5 +5,5 @@ class Repository {
 
     suspend fun getIngredients(ingredientName: String) = retrofit.getIngredients(ingredientName)
 
-
+    suspend fun getRecipes(ingredientsNames: String) = retrofit.getRecipes(ingredientsNames)
 }

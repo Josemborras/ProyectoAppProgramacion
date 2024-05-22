@@ -36,7 +36,11 @@ class ViewModel: ViewModel() {
 
     fun getSuggestions() = suggestionsLiveData
 
-
+/*
+ * no sé cómo hacer para guardar un listado de los ingredientes que mete
+ * el usuario, creo que sería como con setSuggestions/getSuggestions
+ *
+ * */
     fun setIngredienteResult(ingrediente: ArrayList<Resultado>) { ingredienteResultLiveData = ingrediente }
 
     fun getIngredienteResult() = ingredienteResultLiveData
@@ -44,5 +48,9 @@ class ViewModel: ViewModel() {
     fun setSuggestionsSelected(name: String) { suggestionSelected = name }
 
     fun getSuggestionsSelected() = suggestionSelected
+
+    fun getRecipes(ingredientsNames: String) {
+
+    }
 
 }
