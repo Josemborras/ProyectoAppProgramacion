@@ -53,7 +53,7 @@ class DetailRecipeFragment : Fragment() {
             }
         }.attach()
 
-        val id = 324694
+        val id = 209128
         viewModel.getRecipeInfo(id).observe(viewLifecycleOwner){
             (requireActivity() as MainActivity).supportActionBar?.title = it.title
             Glide.with(this).load(it.image).into(binding.ivRecipe)

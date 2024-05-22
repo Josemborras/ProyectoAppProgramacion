@@ -7,13 +7,15 @@
 
     <TextView
         android:id="@+id/tvStep"
-        android:layout_width="229dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="15dp"
         android:text="Preheat the oven to 200 degrees F."
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvNumStep"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

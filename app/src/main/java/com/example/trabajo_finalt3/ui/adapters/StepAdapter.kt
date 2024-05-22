@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trabajo_finalT3.databinding.HolderStepsBinding
-import com.example.trabajo_finalt3.model.data.Recipe.ExtendedIngredient
 import com.example.trabajo_finalt3.model.data.Steps.Step
-import com.example.trabajo_finalt3.model.data.Steps.StepsResponseItem
 
 class StepAdapter : RecyclerView.Adapter<StepAdapter.StepsHolder>() {
 
-    private var lista = ArrayList<StepsResponseItem>()
+    private var lista = ArrayList<Step>()
 
     inner class StepsHolder(val binding: HolderStepsBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,7 +22,6 @@ class StepAdapter : RecyclerView.Adapter<StepAdapter.StepsHolder>() {
         val steps = lista[position]
         holder.binding.tvNumStep.text = steps.number.toString()
         holder.binding.tvStep.text = steps.step
-
     }
 
     override fun getItemCount() = lista.size

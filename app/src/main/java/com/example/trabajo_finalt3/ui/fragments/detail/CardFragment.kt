@@ -26,7 +26,7 @@ class CardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 716429
+        val id = 209128
         viewModel.getCardImage(id).observe(viewLifecycleOwner){cardImage ->
             Glide.with(this).load(cardImage.url).into(binding.imageView)
 
