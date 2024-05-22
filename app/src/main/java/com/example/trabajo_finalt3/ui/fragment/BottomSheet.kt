@@ -17,9 +17,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * [BottomSheetDialogFragment]
  * ModalBottomSheet que contiene los TextInputLayout necesarios para añadir un elemento nuevo a la lista de la compra
  */
-class BottomSheet : BottomSheetDialogFragment() {
+class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
     private lateinit var binding: ModalBottomSheetBinding
     private val viewModel by activityViewModels<MyViewModel>()
+
+    //como BottomSheetDialogFragment es un elemento nuevo, no sabia como implementar su listener, asi que lo busque en internet
+    //esta forma de iniciar el listener es la misma que utilizaron en la documentacion que encontre
+    private var bottomSheetListener: BottomSheetListener?=null
+    init{
+        this.bottomSheetListener = listener
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +59,7 @@ class BottomSheet : BottomSheetDialogFragment() {
 
                 viewModel.addItemShoppingList(postItem)
                 dismiss()
+                bottomSheetListener?.reloadViewmodel()
             } else {
                 Toast.makeText(requireContext(), "No ingredient introduced", Toast.LENGTH_LONG).show()
             }
@@ -59,5 +68,9 @@ class BottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "ModalBottomSheet list item form"
+    }
+
+    interface BottomSheetListener {
+        fun reloadViewmodel()
     }
 }

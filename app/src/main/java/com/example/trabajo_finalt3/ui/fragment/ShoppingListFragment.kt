@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -24,11 +23,19 @@ import com.example.trabajo_finalt3.viewmodel.MyViewModel
  *  * [Fragment] ShoppingListFragment
  *  En este fragment se van a mostrar los productos guardados en la lista de la compra.Tambien se podran borrar, marcar como ya comprados y agregar otros nuevos a la lista
  */
-class ShoppingListFragment : Fragment() {
+class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapterAisles: AdapterAisles
     private val viewModel by activityViewModels<MyViewModel>()
+
+    lateinit var bottomSheet: BottomSheet
+    lateinit var listener: BottomSheet.BottomSheetListener
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        listener = this
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -115,5 +122,9 @@ class ShoppingListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun reloadViewmodel() {
+        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
     }
 }
