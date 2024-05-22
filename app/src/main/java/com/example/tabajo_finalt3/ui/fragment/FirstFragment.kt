@@ -78,4 +78,15 @@ class FirstFragment : Fragment() {
         recyclerView.adapter = adaptador
 
     }
+
+//    val observer = Observer<CharacterResponse?> {
+//        binding.swipe.isRefreshing = false
+//        val info = it?.info
+//        info?.pages?.let { totalPage = it }
+//
+//
+//        val personajes = it?.results
+//        adaptador.refrescarListado(personajes)
+//
+//    }
 }

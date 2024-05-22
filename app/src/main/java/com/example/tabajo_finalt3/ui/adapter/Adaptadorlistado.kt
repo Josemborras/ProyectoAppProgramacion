@@ -32,7 +32,7 @@ class Adaptadorlistado(val recetas: ArrayList<Recipe>, val listener: MyClick): R
     override fun onBindViewHolder(holder: disenioPlantilla, position: Int) {
         val listRecetas = recetas[position]
 
-        holder.binding.txNombrereceta.text = listRecetas.sourceName
+        holder.binding.txNombrereceta.text = listRecetas.title
         Glide.with(holder.itemView).load(listRecetas.image).into(holder.binding.imgReceta)
         holder.itemView.setOnClickListener {
             listener.onClick(listRecetas)
@@ -40,6 +40,7 @@ class Adaptadorlistado(val recetas: ArrayList<Recipe>, val listener: MyClick): R
 
 
     }
+
 
 //    fun refrescarListado(lista: List<RecipesRandom?>?){
 //        recetas.clear()
