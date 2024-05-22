@@ -29,12 +29,13 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
     private lateinit var adapterAisles: AdapterAisles
     private val viewModel by activityViewModels<MyViewModel>()
 
+    //inicializar el bottomSheet y su listener
     lateinit var bottomSheet: BottomSheet
     lateinit var listener: BottomSheet.BottomSheetListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listener = this
+        listener = this //declarar el valor del listener
     }
 
     override fun onCreateView(
@@ -45,7 +46,6 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         (requireActivity() as MainActivity).changeToolbar(binding.toolbarShoppingList, false, findNavController())
         (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +63,8 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         }
 
         binding.buttonForm.setOnClickListener {
-            BottomSheet().show((activity as MainActivity).supportFragmentManager, BottomSheet.TAG)
+            bottomSheet = BottomSheet(listener)
+            bottomSheet.show((activity as MainActivity).supportFragmentManager, BottomSheet.TAG)
         }
     }
 
@@ -113,18 +114,14 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         dialog.show()
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    //override de la funcion del listener del bottomsheet
+    override fun reloadViewmodel() {
+        binding.swipeShoppingList.isRefreshing = true
         viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun reloadViewmodel() {
-        viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
     }
 }

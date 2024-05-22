@@ -3,6 +3,7 @@
     <style name="ToolbarColoredBackArrow" parent="Base.Theme.Trabajo_finalT3">
         <item name="android:textColorSecondary">@color/yellow</item>
         <item name="android:statusBarColor">@color/green</item>
-        <item name="android:fontFamily">@font/lexend_semibold</item>
+        <item name="android:fontFamily">@font/alata</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

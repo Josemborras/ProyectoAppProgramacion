@@ -21,7 +21,7 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
     private lateinit var binding: ModalBottomSheetBinding
     private val viewModel by activityViewModels<MyViewModel>()
 
-    //como BottomSheetDialogFragment es un elemento nuevo, no sabia como implementar su listener, asi que lo busque en internet
+    //como BottomSheetDialogFragment es un elemento nuevo, busque como implementar su listener
     //esta forma de iniciar el listener es la misma que utilizaron en la documentacion que encontre
     private var bottomSheetListener: BottomSheetListener?=null
     init{
@@ -58,10 +58,10 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
                 }
 
                 viewModel.addItemShoppingList(postItem)
-                dismiss()
                 bottomSheetListener?.reloadViewmodel()
+                dismiss()
             } else {
-                Toast.makeText(requireContext(), "No ingredient introduced", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "No food item introduced", Toast.LENGTH_LONG).show()
             }
         }
     }
