@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
 
@@ -27,17 +26,8 @@ class Ingredientes(val ingrediente: ArrayList<Resultado>, val name: String?): Re
     override fun onBindViewHolder(holder: IngredientesCelda, position: Int) {
         var item = ingrediente[position] // para inicializar la variable
 
-        // cambia item por lo que ha seleccionado el usuario en las sugerencias
-        //ingrediente.forEach { if (it.name == name) item = it }
-        // val item = ingrediente
-
-        /*
-         * hacer la petición de la imagen cogiendo el string de aquí: item.image
-         * para hacerla mira en: https://spoonacular.com/food-api/docs#Show-Images
-         *
-         * */
         Glide.with(holder.itemView)
-            .load(R.drawable.ic_launcher_background)
+            .load("https://img.spoonacular.com/ingredients_100x100/" + item.image)
             .into(holder.binding.imvImagenIngredienteEnRV)
 
         holder.binding.tvIngredientName.text = item.name

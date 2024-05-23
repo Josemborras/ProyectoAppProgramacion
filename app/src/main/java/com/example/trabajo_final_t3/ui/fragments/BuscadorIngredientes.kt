@@ -21,6 +21,7 @@ import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorIngredientesBinding
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
+import com.example.trabajo_final_t3.databinding.SugerenciasBinding
 import com.example.trabajo_final_t3.ui.adapters.Ingredientes
 import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
 
@@ -28,6 +29,7 @@ class BuscadorIngredientes : Fragment() {
 
     private lateinit var binding: FragmentBuscadorIngredientesBinding
     private lateinit var bindingIngredient: IngredientesBinding
+    private lateinit var bindingSugerencias: SugerenciasBinding
     private val viewModel by activityViewModels<ViewModel>()
     private lateinit var adaptador: Ingredientes
 
