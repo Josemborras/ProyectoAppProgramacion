@@ -149,5 +149,12 @@ class BuscadorIngredientes : Fragment() {
             binding.swipe.isRefreshing = false
         }
 
+        binding.btnBuscarReceta.setOnClickListener {
+            val string = "apple,flour,sugar"
+            viewModel.getRecipes(string).observe(viewLifecycleOwner){
+                binding.tv.text = it.toString()
+            }
+        }
+
     }
 }

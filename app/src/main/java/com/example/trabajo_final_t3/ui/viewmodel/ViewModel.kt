@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.trabajo_final_t3.data.models.ingredients.IngredientsResponse
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
+import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
 import com.example.trabajo_final_t3.data.retrofit.Repository
 import kotlinx.coroutines.launch
 
@@ -16,6 +17,9 @@ class ViewModel: ViewModel() {
     private var suggestionsLiveData = ArrayList<Resultado>()
     private var ingredienteResultLiveData = ArrayList<Resultado>()
     private var suggestionSelected = String()
+
+    private val recipesListLiveData = MutableLiveData<RecipeResponse>()
+
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
 
@@ -49,8 +53,20 @@ class ViewModel: ViewModel() {
 
     fun getSuggestionsSelected() = suggestionSelected
 
-    fun getRecipes(ingredientsNames: String) {
 
+    fun getRecipes(ingredientsNames: String): MutableLiveData<RecipeResponse>{
+
+        viewModelScope.launch {
+            val response = repositorio.getRecipes(ingredientsNames)
+
+            if (response.code() == 200){
+                response.body().let {
+                    recipesListLiveData.postValue(it)
+                    Log.d("viewModelScope", it.toString() + " respose.code() == 200")
+                }
+            }else Log.d("viewModelScope", "response.code() == " + response.code().toString())
+        }
+        return recipesListLiveData
     }
 
 }
