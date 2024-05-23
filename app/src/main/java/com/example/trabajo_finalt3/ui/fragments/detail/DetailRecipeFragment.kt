@@ -32,15 +32,6 @@ class DetailRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel.getRecipe().observe(viewLifecycleOwner){recipeListItem ->
-//            (requireActivity() as MainActivity).supportActionBar?.title = recipeListItem.title
-//
-//            viewModel.getRecipeInfo(recipeListItem.id).observe(viewLifecycleOwner){recipeComplete ->
-//                Glide.with(this).load(recipeComplete.image).into(binding.ivRecipe)
-//            }
-//
-//        }
-//
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
         binding.viewpager.adapter = viewPagerAdapter
 

@@ -18,7 +18,8 @@ class StepsFragment : Fragment() {
 
     private lateinit var binding: FragmentStepsBinding
     private val viewModel by activityViewModels<MyViewModel>()
-    private lateinit var adapter: StepAdapter
+    private lateinit var adapterElab: ElabAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,17 +34,19 @@ class StepsFragment : Fragment() {
 
         val id = 324694
         viewModel.getInstructions(id).observe(viewLifecycleOwner) {
-            configRecyclerSteps(it.first().steps)  // Asuming steps are in the first item of the list
+            configRecyclerElabs(it)
         }
     }
 
-    private fun configRecyclerSteps(list: List<Step>) {
-        adapter = StepAdapter()
-        adapter.setSteps(list)
+    private fun configRecyclerElabs(list: List<StepsResponseItem>) {
+        adapterElab = ElabAdapter()
+        adapterElab.setElabs(list)
 
-        binding.rvSteps.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvSteps.adapter = adapter
+        binding.rvElab.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvElab.adapter = adapterElab
     }
+
+
 }
 
 
