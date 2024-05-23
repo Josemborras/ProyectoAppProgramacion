@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.tabajo_finalt3.R
 import com.example.tabajo_finalt3.data.models.Recipe
 import com.example.tabajo_finalt3.data.models.RecipesRandom
@@ -46,10 +47,37 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //aqui se pone para que si tarda mucho en cargar el viewmodel se muestre y el usuario sepa que se esta cargando la pagina
+        binding.swipe.isRefreshing = true
+        //para cambiar el color del circulo
+//        binding.swipe
+
         //esta funcion la investige por google para que cuando bajes y te de pereza tener que subir que te suba automaticamente
         binding.flSubir.setOnClickListener {
             binding.recyclerView.smoothScrollToPosition(0)
         }
+
+        //este es el listener para que cuando tires hacia arriba te recarge el viewmodel
+        binding.swipe.setOnRefreshListener {
+            binding.swipe.isRefreshing = true
+            viewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
+                if (it != null) {
+                    configRecicler(it.recipes)
+                }
+
+                binding.swipe.isRefreshing = false
+            }
+        }
+
+
+        //esto lo hemos hecho aqui para comprobar que la llamada de la peticion estuviese bien, la peticion viene de otra clase, y si lo
+        //haciamos desde aqui directamente es mejor, porque asi no nos aria falta llamar al viewmodel desde el adaptador
+
+
+//        viewModel.recipeCardAddvw(4632).observe(viewLifecycleOwner){
+//            var cardimage = it?.url
+//            Glide.with(this).load(cardimage).into(binding.ivPrueba)
+//        }
 
         //se le pasa recipes(RecipesRandom) al configrecicler(configuracion del adaptador)
         //la funcion que viene del viewModel es para pasarle el listado que devuelve al config recicle
@@ -57,6 +85,7 @@ class FirstFragment : Fragment() {
             if (it != null) {
                 configRecicler(it.recipes)
             }
+            binding.swipe.isRefreshing = false
         }
     }
 

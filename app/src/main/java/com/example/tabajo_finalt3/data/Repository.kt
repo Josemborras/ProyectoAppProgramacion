@@ -8,4 +8,6 @@ class Repository {
 
     suspend fun triviaRandomAdd() = RetrofitObjeto.retrofitInterface.triviaRandom()
 
+    suspend fun recipeCard(id: Int) = RetrofitObjeto.retrofitInterface.recipeCard(id)
+
 }

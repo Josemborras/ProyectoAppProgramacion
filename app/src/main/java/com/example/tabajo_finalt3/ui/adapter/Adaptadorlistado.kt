@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.tabajo_finalt3.data.models.Recipe
 import com.example.tabajo_finalt3.data.models.RecipesRandom
 import com.example.tabajo_finalt3.databinding.FragmentceldarecetaBinding
+import com.example.tabajo_finalt3.viewmodel.ViewModel
 
 //el listado lo metemos dentro como parametro para cuando llamemos al adaptador pasar el listado
 class Adaptadorlistado(val recetas: ArrayList<Recipe>, val listener: MyClick): RecyclerView.Adapter<Adaptadorlistado.disenioPlantilla>(){

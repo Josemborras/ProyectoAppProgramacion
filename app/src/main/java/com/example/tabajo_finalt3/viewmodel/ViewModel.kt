@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tabajo_finalt3.data.Repository
+import com.example.tabajo_finalt3.data.models.RecipeCard
 import com.example.tabajo_finalt3.data.models.RecipesRandom
 import com.example.tabajo_finalt3.data.models.TriviaRandom
 import kotlinx.coroutines.launch
@@ -47,6 +48,24 @@ class ViewModel: ViewModel() {
 
         viewModelScope.launch {
             val response = repository.triviaRandomAdd()
+            if (response.code() == 200) {
+                val characterResponse = response.body()
+                characterResponse?.let {
+                    liveData.postValue(it)
+                }
+            }
+
+        }
+        return liveData
+
+    }
+
+    fun recipeCardAddvw(id: Int): MutableLiveData<RecipeCard?> {
+
+        val liveData = MutableLiveData<RecipeCard?>()
+
+        viewModelScope.launch {
+            val response = repository.recipeCard(id)
             if (response.code() == 200) {
                 val characterResponse = response.body()
                 characterResponse?.let {
