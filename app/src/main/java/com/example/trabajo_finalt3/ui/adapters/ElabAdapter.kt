@@ -1,6 +1,7 @@
 package com.example.trabajo_finalt3.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,12 @@ class ElabAdapter : RecyclerView.Adapter<ElabAdapter.ElabHolder>() {
     override fun onBindViewHolder(holder: ElabHolder, position: Int) {
         val elabs = lista[position]
         holder.binding.tvElab.text = elabs.name
+
+        if (elabs.name.isEmpty()) {
+            holder.binding.tvElab.visibility = View.GONE
+        } else {
+            holder.binding.tvElab.visibility = View.VISIBLE
+        }
         configRecyclerSteps(holder, elabs.steps)
     }
 
