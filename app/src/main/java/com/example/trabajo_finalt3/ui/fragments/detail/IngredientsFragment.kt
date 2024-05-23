@@ -29,7 +29,7 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 209128
+        val id = 632583
         viewModel.getRecipeInfo(id).observe(viewLifecycleOwner) { recipeComplete ->
             recipeComplete?.let {
                 configRecyclerIngredients(it.extendedIngredients)
