@@ -9,8 +9,8 @@
         android:id="@+id/tvIngredientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/imvImagenIngredienteEnRV"
         app:layout_constraintEnd_toStartOf="@+id/imvDeleteIngredient"
@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/imvImagenIngredienteEnRV"
-        android:layout_width="108dp"
-        android:layout_height="108dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imvDeleteIngredient"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvIngredientName"
         app:layout_constraintEnd_toEndOf="parent"
