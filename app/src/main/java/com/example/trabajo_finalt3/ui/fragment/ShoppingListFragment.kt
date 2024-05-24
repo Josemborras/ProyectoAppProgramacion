@@ -103,9 +103,10 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         val dialog = builder.create()
 
         dialogBinding.buttonDelete.setOnClickListener {
-            viewModel.deleteItemShoppingList(itemId)
-            viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
-            dialog.dismiss()
+            viewModel.deleteItemShoppingList(itemId).observe(viewLifecycleOwner){
+                viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
+                dialog.dismiss()
+            }
         }
         dialogBinding.buttonCancel.setOnClickListener {
             dialog.dismiss()

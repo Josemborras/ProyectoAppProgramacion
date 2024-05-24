@@ -59,14 +59,15 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
                     PostItem(null, item, true)
                 }
 
-                viewModel.addItemShoppingList(postItem)
-                bottomSheetListener?.reloadViewmodel()
-                //para hacer un delay en el dismiss y dar tiempo de que se ejecute el listener
-                Timer().schedule(1000){
-                    dismiss()
+                viewModel.addItemShoppingList(postItem).observe(viewLifecycleOwner){
+                    bottomSheetListener?.reloadViewmodel()
+                    //para hacer un delay en el dismiss y dar tiempo de que se ejecute el listener
+                    Timer().schedule(400){
+                        dismiss()
+                    }
                 }
             } else {
-                Toast.makeText(requireContext(), "No food item6 introduced", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "No food item introduced", Toast.LENGTH_LONG).show()
             }
         }
     }
