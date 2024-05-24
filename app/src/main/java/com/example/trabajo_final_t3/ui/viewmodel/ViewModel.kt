@@ -14,15 +14,16 @@ class ViewModel: ViewModel() {
     private val repositorio by lazy { Repository() }
 
     private val ingredientsListLiveData = MutableLiveData<IngredientsResponse>()
-    private var suggestionsLiveData = ArrayList<Resultado>()
     private var ingredienteResultLiveData = ArrayList<Resultado>()
     private var suggestionSelected = String()
 
     private val recipesListLiveData = MutableLiveData<RecipeResponse>()
 
+    private var suggestions = MutableLiveData<IngredientsResponse>()
+    private var ingredienteLiveData = MutableLiveData<Resultado>()
+
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
-
         viewModelScope.launch {
             val response = repositorio.getIngredients(ingredientName)
 
@@ -36,9 +37,7 @@ class ViewModel: ViewModel() {
         return ingredientsListLiveData
     }
 
-    fun setSuggestions(ingrediente: ArrayList<Resultado>) { suggestionsLiveData = ingrediente }
 
-    fun getSuggestions() = suggestionsLiveData
 
 /*
  * no sé cómo hacer para guardar un listado de los ingredientes que mete
@@ -69,4 +68,11 @@ class ViewModel: ViewModel() {
         return recipesListLiveData
     }
 
+    fun setSuggestions(sugerencia: IngredientsResponse) { suggestions.postValue(sugerencia) }
+
+    fun getSuggestions() = suggestions
+
+    fun setIngrediente(ingrediente: Resultado) { ingredienteLiveData.value = ingrediente }
+
+    fun getIngrediente() = ingredienteLiveData
 }

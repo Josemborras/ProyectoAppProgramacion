@@ -29,7 +29,6 @@ class BuscadorIngredientes : Fragment() {
 
     private lateinit var binding: FragmentBuscadorIngredientesBinding
     private lateinit var bindingIngredient: IngredientesBinding
-    private lateinit var bindingSugerencias: SugerenciasBinding
     private val viewModel by activityViewModels<ViewModel>()
     private lateinit var adaptador: Ingredientes
 
@@ -50,6 +49,12 @@ class BuscadorIngredientes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configRecycler()
+
+        /*
+        * cambiar from para poner una imangen, podría servier este
+        * SearchManager.SUGGEST_COLUMN_ICON_1
+        * */
         val from = arrayOf(SearchManager.SUGGEST_COLUMN_TEXT_1)
         val to = intArrayOf(R.id.searchItemID)
 
@@ -73,15 +78,16 @@ class BuscadorIngredientes : Fragment() {
                 return true
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onQueryTextChange(newText: String?): Boolean {
                 // esto se hace cada vez que cambias (escribir, borrar, cortar, pegar...) el texto
                 var suggestions = ArrayList<String>()
 
-                binding.tv.text
                 viewModel.getIngredients(newText.toString()).observe(viewLifecycleOwner){ ingredientsResponse ->
                      ingredientsResponse.results.forEach {result ->
                         suggestions.add(result.name)
                     }
+                    viewModel.setSuggestions(ingredientsResponse)
                 }
 
                 val cursor =
@@ -93,6 +99,20 @@ class BuscadorIngredientes : Fragment() {
                             cursor.addRow(arrayOf(index, suggestion))
                     }
                 }
+
+                if (newText == viewModel.getIngrediente().value?.name) viewModel.getIngrediente().value?.let {
+                    adaptador.addIngredient(it)
+                }
+                Log.d("aaa", "newText: " + newText.toString())
+                Log.d("aaa", "viewModel: " + viewModel.getIngrediente().value?.name.toString())
+                binding.tv.text = """
+                    buscador: $newText
+                    viewModel: ${viewModel.getIngrediente().value?.name}
+                """.trimIndent()
+                /*
+                * hacer que compruebe que lo que hay escrito sea igual que el nombre de los ingredientes
+                * que devuelve la api
+                * */
 
                 cursorAdapter.changeCursor(cursor)
                 return true
@@ -113,30 +133,28 @@ class BuscadorIngredientes : Fragment() {
 
                 val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
 
-                viewModel.getIngredients(selection).observe(viewLifecycleOwner){
-                    var resultado = ArrayList<Resultado>()
+                viewModel.setSuggestionsSelected(selection)
 
-                    it.results.forEach { i ->
-                        if (i.name == selection) resultado.add(i)
-                    }
+                viewModel.getSuggestions().observe(viewLifecycleOwner){
 
-                    viewModel.setSuggestions(resultado)
+                    viewModel.setIngrediente(it.results[position])
+                    // adaptador.addIngredient(it.results[position])
+                    /*it.results.forEach { i ->
+                        if (i.name.equals(selection)) adaptador.addIngredient(i)
+                    }*/
+
                 }
-
-                // todo lo que devuelve en las sugerencias lo mete en el rv
 
                 binding.rvBuscadorIngredientes.visibility = View.VISIBLE
                 binding.imvImagenBuscador.visibility = View.GONE
 
-                binding.rvBuscadorIngredientes.layoutManager = LinearLayoutManager(context)
-                adaptador = Ingredientes(
-                    viewModel.getSuggestions(),
-                    selection,
-                )
-                binding.rvBuscadorIngredientes.adapter = adaptador
+                // Log.d("rv", viewModel.getSuggestions().toString())
 
-                Log.d("rv", viewModel.getSuggestions().toString())
-
+                /*
+                * hace la petición para buscar con el string que se escribe en el SearchView
+                * en false escribirías y no buscaría ingredientes ni mostraría la lista
+                * de sugerencias
+                * */
                 searchView.setQuery(selection, true)
                 return true
             }
@@ -146,7 +164,7 @@ class BuscadorIngredientes : Fragment() {
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = true
 
-
+            adaptador.clearIngredients()
 
             binding.swipe.isRefreshing = false
         }
@@ -158,5 +176,11 @@ class BuscadorIngredientes : Fragment() {
             }
         }
 
+    }
+
+    private fun configRecycler(){
+        binding.rvBuscadorIngredientes.layoutManager = LinearLayoutManager(context)
+        adaptador = Ingredientes()
+        binding.rvBuscadorIngredientes.adapter = adaptador
     }
 }
