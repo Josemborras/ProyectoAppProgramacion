@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 class MyViewModel: ViewModel() {
 
     private val repositorio = Repositorio()
+    private val recipeList = MutableLiveData<ArrayList<RecipeItem>>()
     private val selectedRecipeList = MutableLiveData<RecipeItem>()
     private val selectedRecipe = MutableLiveData<RecipeResponse>()
     private val cardImageRecipe = MutableLiveData<CardImage>()
@@ -72,6 +73,21 @@ class MyViewModel: ViewModel() {
             }
         }
         return stepsRecipe
+    }
+    fun getSimilars(id: Int): MutableLiveData<ArrayList<RecipeItem>>{
+        viewModelScope.launch {
+            val respuesta = repositorio.listRecipes(id)
+
+            val code = respuesta.code()
+
+            if (code == 200){
+                val similars = respuesta.body()
+                similars?.let {
+                    recipeList.postValue(it)
+                }
+            }
+        }
+        return recipeList
     }
 
 }
