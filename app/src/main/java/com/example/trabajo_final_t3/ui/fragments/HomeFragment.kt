@@ -34,9 +34,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSearch.setOnClickListener{
-            findNavController().navigate(R.id.action_HomeFragment_to_buscadorIngredientes2)
+            findNavController().navigate(R.id.action_HomeFragment_to_buscadorIngredientes)
         }
 
+        binding.buttonRandom.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_buscadorNutrientes)
+        }
     }
 
     override fun onDestroyView() {

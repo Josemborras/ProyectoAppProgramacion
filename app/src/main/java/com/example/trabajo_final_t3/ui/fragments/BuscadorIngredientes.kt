@@ -153,7 +153,7 @@ class BuscadorIngredientes : Fragment() {
 
         binding.btnBuscarReceta.setOnClickListener {
             val string = "apple,flour,sugar"
-            viewModel.getRecipes(string).observe(viewLifecycleOwner){
+            viewModel.getRecipesByIngredients(string).observe(viewLifecycleOwner){
                 binding.tv.text = it.toString()
             }
         }

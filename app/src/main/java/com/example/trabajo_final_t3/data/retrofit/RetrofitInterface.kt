@@ -2,6 +2,7 @@ package com.example.trabajo_final_t3.data.retrofit
 
 import com.example.trabajo_final_t3.data.models.ingredients.IngredientsResponse
 import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
+import com.example.trabajo_final_t3.data.models.recipesbynutrients.RecipesByNutrientsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -39,7 +40,24 @@ interface RetrofitInterface {
         "x-api-key: $API_KEY"
     )
     @GET("recipes/findByIngredients")
-    suspend fun getRecipes(
+    suspend fun getRecipesByIngredients(
         @Query("ingredients") ingredientes: String
     ): Response<RecipeResponse>
+
+    @Headers(
+        "Content-Type: application/json",
+        "x-api-key: $API_KEY"
+    )
+    @GET("recipes/findByNutrients")
+    suspend fun getRecipesByNutrients(
+        @Query("minCarbs") minCarbs: Int,
+        @Query("maxCarbs") maxCarbs: Int,
+        @Query("minProtein") minProtein: Int,
+        @Query("maxProtein") maxProtein: Int,
+        @Query("minFat") minFat: Int,
+        @Query("maxFat") maxFat: Int,
+        @Query("minCalories") minCalories: Int,
+        @Query("maxCalories") maxCalories: Int,
+        @Query("number") number: Int,
+    ): Response<RecipesByNutrientsResponse>
 }

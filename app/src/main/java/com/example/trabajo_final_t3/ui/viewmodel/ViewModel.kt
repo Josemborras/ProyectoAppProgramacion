@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.trabajo_final_t3.data.models.ingredients.IngredientsResponse
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
+import com.example.trabajo_final_t3.data.models.recipesbynutrients.RecipesByNutrientsResponse
 import com.example.trabajo_final_t3.data.retrofit.Repository
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,7 @@ class ViewModel: ViewModel() {
     private var suggestionSelected = String()
 
     private val recipesListLiveData = MutableLiveData<RecipeResponse>()
+    private val recipesByNutrientsListLiveData = MutableLiveData<RecipesByNutrientsResponse>()
 
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
@@ -54,10 +56,10 @@ class ViewModel: ViewModel() {
     fun getSuggestionsSelected() = suggestionSelected
 
 
-    fun getRecipes(ingredientsNames: String): MutableLiveData<RecipeResponse>{
+    fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<RecipeResponse>{
 
         viewModelScope.launch {
-            val response = repositorio.getRecipes(ingredientsNames)
+            val response = repositorio.getRecipesByIngredients(ingredientsNames)
 
             if (response.code() == 200){
                 response.body().let {
@@ -67,6 +69,21 @@ class ViewModel: ViewModel() {
             }else Log.d("viewModelScope", "response.code() == " + response.code().toString())
         }
         return recipesListLiveData
+    }
+
+    fun getRecipesByNutrients(minCarbs: Int, maxCarbs: Int, minProtein: Int, maxProtein: Int, minFat: Int, maxFat: Int, minCalories: Int, maxCalories: Int, number: Int): MutableLiveData<RecipesByNutrientsResponse>{
+
+        viewModelScope.launch {
+            val response = repositorio.getRecipesByNutrients(minCarbs, maxCarbs, minProtein, maxProtein, minFat, maxFat, minCalories, maxCalories, number)
+
+            if (response.code() == 200){
+                response.body().let {
+                    recipesByNutrientsListLiveData.postValue(it)
+                    Log.d("viewModelScope", it.toString() + " respose.code() == 200")
+                }
+            }else Log.d("viewModelScope", "response.code() == " + response.code().toString())
+        }
+        return recipesByNutrientsListLiveData
     }
 
 }

@@ -5,5 +5,8 @@ class Repository {
 
     suspend fun getIngredients(ingredientName: String) = retrofit.getIngredients(ingredientName)
 
-    suspend fun getRecipes(ingredientsNames: String) = retrofit.getRecipes(ingredientsNames)
+    suspend fun getRecipesByIngredients(ingredientsNames: String) = retrofit.getRecipesByIngredients(ingredientsNames)
+
+    suspend fun getRecipesByNutrients(minCarbs: Int, maxCarbs: Int, minProtein: Int, maxProtein: Int, minFat: Int, maxFat: Int, minCalories: Int, maxCalories: Int, number: Int) = retrofit.getRecipesByNutrients(minCarbs, maxCarbs, minProtein, maxProtein, minFat, maxFat, minCalories, maxCalories, number)
+
 }
