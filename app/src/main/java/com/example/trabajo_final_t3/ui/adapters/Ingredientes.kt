@@ -8,47 +8,57 @@ import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
 
-class Ingredientes(val ingrediente: ArrayList<Resultado>, val name: String?): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
+class Ingredientes(
+    val listener: DeleteClickListener
+): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
 
-    // private val lista = ArrayList<IngredientsResponse>()
-
+    private val lista = ArrayList<Resultado>()
 
     inner class IngredientesCelda(val binding: IngredientesBinding): ViewHolder(binding.root)
+
+    interface DeleteClickListener {
+        fun onDeleteClick(resultado: Resultado)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientesCelda {
         return IngredientesCelda(IngredientesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int {
-        return ingrediente.size
+        return lista.size
     }
 
     override fun onBindViewHolder(holder: IngredientesCelda, position: Int) {
-        var item = ingrediente[position] // para inicializar la variable
+        var item = lista[position] // para inicializar la variable
 
         Glide.with(holder.itemView)
             .load("https://img.spoonacular.com/ingredients_100x100/" + item.image)
             .into(holder.binding.imvImagenIngredienteEnRV)
 
         holder.binding.tvIngredientName.text = item.name
-    }
 
-    fun  refrescarListado(lista: ArrayList<Resultado>){
-        ingrediente.clear()
-        if (lista != null) {
-            /*
-             * si añades la lista de personajes sin limpiar antes
-             * se cierra la aplicación
-             *
-             * Primero limpiar la lista, notificar los cambios
-             * y después añadir la lista. Volver a notificar
-             * los cambios con notifyItemRangeChanged(0, itemCount)
-             */
-            ingrediente.clear()
-            notifyDataSetChanged()
-            ingrediente.addAll(lista)
+        holder.binding.imvDeleteIngredient.setOnClickListener {
+            listener.onDeleteClick(item)
         }
-        notifyItemRangeChanged(0, itemCount)
     }
 
+    fun updateList(newList: ArrayList<Resultado>){
+        lista.clear()
+        lista.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    fun getString(): String{
+        /*
+         * devuelve el string de los nombres de los items separados
+         * por comas (apple,banana...) para luego poder hacer la
+         * petición de buscar recetas
+         * */
+        var string = ""
+        lista.forEach{
+            string = string + "," + it.name
+        }
+
+        return string.replaceFirst(",", "")
+    }
 }

@@ -14,53 +14,68 @@ import kotlinx.coroutines.launch
 class ViewModel: ViewModel() {
     private val repositorio by lazy { Repository() }
 
-    private val ingredientsListLiveData = MutableLiveData<IngredientsResponse>()
-    private var suggestionsLiveData = ArrayList<Resultado>()
-    private var ingredienteResultLiveData = ArrayList<Resultado>()
-    private var suggestionSelected = String()
+    // respuesta del servidor
+    private val ingrResponseLiveData = MutableLiveData<IngredientsResponse>()
+    // livedata que contiene mi lista de ingredientes seleccionados
+    private var ingrListLiveData = MutableLiveData<ArrayList<Resultado>>()
 
     private val recipesListLiveData = MutableLiveData<RecipeResponse>()
     private val recipesByNutrientsListLiveData = MutableLiveData<RecipesByNutrientsResponse>()
+    private var suggestions = MutableLiveData<IngredientsResponse>()
 
     private val recipeNutientsResponseLiveData = MutableLiveData<RecipesByNutrientsResponse>()
+    init {
+        // init se encarga de inicializar valores la primera vez que se crea el livedata
+        // aquí agregamos un listado vacio a mi lista de ingredietnes
+        ingrListLiveData.postValue(ArrayList())
+    }
+
+    fun setSuggestions(sugerencia: IngredientsResponse) { suggestions.postValue(sugerencia) }
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
-
         viewModelScope.launch {
             val response = repositorio.getIngredients(ingredientName)
 
             if (response.code() == 200){
                 response.body().let {
-                    ingredientsListLiveData.postValue(it)
+                    ingrResponseLiveData.postValue(it)
                     Log.d("viewModelScope", it.toString() + " respose.code() == 200")
                 }
             }else Log.d("viewModelScope", "response.code() == " + response.code().toString())
         }
-        return ingredientsListLiveData
+        return ingrResponseLiveData
     }
 
-    fun setSuggestions(ingrediente: ArrayList<Resultado>) { suggestionsLiveData = ingrediente }
+    fun getIngredienteResult() = ingrListLiveData
 
-    fun getSuggestions() = suggestionsLiveData
+    fun filterList(name: String): MutableLiveData<ArrayList<Resultado>> {
+        val filteredResult = MutableLiveData<ArrayList<Resultado>>()
 
-/*
- * no sé cómo hacer para guardar un listado de los ingredientes que mete
- * el usuario, creo que sería como con setSuggestions/getSuggestions
- *
- * */
-    fun setIngredienteResult(ingrediente: ArrayList<Resultado>) { ingredienteResultLiveData = ingrediente }
+        ingrResponseLiveData.value?.let { response ->
+            filteredResult.value = response.results.filter { result ->
+                result.name == name
+            } as ArrayList<Resultado>
+        }
 
-    fun getIngredienteResult() = ingredienteResultLiveData
+        return filteredResult
+    }
 
-    fun setSuggestionsSelected(name: String) { suggestionSelected = name }
+    fun addIngredienteResult(ingrediente: Resultado) {
+        val list = ingrListLiveData.value
+        list?.add(ingrediente)
+        list?.let { ingrListLiveData.postValue(it) }
+    }
 
-    fun getSuggestionsSelected() = suggestionSelected
+    fun removeIngredientResult(ingrediente: Resultado) {
+        val list = ingrListLiveData.value
+        list?.remove(ingrediente)
+        list?.let { ingrListLiveData.postValue(it) }
+    }
 
-
-    fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<RecipeResponse>{
+    fun getRecipes(ingredientsNames: String): MutableLiveData<RecipeResponse>{
 
         viewModelScope.launch {
-            val response = repositorio.getRecipesByIngredients(ingredientsNames)
+            val response = repositorio.getRecipes(ingredientsNames)
 
             if (response.code() == 200){
                 response.body().let {
