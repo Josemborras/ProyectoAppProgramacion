@@ -15,6 +15,6 @@
     <item
         android:id="@+id/buscadorIngredientes"
         android:icon="@drawable/baseline_search_24"
-        android:title="Buscador"
+        android:title="Search"
         app:showAsAction="ifRoom" />
 </menu>

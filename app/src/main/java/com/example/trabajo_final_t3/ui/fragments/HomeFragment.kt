@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
         binding.buttonRandom.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_buscadorNutrientes)
         }
+
+        binding.buttonShoppingList.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_tabLayoutBuscador)
+        }
     }
 
     override fun onDestroyView() {

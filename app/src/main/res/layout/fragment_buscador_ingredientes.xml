@@ -57,7 +57,7 @@
         android:id="@+id/imvImagenBuscador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/buscador_fondo"
+        android:src="@drawable/buscador_fondo_dos"
         app:layout_constraintBottom_toBottomOf="@+id/swipe"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/swipe"

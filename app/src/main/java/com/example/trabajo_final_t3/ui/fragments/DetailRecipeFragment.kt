@@ -23,7 +23,7 @@ class DetailRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_recipe, container, false)
+        return inflater.inflate(R.layout.fragment_tablayout_buscador, container, false)
     }
 
 

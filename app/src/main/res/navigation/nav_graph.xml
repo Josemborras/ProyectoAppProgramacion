@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_buscadorNutrientes"
             app:destination="@id/buscadorNutrientes" />
+        <action
+            android:id="@+id/action_HomeFragment_to_tabLayoutBuscador"
+            app:destination="@id/tabLayoutBuscador" />
     </fragment>
     <fragment
         android:id="@+id/ShoppingListFragment"
@@ -49,4 +52,8 @@
             android:id="@+id/action_buscadorNutrientes_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tabLayoutBuscador"
+        android:name="com.example.trabajo_final_t3.ui.fragments.TabLayoutBuscador"
+        android:label="TabLayoutBuscador" />
 </navigation>

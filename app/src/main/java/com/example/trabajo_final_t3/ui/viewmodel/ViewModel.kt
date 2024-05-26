@@ -72,10 +72,10 @@ class ViewModel: ViewModel() {
         list?.let { ingrListLiveData.postValue(it) }
     }
 
-    fun getRecipes(ingredientsNames: String): MutableLiveData<RecipeResponse>{
+    fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<RecipeResponse>{
 
         viewModelScope.launch {
-            val response = repositorio.getRecipes(ingredientsNames)
+            val response = repositorio.getRecipesByIngredients(ingredientsNames)
 
             if (response.code() == 200){
                 response.body().let {
