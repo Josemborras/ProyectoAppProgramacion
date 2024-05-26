@@ -5,14 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.trabajo_finalT3.R
 import com.example.trabajo_finalT3.databinding.FragmentDetailRecipeBinding
 import com.example.trabajo_finalt3.MainActivity
 import com.example.trabajo_finalt3.MyViewModel
 import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
-import com.example.trabajo_finalt3.model.data.Recipe.ListRecipe
 import com.example.trabajo_finalt3.ui.adapters.SimilarRecipeAdapter
 import com.example.trabajo_finalt3.ui.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,29 +42,38 @@ class DetailRecipeFragment : Fragment() {
         binding.viewpager.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Ingredients"
-                1 -> "Steps"
-                2 -> "Card"
-                else -> null
-            }
+            tab.customView = createTabView(position)
         }.attach()
 
         val id = 632583
         viewModel.getRecipeInfo(id).observe(viewLifecycleOwner){
             (requireActivity() as MainActivity).supportActionBar?.title = it.title
+            binding.collapsingToolbar.title = it.title
             Glide.with(this).load(it.image).into(binding.ivRecipe)
-            viewModel.getSimilars(id).observe(viewLifecycleOwner){
-                configRecycler(it)
-            }
+
+        }
+
+        viewModel.getSimilars(id).observe(viewLifecycleOwner){
+            configRecycler(it)
         }
     }
 
     private fun configRecycler(list: ArrayList<RecipeItem>) {
-        adapter = SimilarRecipeAdapter()
+        adapter = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
         adapter.setRecipes(list)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.adapter = adapter
+    }
+    private fun createTabView(position: Int): View {
+        val tabView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_layout, null)
+        val tabText = tabView.findViewById<TextView>(R.id.tab_text)
+        tabText.text = when (position) {
+            0 -> "Ingredients"
+            1 -> "Steps"
+            2 -> "Card"
+            else -> null
+        }
+        return tabView
     }
 }

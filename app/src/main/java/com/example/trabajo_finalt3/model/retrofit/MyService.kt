@@ -2,10 +2,8 @@ package com.example.trabajo_finalt3.model.retrofit
 
 import com.example.trabajo_finalt3.model.data.CardImage.CardImage
 import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
-import com.example.trabajo_finalt3.model.data.Recipe.ListRecipe
 import com.example.trabajo_finalt3.model.data.Recipe.RecipeResponse
 import com.example.trabajo_finalt3.model.data.Steps.StepsResponse
-import com.example.trabajo_finalt3.model.data.Steps.StepsResponseItem
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
