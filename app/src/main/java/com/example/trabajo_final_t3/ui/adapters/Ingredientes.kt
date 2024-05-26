@@ -7,13 +7,18 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
-import kotlin.time.Duration.Companion.milliseconds
 
-class Ingredientes(): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
+class Ingredientes(
+    val listener: DeleteClickListener
+): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
 
     private val lista = ArrayList<Resultado>()
 
     inner class IngredientesCelda(val binding: IngredientesBinding): ViewHolder(binding.root)
+
+    interface DeleteClickListener {
+        fun onDeleteClick(resultado: Resultado)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientesCelda {
         return IngredientesCelda(IngredientesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -33,31 +38,20 @@ class Ingredientes(): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
         holder.binding.tvIngredientName.text = item.name
 
         holder.binding.imvDeleteIngredient.setOnClickListener {
-            /*
-             * al pulsar para borrar un ingrediente, lo elimina
-             * de la lista y lo notifica
-             * */
-            lista.removeAt(position)
-            notifyDataSetChanged()
+            listener.onDeleteClick(item)
         }
     }
 
-    fun addIngredient(ingredient: Resultado){
-        // añade un ingrediente al recyclerView
-        lista.add(ingredient)
-        notifyDataSetChanged()
-    }
-
-    fun clearIngredients(){
-        // vacía la lista del recyclerView
+    fun updateList(newList: ArrayList<Resultado>){
         lista.clear()
+        lista.addAll(newList)
         notifyDataSetChanged()
     }
 
     fun getString(): String{
         /*
          * devuelve el string de los nombres de los items separados
-         * por comas (apple, banana...) para luego poder hacer la
+         * por comas (apple,banana...) para luego poder hacer la
          * petición de buscar recetas
          * */
         var string = ""
@@ -67,5 +61,4 @@ class Ingredientes(): RecyclerView.Adapter<Ingredientes.IngredientesCelda>() {
 
         return string.replaceFirst(",", "")
     }
-
 }

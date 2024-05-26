@@ -21,7 +21,6 @@ import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorIngredientesBinding
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
-import com.example.trabajo_final_t3.databinding.SugerenciasBinding
 import com.example.trabajo_final_t3.ui.adapters.Ingredientes
 import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
 
@@ -32,15 +31,10 @@ class BuscadorIngredientes : Fragment() {
     private val viewModel by activityViewModels<ViewModel>()
     private lateinit var adaptador: Ingredientes
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentBuscadorIngredientesBinding.inflate(layoutInflater, container, false)
         bindingIngredient = IngredientesBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -50,6 +44,10 @@ class BuscadorIngredientes : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configRecycler()
+
+        viewModel.getIngredienteResult().observe(viewLifecycleOwner){
+            adaptador.updateList(it)
+        }
 
         /*
         * cambiar from para poner una imangen, podría servier este
@@ -100,20 +98,6 @@ class BuscadorIngredientes : Fragment() {
                     }
                 }
 
-                if (newText == viewModel.getIngrediente().value?.name) viewModel.getIngrediente().value?.let {
-                    adaptador.addIngredient(it)
-                }
-                Log.d("aaa", "newText: " + newText.toString())
-                Log.d("aaa", "viewModel: " + viewModel.getIngrediente().value?.name.toString())
-                binding.tv.text = """
-                    buscador: $newText
-                    viewModel: ${viewModel.getIngrediente().value?.name}
-                """.trimIndent()
-                /*
-                * hacer que compruebe que lo que hay escrito sea igual que el nombre de los ingredientes
-                * que devuelve la api
-                * */
-
                 cursorAdapter.changeCursor(cursor)
                 return true
             }
@@ -133,16 +117,8 @@ class BuscadorIngredientes : Fragment() {
 
                 val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
 
-                viewModel.setSuggestionsSelected(selection)
-
-                viewModel.getSuggestions().observe(viewLifecycleOwner){
-
-                    viewModel.setIngrediente(it.results[position])
-                    // adaptador.addIngredient(it.results[position])
-                    /*it.results.forEach { i ->
-                        if (i.name.equals(selection)) adaptador.addIngredient(i)
-                    }*/
-
+                viewModel.filterList(selection).observe(viewLifecycleOwner){
+                    if (it.isNotEmpty()) viewModel.addIngredienteResult(it[0])
                 }
 
                 binding.rvBuscadorIngredientes.visibility = View.VISIBLE
@@ -164,21 +140,22 @@ class BuscadorIngredientes : Fragment() {
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = true
 
-            adaptador.clearIngredients()
-
             binding.swipe.isRefreshing = false
         }
 
         binding.btnBuscarReceta.setOnClickListener {
             viewModel.getRecipes(adaptador.getString()).observe(viewLifecycleOwner){
-                binding.tv.text = it.toString()
             }
         }
     }
 
     private fun configRecycler(){
         binding.rvBuscadorIngredientes.layoutManager = LinearLayoutManager(context)
-        adaptador = Ingredientes()
+        adaptador = Ingredientes(object : Ingredientes.DeleteClickListener{
+            override fun onDeleteClick(resultado: Resultado) {
+                viewModel.removeIngredientResult(resultado)
+            }
+        })
         binding.rvBuscadorIngredientes.adapter = adaptador
     }
 }
