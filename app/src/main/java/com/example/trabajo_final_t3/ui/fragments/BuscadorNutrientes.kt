@@ -127,8 +127,12 @@ class BuscadorNutrientes : Fragment() {
                 minCalories, maxCalories,
                 80
             ).observe(viewLifecycleOwner){
-                binding.textView10.text = it.toString()
+                binding.textView.text = it.toString()
+                viewModel.setRecipesNutrientsResponse(it)
             }
+
+            val response = viewModel.getRecipesNutrientsResponse().value
+            binding.textView10.text = response.toString()
         }
     }
 }

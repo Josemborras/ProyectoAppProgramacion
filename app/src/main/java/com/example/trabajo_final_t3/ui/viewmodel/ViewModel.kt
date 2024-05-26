@@ -22,6 +22,7 @@ class ViewModel: ViewModel() {
     private val recipesListLiveData = MutableLiveData<RecipeResponse>()
     private val recipesByNutrientsListLiveData = MutableLiveData<RecipesByNutrientsResponse>()
 
+    private val recipeNutientsResponseLiveData = MutableLiveData<RecipesByNutrientsResponse>()
 
     fun getIngredients(ingredientName: String): MutableLiveData<IngredientsResponse>{
 
@@ -86,4 +87,7 @@ class ViewModel: ViewModel() {
         return recipesByNutrientsListLiveData
     }
 
+    fun setRecipesNutrientsResponse(recipes: RecipesByNutrientsResponse) { recipeNutientsResponseLiveData.value = recipes }
+
+    fun getRecipesNutrientsResponse() = recipeNutientsResponseLiveData
 }
