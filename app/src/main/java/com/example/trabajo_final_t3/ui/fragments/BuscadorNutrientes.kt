@@ -58,20 +58,20 @@ class BuscadorNutrientes : Fragment() {
         binding.nPMaxCarbs.maxValue = 100
         binding.nPMaxCarbs.value = 100
 
-        binding.nPMinCalories.minValue = 0
-        binding.nPMinCalories.maxValue = 800
-        // cambiar estos dos para que salten de 5 en 5 o de 10 en 10
-        binding.nPMaxCalories.minValue = 0
-        binding.nPMaxCalories.maxValue = 800
-        binding.nPMaxCalories.value = 800
-
-        // binding.nPMinCalories.wrapSelectorWheel = false
-        // binding.nPMaxCalories.wrapSelectorWheel = false
-        // esto es para que no tenga ruleta infinita
         /*
-        * para saltar de 10 en 10
-        * https://stackoverflow.com/a/77721944
-        * */
+         * esto hace que los valores de los number pickers de calorías mínimas
+         * y máximas salten de 10 en 10
+         *  */
+        val values = Array(81) { i -> (i * 10).toString() }
+
+        binding.nPMinCalories.minValue = 0
+        binding.nPMinCalories.maxValue = values.size - 1
+        binding.nPMinCalories.displayedValues = values
+
+        binding.nPMaxCalories.minValue = 0
+        binding.nPMaxCalories.maxValue = values.size - 1
+        binding.nPMaxCalories.displayedValues = values
+        binding.nPMaxCalories.value = values.size - 1
 
         binding.btnSearchRecipeByNutrients.setOnClickListener {
 
