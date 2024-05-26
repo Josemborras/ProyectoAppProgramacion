@@ -19,6 +19,8 @@ class MyViewModel : ViewModel() {
      * @author Sandra Martinez
      * funciones get y delete de la lista de la compra
      */
+
+    //GET
     fun getShoppingList(): MutableLiveData<ResponseGetShoppingList> {
         val listLiveData = MutableLiveData<ResponseGetShoppingList>()
 
@@ -32,6 +34,7 @@ class MyViewModel : ViewModel() {
         return listLiveData
     }
 
+    //DELETE
     fun deleteItemShoppingList(idItem: Int): MutableLiveData<ResponseDeleteItem> {
         val deleteResLiveData = MutableLiveData<ResponseDeleteItem>()
 
@@ -45,6 +48,7 @@ class MyViewModel : ViewModel() {
         return deleteResLiveData
     }
 
+    //POST
     fun addItemShoppingList(item: PostItem): MutableLiveData<Item> {
         val itemLiveData = MutableLiveData<Item>()
 

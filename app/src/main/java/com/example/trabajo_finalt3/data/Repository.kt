@@ -16,11 +16,15 @@ class Repository {
      * peticiones get, delete y post de la lista de la compra
      * Los parametros del usuario tendran un valor por defecto
      */
+
+    //GET
     suspend fun getShoppingList(
         username: String = "sandra-m",
         usernameQuery: String = "sandra-m",
         hash: String = "56d9160fc457a3d586fe75d3f885da91654a26cd"
     ) = retrofit.getShoppingList(username, usernameQuery, hash)
+
+    //DELETE
     suspend fun deleteItemShoppingList(itemId: Int): Response<ResponseDeleteItem> {
         val username = "sandra-m"
         val usernameQuery = "sandra-m"
@@ -28,6 +32,8 @@ class Repository {
 
         return retrofit.deleteItemShoppingList(username, itemId, usernameQuery, itemId, hash)
     }
+
+    //POST
     suspend fun addItemShoppingList(item: PostItem): Response<Item> {
         val username = "sandra-m"
         val usernameQuery = "sandra-m"

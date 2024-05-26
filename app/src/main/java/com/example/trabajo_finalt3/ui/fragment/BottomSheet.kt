@@ -41,8 +41,9 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireDialog() as BottomSheetDialog).dismissWithAnimation = true
+        (requireDialog() as BottomSheetDialog).dismissWithAnimation = true //muestra una animacion al cerrar el bottomSheet
 
+        //al pulsar el boton se recoge la informacion del formulario y se crea un elemento nuevo
         binding.buttonAddItem.setOnClickListener {
             var item = binding.inputItem.text.toString()
             val quantity = binding.inputQuantity.text.toString()
@@ -54,14 +55,19 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
 
             if(!item.isNullOrEmpty()){
                 val postItem = if(!list.isNullOrEmpty()){
-                    PostItem(list, item, true)
+                    PostItem(list, item, true) //si la variable de la lista no esta vacia
                 } else {
-                    PostItem(null, item, true)
+                    PostItem(null, item, true) //si la variable de la lista esta vacia
                 }
 
+                //se llama al metodo del viewmodel para guardar un elemento nuevo
+                // Cuando se termine de ejecutar, se ejecutara el resto del codigo
                 viewModel.addItemShoppingList(postItem).observe(viewLifecycleOwner){
+                    //este listener ejecuta el codigo que se le indica en ShoppingListFragment
+                    //(refresca la lista de la compra para mostrar el producto nuevo)
                     bottomSheetListener?.reloadViewmodel()
-                    //para hacer un delay en el dismiss y dar tiempo de que se ejecute el listener
+
+                    //para hacer un delay en el dismiss y dar tiempo de que se ejecute el listener correctamente
                     Timer().schedule(400){
                         dismiss()
                     }
@@ -72,6 +78,7 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
         }
     }
 
+    //tag del dialog
     companion object {
         const val TAG = "ModalBottomSheet list item form"
     }

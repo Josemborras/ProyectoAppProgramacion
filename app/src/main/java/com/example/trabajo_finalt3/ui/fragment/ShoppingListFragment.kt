@@ -21,7 +21,8 @@ import com.example.trabajo_finalt3.viewmodel.MyViewModel
 /**
  * @author Sandra Martinez
  *  * [Fragment] ShoppingListFragment
- *  En este fragment se van a mostrar los productos guardados en la lista de la compra.Tambien se podran borrar, marcar como ya comprados y agregar otros nuevos a la lista
+ *  En este fragment se van a mostrar los productos guardados en la lista de la compra.
+ *  Tambien se podran borrar de la lista
  */
 class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
     private var _binding: FragmentShoppingListBinding? = null
@@ -35,7 +36,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listener = this //declarar el valor del listener
+        listener = this //indicar que el listener funcione en este fragment
     }
 
     override fun onCreateView(
@@ -43,6 +44,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
+        //usar las funciones creadas en MainActivity para cargar el toolbar y cambiar su titulo
         (requireActivity() as MainActivity).changeToolbar(binding.toolbarShoppingList, false, findNavController())
         (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
@@ -50,29 +52,35 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //cambiar el color del swipe
         binding.swipeShoppingList.setColorSchemeResources(R.color.green)
 
         configRecycler()
 
+        //cargar el listado
         binding.swipeShoppingList.isRefreshing = true
         viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
 
+        //recargar el listado al hacer el gesto ed swipe
         binding.swipeShoppingList.setOnRefreshListener {
             binding.swipeShoppingList.isRefreshing = true
             viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
         }
 
+        //activar el ModalBottomSheet al pulsar el boton
         binding.buttonForm.setOnClickListener {
             bottomSheet = BottomSheet(listener)
             bottomSheet.show((activity as MainActivity).supportFragmentManager, BottomSheet.TAG)
         }
     }
 
+    //observador para cuando se llama a la peticion de mostrar el listado
     private val observer = Observer<ResponseGetShoppingList>{
         it.aisles?.let {list ->
             adapterAisles.newList(list)
         }
 
+        //si el listado esta vacio, se muestra la imagen y un subtitulo. Si hay listado, desaparecen
         if(adapterAisles.itemCount > 0){
             binding.IVnoList.visibility = View.GONE
             binding.TVnoList.visibility = View.GONE
@@ -84,9 +92,11 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         binding.swipeShoppingList.isRefreshing = false
     }
 
+    //configuracion del recyclerview
     private fun configRecycler(){
         adapterAisles = AdapterAisles(object: AdapterAisles.Listener{
             override fun onClickListener(itemId: Int) {
+                //al pulsar sobre la celda del ingrediente se activa un AlertDialog para confirmar si se quiere borrar
                 createDialogDelete(itemId)
             }
         })
@@ -95,6 +105,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         binding.recyclerAisles.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    //crear la alerta
     private fun createDialogDelete(itemId: Int){
         val builder = AlertDialog.Builder(requireContext())
         val dialogBinding = DialogBinding.inflate(layoutInflater)
@@ -103,6 +114,8 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         val dialog = builder.create()
 
         dialogBinding.buttonDelete.setOnClickListener {
+            //cuando se pulsa el boton eliminar, se llama al metodo del viewmodel que borra un elemento de la lista
+            //una vez se ha completado esa peticion, se refesca el listado y se cierra el AlertDialog
             viewModel.deleteItemShoppingList(itemId).observe(viewLifecycleOwner){
                 viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
                 dialog.dismiss()
@@ -115,7 +128,8 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         dialog.show()
     }
 
-    //override de la funcion del listener del bottomsheet
+    //override de la funcion del listener del ModalBottomSheet
+    //Se le indica que recargue el listado tras haber creado un elemento nuevo desde el bottomSheet
     override fun reloadViewmodel() {
         binding.swipeShoppingList.isRefreshing = true
         viewModel.getShoppingList().observe(viewLifecycleOwner, observer)

@@ -16,8 +16,10 @@ import retrofit2.http.Query
 interface RetrofitInterface {
     /**
      * @author Sandra Martinez
-     * peticiones get, delete y post de la lista de la compra
+     * peticiones get, delete y post de la lista de la compra con sus correspondientes headers
      */
+
+    //GET
     @Headers(
         "Content-Type: application/json",
         "x-api-key: 90b3b4e1f1e64864943fe169af738877"
@@ -29,6 +31,7 @@ interface RetrofitInterface {
         @Query("hash") hash: String
     ): Response<ResponseGetShoppingList>
 
+    //DELETE
     @Headers(
         "Content-Type: application/json",
         "x-api-key: 90b3b4e1f1e64864943fe169af738877"
@@ -42,6 +45,7 @@ interface RetrofitInterface {
         @Query("hash") hash: String
     ): Response<ResponseDeleteItem>
 
+    //POST
     @Headers(
         "Content-Type: application/json",
         "x-api-key: 90b3b4e1f1e64864943fe169af738877"

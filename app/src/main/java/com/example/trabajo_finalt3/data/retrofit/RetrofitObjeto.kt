@@ -9,6 +9,7 @@ object RetrofitObjeto {
 
     const val URL_BASE = "https://api.spoonacular.com/"
 
+    //para evitar que la aplicación se cierre si hay un error timeout
     val okHttpClient = OkHttpClient.Builder()
         .readTimeout(60000, TimeUnit.SECONDS)
         .connectTimeout(60000, TimeUnit.SECONDS)

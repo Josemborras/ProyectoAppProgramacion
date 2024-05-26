@@ -7,10 +7,17 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.trabajo_finalt3.data.models.Item
 import com.example.trabajo_finalt3.databinding.HolderItemBinding
 
+/**
+ * @author Sandra Martinez
+ *  * [Adapter] AdapterItem
+ *  Este es el adaptador para listar los ingredientes.
+ *  Es el adaptador del RecyclerView en AdapterAisles.
+ */
 class AdapterItems(val listener: Listener) : RecyclerView.Adapter<AdapterItems.ItemHolder>() {
     private val list = ArrayList<Item>()
 
     interface Listener{
+        //este es el metodo al que se va a llamar en AdapterAisles al llamar a su listener
         fun onClickListener(idItem: Int)
     }
 
@@ -27,8 +34,10 @@ class AdapterItems(val listener: Listener) : RecyclerView.Adapter<AdapterItems.I
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
+        //cargar el nombre del ingrediente, su cantidad y su medida metrica en un mismo textview
         holder.binding.TVitem.text = "${list[position].measures?.metric?.amount?.toInt().toString()} ${list[position].measures?.metric?.unit!!} ${list[position].name}"
 
+        //activar el listener al pulsar sobre un ingrediente/ celda
         holder.itemView.setOnClickListener {
             list[position].id?.let {
                 listener.onClickListener(it)
@@ -36,6 +45,7 @@ class AdapterItems(val listener: Listener) : RecyclerView.Adapter<AdapterItems.I
         }
     }
 
+    //para darle valores a la lista o sobreescribirlos
     fun newList(newList: List<Item>){
         list.clear()
         list.addAll(newList)

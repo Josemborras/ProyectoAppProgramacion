@@ -36,12 +36,14 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
+    //metodo para cambiar el toolbar desde cada fragment (no son todos iguales)
     fun changeToolbar(toolbarNew: Toolbar, showBack: Boolean, navController: NavController){
         setSupportActionBar(toolbarNew)
         supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
+    //metodo para cambiar el titulo del toolbar desde cada fragment
     fun changeToolbarTitle(title: String){
         supportActionBar?.title = title
     }
