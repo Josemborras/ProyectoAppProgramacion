@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/tvTrecipe"
-                android:layout_width="181dp"
+                android:layout_width="163dp"
                 android:layout_height="64dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="16dp"
