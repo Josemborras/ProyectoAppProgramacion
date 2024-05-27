@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorNutrientesBinding
 import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
-import kotlin.math.max
 
 
 class BuscadorNutrientes : Fragment() {
@@ -30,38 +29,35 @@ class BuscadorNutrientes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-         * aquí se le dan valores mínimos y máximos a cada number picker.
-         *
-         * a los number pickers máximos se les pone el valor máximos por defecto, 100,
-         * y los mínimos se quedan en 0.
-         * */
+        // aquí se le dan valores mínimos y máximos a cada number picker.
 
         binding.nPMinProtein.minValue = 0
         binding.nPMinProtein.maxValue = 100
 
         binding.nPMaxProtein.minValue = 0
         binding.nPMaxProtein.maxValue = 100
-        binding.nPMaxProtein.value = 100
+        // binding.nPMaxProtein.value = 100
 
         binding.nPMinFat.minValue = 0
         binding.nPMinFat.maxValue = 100
 
         binding.nPMaxFat.minValue = 0
         binding.nPMaxFat.maxValue = 100
-        binding.nPMaxFat.value = 100
+        // binding.nPMaxFat.value = 100
 
         binding.nPMinCarbs.minValue = 0
         binding.nPMinCarbs.maxValue = 100
 
         binding.nPMaxCarbs.minValue = 0
         binding.nPMaxCarbs.maxValue = 100
-        binding.nPMaxCarbs.value = 100
+        // binding.nPMaxCarbs.value = 100
 
         /*
          * esto hace que los valores de los number pickers de calorías mínimas
          * y máximas salten de 10 en 10
          *  */
+
+        // values = ["0", "10", "20", "30", "40", +76 more]
         val values = Array(81) { i -> (i * 10).toString() }
 
         binding.nPMinCalories.minValue = 0
@@ -71,7 +67,7 @@ class BuscadorNutrientes : Fragment() {
         binding.nPMaxCalories.minValue = 0
         binding.nPMaxCalories.maxValue = values.size - 1
         binding.nPMaxCalories.displayedValues = values
-        binding.nPMaxCalories.value = values.size - 1
+        // binding.nPMaxCalories.value = values.size - 1
 
         binding.btnSearchRecipeByNutrients.setOnClickListener {
 
@@ -81,7 +77,8 @@ class BuscadorNutrientes : Fragment() {
              * correspondientes y después se comprueba si el valor mínimo es
              * mayor que el máximo, si es true los valores de estas dos
              * variables se cambian entre ellas para poder hacer la petición
-             * a la api sin que de fallo o devuelva un json vacío.
+             * a la api sin que de fallo o devuelva un json vacío. El valor
+             * de los number pickers también se cambiarán
              * */
 
             var minCarbs = binding.nPMinCarbs.value
@@ -91,6 +88,9 @@ class BuscadorNutrientes : Fragment() {
                 val temp = maxCarbs
                 maxCarbs = minCarbs
                 minCarbs = temp
+
+                binding.nPMinCarbs.value = minCarbs
+                binding.nPMaxCarbs.value = maxCarbs
             }
 
             var minProtein = binding.nPMinProtein.value
@@ -100,6 +100,9 @@ class BuscadorNutrientes : Fragment() {
                 val temp = maxProtein
                 maxProtein = minProtein
                 minProtein = temp
+
+                binding.nPMinProtein.value = minProtein
+                binding.nPMaxProtein.value = maxProtein
             }
 
             var minFat = binding.nPMinFat.value
@@ -109,6 +112,9 @@ class BuscadorNutrientes : Fragment() {
                 val temp = maxFat
                 maxFat = minFat
                 minFat = temp
+
+                binding.nPMinFat.value = minFat
+                binding.nPMaxFat.value = maxFat
             }
 
             var minCalories = binding.nPMinCalories.value
@@ -118,6 +124,9 @@ class BuscadorNutrientes : Fragment() {
                 val temp = maxCalories
                 maxCalories = minCalories
                 minCalories = temp
+
+                binding.nPMinCalories.value = minCalories
+                binding.nPMaxCalories.value = maxCalories
             }
 
             viewModel.getRecipesByNutrients(
@@ -127,12 +136,10 @@ class BuscadorNutrientes : Fragment() {
                 minCalories, maxCalories,
                 80
             ).observe(viewLifecycleOwner){
-                binding.textView.text = it.toString()
+                // aquí devuelve la lista de recetas según los datos que ha metido el usuario,
+                // después se guarda en un liveData
                 viewModel.setRecipesNutrientsResponse(it)
             }
-
-            val response = viewModel.getRecipesNutrientsResponse().value
-            binding.textView10.text = response.toString()
         }
     }
 }

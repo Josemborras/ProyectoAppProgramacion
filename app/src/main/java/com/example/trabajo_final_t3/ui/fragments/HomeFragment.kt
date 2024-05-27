@@ -34,14 +34,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSearch.setOnClickListener{
-            findNavController().navigate(R.id.action_HomeFragment_to_buscadorIngredientes)
-        }
-
-        binding.buttonRandom.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_buscadorNutrientes)
-        }
-
-        binding.buttonShoppingList.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_tabLayoutBuscador)
         }
     }

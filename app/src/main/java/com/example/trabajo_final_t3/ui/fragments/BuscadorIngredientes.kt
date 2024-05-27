@@ -61,17 +61,6 @@ class BuscadorIngredientes : Fragment() {
 
         binding.svIngredientes.setOnQueryTextListener(object : OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // esto se hace cuando pulsas la lupa del teclado al terminar de buscar
-                /*viewModel.getIngredients(query.toString()).observe(viewLifecycleOwner){
-                    binding.tv.text = ""
-                    binding.imvImagenBuscador.visibility = View.GONE
-                    it.results.forEach {
-
-                        binding.tv.text = """${binding.tv.text} 
-                            |${it.name}""".trimMargin()
-                    }
-                }*/
-//                binding.tv.text = query.toString()
                 return true
             }
 
@@ -122,6 +111,7 @@ class BuscadorIngredientes : Fragment() {
 
                 binding.rvBuscadorIngredientes.visibility = View.VISIBLE
                 binding.imvImagenBuscador.visibility = View.GONE
+                binding.btnBuscarReceta.visibility = View.VISIBLE
 
                 // Log.d("rv", viewModel.getSuggestions().toString())
 

@@ -15,12 +15,6 @@
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/ShoppingListFragment" />
         <action
-            android:id="@+id/action_HomeFragment_to_buscadorIngredientes"
-            app:destination="@id/buscadorIngredientes2" />
-        <action
-            android:id="@+id/action_HomeFragment_to_buscadorNutrientes"
-            app:destination="@id/buscadorNutrientes" />
-        <action
             android:id="@+id/action_HomeFragment_to_tabLayoutBuscador"
             app:destination="@id/tabLayoutBuscador" />
     </fragment>
@@ -32,24 +26,6 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/buscadorIngredientes2"
-        android:name="com.example.trabajo_final_t3.ui.fragments.BuscadorIngredientes"
-        android:label="fragment_buscador_ingredientes"
-        tools:layout="@layout/fragment_buscador_ingredientes" >
-        <action
-            android:id="@+id/action_buscadorIngredientes2_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/buscadorNutrientes"
-        android:name="com.example.trabajo_final_t3.ui.fragments.BuscadorNutrientes"
-        android:label="fragment_buscador_nutrientes"
-        tools:layout="@layout/fragment_buscador_nutrientes" >
-        <action
-            android:id="@+id/action_buscadorNutrientes_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
     <fragment

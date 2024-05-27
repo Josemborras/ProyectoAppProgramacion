@@ -19,8 +19,13 @@ class ViewModel: ViewModel() {
     // livedata que contiene mi lista de ingredientes seleccionados
     private var ingrListLiveData = MutableLiveData<ArrayList<Resultado>>()
 
+    // lista de recetas que devuelve la petición de getRecipesByIngredients
     private val recipesListLiveData = MutableLiveData<RecipeResponse>()
+
+    // lista de recetas que devuelve la petición de getRecipesByNutrients
     private val recipesByNutrientsListLiveData = MutableLiveData<RecipesByNutrientsResponse>()
+
+    // liveData para guardar las sugerencias que se muestran en el buscador
     private var suggestions = MutableLiveData<IngredientsResponse>()
 
     private val recipeNutientsResponseLiveData = MutableLiveData<RecipesByNutrientsResponse>()
@@ -73,7 +78,6 @@ class ViewModel: ViewModel() {
     }
 
     fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<RecipeResponse>{
-
         viewModelScope.launch {
             val response = repositorio.getRecipesByIngredients(ingredientsNames)
 
