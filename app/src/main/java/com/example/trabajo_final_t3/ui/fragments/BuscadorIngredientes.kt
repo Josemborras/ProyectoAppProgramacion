@@ -44,6 +44,8 @@ class BuscadorIngredientes : Fragment() {
 
         configRecycler()
 
+        binding.svIngredientes.setIconifiedByDefault(false)
+
         viewModel.getIngredienteResult().observe(viewLifecycleOwner){
             adaptador.updateList(it)
         }
