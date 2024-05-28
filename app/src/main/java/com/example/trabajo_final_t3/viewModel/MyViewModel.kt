@@ -16,9 +16,13 @@ import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.data.models.Recipe.Recipe
 import com.example.trabajo_final_t3.data.models.Steps.StepsResponse
 import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
+import com.example.trabajo_finalt3.data.models.Item
+import com.example.trabajo_finalt3.data.models.PostItem
+import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
+import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import kotlinx.coroutines.launch
 
-class ViewModel: ViewModel() {
+class MyViewModel: ViewModel() {
 
     private val repository by lazy {
         Repository()
@@ -268,5 +272,53 @@ class ViewModel: ViewModel() {
             }else Log.d("viewModelScope", "response.code() == " + response.code().toString())
         }
         return recipesByNutrientsListLiveData
+    }
+
+
+    /**
+     * @author Sandra Martinez
+     * funciones get y delete de la lista de la compra
+     */
+
+    //GET
+    fun getShoppingList(): MutableLiveData<ResponseGetShoppingList> {
+        val listLiveData = MutableLiveData<ResponseGetShoppingList>()
+
+        viewModelScope.launch{
+            val res = repository.getShoppingList()
+            if(res.code() == 200){
+                listLiveData.postValue(res.body())
+            }
+        }
+
+        return listLiveData
+    }
+
+    //DELETE
+    fun deleteItemShoppingList(idItem: Int): MutableLiveData<ResponseDeleteItem> {
+        val deleteResLiveData = MutableLiveData<ResponseDeleteItem>()
+
+        viewModelScope.launch {
+            val res = repository.deleteItemShoppingList(idItem)
+            if(res.code() == 200) {
+                deleteResLiveData.postValue(res.body())
+            }
+        }
+
+        return deleteResLiveData
+    }
+
+    //POST
+    fun addItemShoppingList(item: PostItem): MutableLiveData<Item> {
+        val itemLiveData = MutableLiveData<Item>()
+
+        viewModelScope.launch {
+            val res = repository.addItemShoppingList(item)
+            if(res.code() == 200){
+                itemLiveData.postValue(res.body())
+            }
+        }
+
+        return itemLiveData
     }
 }

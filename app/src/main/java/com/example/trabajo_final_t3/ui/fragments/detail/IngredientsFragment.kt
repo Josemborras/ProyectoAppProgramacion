@@ -12,12 +12,12 @@ import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.databinding.FragmentIngredientsBinding
 import com.example.trabajo_final_t3.ui.adapters.IngredientsAdapter
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 class IngredientsFragment : Fragment() {
 
     private lateinit var binding: FragmentIngredientsBinding
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
     private lateinit var adapter: IngredientsAdapter
     private lateinit var adapterSimilar: SimilarRecipeAdapter
 
@@ -33,19 +33,19 @@ class IngredientsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = 632583
-        viewModel.getRecipeInfo(id).observe(viewLifecycleOwner) { recipeComplete ->
+        myViewModel.getRecipeInfo(id).observe(viewLifecycleOwner) { recipeComplete ->
             recipeComplete?.let {
                 configRecyclerIngredients(it.extendedIngredients)
             }
         }
 
-        viewModel.getSimilars(id).observe(viewLifecycleOwner){
+        myViewModel.getSimilars(id).observe(viewLifecycleOwner){
             configRecyclerSimilar(it)
         }
     }
 
     private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
-        adapterSimilar = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
+        adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner)
         adapterSimilar.setRecipes(list)
 
         binding.rvSimilar2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

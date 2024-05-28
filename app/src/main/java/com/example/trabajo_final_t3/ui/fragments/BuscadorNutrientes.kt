@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorNutrientesBinding
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 
 class BuscadorNutrientes : Fragment() {
 
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
     private lateinit var binding: FragmentBuscadorNutrientesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,7 +129,7 @@ class BuscadorNutrientes : Fragment() {
                 binding.nPMaxCalories.value = maxCalories
             }
 
-            viewModel.getRecipesByNutrients(
+            myViewModel.getRecipesByNutrients(
                 minCarbs, maxCarbs,
                 minProtein, maxProtein,
                 minFat, maxFat,

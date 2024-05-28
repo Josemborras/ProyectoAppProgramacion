@@ -1,6 +1,6 @@
 package com.example.trabajo_final_t3.ui.fragments
 
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +18,7 @@ import com.example.trabajo_final_t3.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
 
 
     // This property is only valid between onCreateView and
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_firstFragment)
         }
 
-        viewModel.triviaRandomAddVw().observe(viewLifecycleOwner){
+        myViewModel.triviaRandomAddVw().observe(viewLifecycleOwner){
             if (it != null) {
                 binding.txTrivia.text = """
                     " ${it.text}"

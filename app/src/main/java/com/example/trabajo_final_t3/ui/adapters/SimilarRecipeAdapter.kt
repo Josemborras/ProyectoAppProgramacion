@@ -9,10 +9,10 @@ import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.databinding.HolderRecipeListBinding
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.data.models.Recipe.Recipe
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 
-class SimilarRecipeAdapter(private val viewModel: ViewModel, private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<SimilarRecipeAdapter.RecipeListHolder>() {
+class SimilarRecipeAdapter(private val myViewModel: MyViewModel, private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<SimilarRecipeAdapter.RecipeListHolder>() {
 
 
     private var currentLiveData: MutableLiveData<Recipe>? = null
@@ -31,7 +31,7 @@ class SimilarRecipeAdapter(private val viewModel: ViewModel, private val lifecyc
         holder.binding.tvTrecipe.text = recipes.title
 
 
-        viewModel.getRecipeInfo(recipes.id).observe(lifecycleOwner){similar ->
+        myViewModel.getRecipeInfo(recipes.id).observe(lifecycleOwner){ similar ->
             Glide.with(holder.binding.imageView5.context)
                 .load(similar.image)
                 .into(holder.binding.imageView5)

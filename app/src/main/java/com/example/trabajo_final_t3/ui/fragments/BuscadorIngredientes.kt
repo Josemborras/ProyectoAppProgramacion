@@ -21,14 +21,14 @@ import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorIngredientesBinding
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
 import com.example.trabajo_final_t3.ui.adapters.Ingredientes
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 
 class BuscadorIngredientes : Fragment() {
 
     private lateinit var binding: FragmentBuscadorIngredientesBinding
     private lateinit var bindingIngredient: IngredientesBinding
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
     private lateinit var adaptador: Ingredientes
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class BuscadorIngredientes : Fragment() {
 
         binding.svIngredientes.setIconifiedByDefault(false)
 
-        viewModel.getIngredienteResult().observe(viewLifecycleOwner){
+        myViewModel.getIngredienteResult().observe(viewLifecycleOwner){
             adaptador.updateList(it)
         }
 
@@ -72,11 +72,11 @@ class BuscadorIngredientes : Fragment() {
                 // esto se hace cada vez que cambias (escribir, borrar, cortar, pegar...) el texto
                 var suggestions = ArrayList<String>()
 
-                viewModel.getIngredients(newText.toString()).observe(viewLifecycleOwner){ ingredientsResponse ->
+                myViewModel.getIngredients(newText.toString()).observe(viewLifecycleOwner){ ingredientsResponse ->
                      ingredientsResponse.results.forEach {result ->
                         suggestions.add(result.name)
                     }
-                    viewModel.setSuggestions(ingredientsResponse)
+                    myViewModel.setSuggestions(ingredientsResponse)
                 }
 
                 val cursor =
@@ -108,8 +108,8 @@ class BuscadorIngredientes : Fragment() {
 
                 val selection = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
 
-                viewModel.filterList(selection).observe(viewLifecycleOwner){
-                    if (it.isNotEmpty()) viewModel.addIngredienteResult(it[0])
+                myViewModel.filterList(selection).observe(viewLifecycleOwner){
+                    if (it.isNotEmpty()) myViewModel.addIngredienteResult(it[0])
                 }
 
                 binding.rvBuscadorIngredientes.visibility = View.VISIBLE
@@ -136,7 +136,7 @@ class BuscadorIngredientes : Fragment() {
         }
 
         binding.btnBuscarReceta.setOnClickListener {
-            viewModel.getRecipesByIngredients(adaptador.getString()).observe(viewLifecycleOwner){
+            myViewModel.getRecipesByIngredients(adaptador.getString()).observe(viewLifecycleOwner){
                 it
             }
         }
@@ -146,7 +146,7 @@ class BuscadorIngredientes : Fragment() {
         binding.rvBuscadorIngredientes.layoutManager = LinearLayoutManager(context)
         adaptador = Ingredientes(object : Ingredientes.DeleteClickListener{
             override fun onDeleteClick(resultado: Resultado) {
-                viewModel.removeIngredientResult(resultado)
+                myViewModel.removeIngredientResult(resultado)
             }
         })
         binding.rvBuscadorIngredientes.adapter = adaptador

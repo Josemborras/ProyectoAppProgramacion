@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.databinding.FragmentCardBinding
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 class CardFragment : Fragment() {
 
     private lateinit var binding: FragmentCardBinding
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
     private lateinit var adapter: SimilarRecipeAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,18 +30,18 @@ class CardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = 632583
-        viewModel.getCardImage(id).observe(viewLifecycleOwner){cardImage ->
+        myViewModel.getCardImage(id).observe(viewLifecycleOwner){ cardImage ->
             Glide.with(this).load(cardImage.url).into(binding.imageView)
 
         }
 
-        viewModel.getSimilars(id).observe(viewLifecycleOwner){
+        myViewModel.getSimilars(id).observe(viewLifecycleOwner){
             configRecyclerSimilar(it)
         }
     }
 
     private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
-        adapter = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
+        adapter = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner)
         adapter.setRecipes(list)
 
         binding.rvSimilar3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

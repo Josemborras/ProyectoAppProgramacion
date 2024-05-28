@@ -20,7 +20,7 @@ class FirstFragment : Fragment() {
     private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by activityViewModels<com.example.trabajo_final_t3.viewModel.ViewModel>()
+    private val myViewModel by activityViewModels<com.example.trabajo_final_t3.viewModel.MyViewModel>()
     private lateinit var adaptador: Adaptadorlistado
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class FirstFragment : Fragment() {
         //este es el listener para que cuando tires hacia arriba te recarge el viewmodel
         binding.swipe.setOnRefreshListener {
             binding.swipe.isRefreshing = true
-            viewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
+            myViewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
                 if (it != null) {
                     configRecicler(it.recipes)
                 }
@@ -71,7 +71,7 @@ class FirstFragment : Fragment() {
 
         //se le pasa recipes(RecipesRandom) al configrecicler(configuracion del adaptador)
         //la funcion que viene del viewModel es para pasarle el listado que devuelve al config recicle
-        viewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
+        myViewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
             if (it != null) {
                 configRecicler(it.recipes)
             }

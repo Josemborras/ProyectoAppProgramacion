@@ -11,13 +11,13 @@ import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.databinding.FragmentDetailRecipeBinding
 import com.example.trabajo_final_t3.ui.MainActivity
-import com.example.trabajo_final_t3.viewModel.ViewModel
+import com.example.trabajo_final_t3.viewModel.MyViewModel
 import com.google.android.material.tabs.TabLayout
 
 class DetailRecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailRecipeBinding
-    private val viewModel by activityViewModels<ViewModel>()
+    private val myViewModel by activityViewModels<MyViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class DetailRecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = 632583
-        viewModel.getRecipeInfo(id).observe(viewLifecycleOwner) {
+        myViewModel.getRecipeInfo(id).observe(viewLifecycleOwner) {
             (requireActivity() as MainActivity).supportActionBar?.title = it.title
             binding.collapsingToolbar.title = it.title
             Glide.with(this).load(it.image).into(binding.ivRecipe)
