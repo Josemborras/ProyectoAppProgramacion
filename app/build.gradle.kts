@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tabajo_finalt3"
+    namespace = "com.example.trabajo_final_t3"
     compileSdk = 34
 
     defaultConfig {
@@ -64,6 +64,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.retrofit)
+    implementation (libs.gson)
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation (libs.converter.moshi)
+     implementation (libs.converter.gson)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation(libs.junit)

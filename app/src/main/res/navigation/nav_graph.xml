@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/ShoppingListFragment" />
-    </fragment>
+            android:id="@+id/action_HomeFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
     <fragment
-        android:id="@+id/ShoppingListFragment"
-        android:name="com.example.trabajo_final_t3.ui.ShoppingListFragment"
-        android:label="Shopping list"
-        tools:layout="@layout/fragment_shopping_list">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
+        android:id="@+id/firstFragment2"
+        android:name="com.example.trabajo_final_t3.ui.fragment.FirstFragment"
+        android:label="fragment_listado"
+        tools:layout="@layout/fragment_listado" />
+</fragment>
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragment.FirstFragment"
+        android:label="fragment_listado"
+        tools:layout="@layout/fragment_listado" />
 </navigation>
