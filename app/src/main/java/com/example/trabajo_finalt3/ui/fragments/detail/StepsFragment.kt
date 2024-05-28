@@ -35,7 +35,7 @@ class StepsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 324694
+        val id = 632583
         viewModel.getInstructions(id).observe(viewLifecycleOwner) {
             configRecyclerElabs(it)
         }
