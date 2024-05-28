@@ -9,14 +9,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trabajo_finalT3.databinding.FragmentIngredientsBinding
 import com.example.trabajo_finalt3.MyViewModel
+import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
 import com.example.trabajo_finalt3.model.data.Recipe.ExtendedIngredient
 import com.example.trabajo_finalt3.ui.adapters.IngredientsAdapter
+import com.example.trabajo_finalt3.ui.adapters.SimilarRecipeAdapter
 
 class IngredientsFragment : Fragment() {
 
     private lateinit var binding: FragmentIngredientsBinding
     private val viewModel by activityViewModels<MyViewModel>()
     private lateinit var adapter: IngredientsAdapter
+    private lateinit var adapterSimilar: SimilarRecipeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,18 @@ class IngredientsFragment : Fragment() {
                 configRecyclerIngredients(it.extendedIngredients)
             }
         }
+
+        viewModel.getSimilars(id).observe(viewLifecycleOwner){
+            configRecyclerSimilar(it)
+        }
+    }
+
+    private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
+        adapterSimilar = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
+        adapterSimilar.setRecipes(list)
+
+        binding.rvSimilar2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSimilar2.adapter = adapterSimilar
     }
 
     private fun configRecyclerIngredients(list: List<ExtendedIngredient>) {

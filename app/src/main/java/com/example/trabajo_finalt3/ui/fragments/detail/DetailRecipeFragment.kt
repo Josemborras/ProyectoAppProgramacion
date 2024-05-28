@@ -39,9 +39,9 @@ class DetailRecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
-        binding.viewpager.adapter = viewPagerAdapter
+        binding.viewPager.adapter = viewPagerAdapter
 
-        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
+        TabLayoutMediator(binding.tablayout, binding.viewPager) { tab, position ->
             tab.customView = createTabView(position)
         }.attach()
 
@@ -53,17 +53,6 @@ class DetailRecipeFragment : Fragment() {
 
         }
 
-        viewModel.getSimilars(id).observe(viewLifecycleOwner){
-            configRecycler(it)
-        }
-    }
-
-    private fun configRecycler(list: ArrayList<RecipeItem>) {
-        adapter = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
-        adapter.setRecipes(list)
-
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerView.adapter = adapter
     }
     private fun createTabView(position: Int): View {
         val tabView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_layout, null)

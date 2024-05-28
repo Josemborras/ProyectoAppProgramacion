@@ -9,9 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trabajo_finalT3.databinding.FragmentStepsBinding
 import com.example.trabajo_finalt3.MyViewModel
+import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
 import com.example.trabajo_finalt3.model.data.Steps.Step
 import com.example.trabajo_finalt3.model.data.Steps.StepsResponseItem
 import com.example.trabajo_finalt3.ui.adapters.ElabAdapter
+import com.example.trabajo_finalt3.ui.adapters.SimilarRecipeAdapter
 import com.example.trabajo_finalt3.ui.adapters.StepAdapter
 
 class StepsFragment : Fragment() {
@@ -19,6 +21,7 @@ class StepsFragment : Fragment() {
     private lateinit var binding: FragmentStepsBinding
     private val viewModel by activityViewModels<MyViewModel>()
     private lateinit var adapterElab: ElabAdapter
+    private lateinit var adapterSimilar: SimilarRecipeAdapter
 
 
     override fun onCreateView(
@@ -36,8 +39,19 @@ class StepsFragment : Fragment() {
         viewModel.getInstructions(id).observe(viewLifecycleOwner) {
             configRecyclerElabs(it)
         }
+
+        viewModel.getSimilars(id).observe(viewLifecycleOwner){
+            configRecyclerSimilar(it)
+        }
     }
 
+    private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
+        adapterSimilar = SimilarRecipeAdapter(viewModel, viewLifecycleOwner)
+        adapterSimilar.setRecipes(list)
+
+        binding.rvSimilar1.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSimilar1.adapter = adapterSimilar
+    }
     private fun configRecyclerElabs(list: List<StepsResponseItem>) {
         adapterElab = ElabAdapter()
         adapterElab.setElabs(list)
