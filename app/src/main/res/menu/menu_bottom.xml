@@ -8,13 +8,13 @@
         android:title="Home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/ShoppingListFragment"
-        android:icon="@drawable/button_list"
-        android:title="List"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/buscadorIngredientes"
         android:icon="@drawable/baseline_search_24"
         android:title="Search"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/ShoppingListFragment"
+        android:icon="@drawable/button_list"
+        android:title="List"
+        app:showAsAction="always" />
 </menu>
