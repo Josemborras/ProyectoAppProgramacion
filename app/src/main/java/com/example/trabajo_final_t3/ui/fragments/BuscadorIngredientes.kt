@@ -136,6 +136,7 @@ class BuscadorIngredientes : Fragment() {
 
         binding.btnBuscarReceta.setOnClickListener {
             viewModel.getRecipesByIngredients(adaptador.getString()).observe(viewLifecycleOwner){
+                it
             }
         }
     }

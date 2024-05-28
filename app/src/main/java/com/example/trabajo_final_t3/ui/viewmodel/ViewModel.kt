@@ -28,7 +28,6 @@ class ViewModel: ViewModel() {
     // liveData para guardar las sugerencias que se muestran en el buscador
     private var suggestions = MutableLiveData<IngredientsResponse>()
 
-    private val recipeNutientsResponseLiveData = MutableLiveData<RecipesByNutrientsResponse>()
     init {
         // init se encarga de inicializar valores la primera vez que se crea el livedata
         // aquí agregamos un listado vacio a mi lista de ingredietnes
@@ -105,8 +104,4 @@ class ViewModel: ViewModel() {
         }
         return recipesByNutrientsListLiveData
     }
-
-    fun setRecipesNutrientsResponse(recipes: RecipesByNutrientsResponse) { recipeNutientsResponseLiveData.value = recipes }
-
-    fun getRecipesNutrientsResponse() = recipeNutientsResponseLiveData
 }

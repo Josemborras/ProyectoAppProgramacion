@@ -138,7 +138,6 @@ class BuscadorNutrientes : Fragment() {
             ).observe(viewLifecycleOwner){
                 // aquí devuelve la lista de recetas según los datos que ha metido el usuario,
                 // después se guarda en un liveData
-                viewModel.setRecipesNutrientsResponse(it)
             }
         }
     }
