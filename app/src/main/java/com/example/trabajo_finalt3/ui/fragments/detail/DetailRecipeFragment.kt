@@ -1,59 +1,76 @@
 package com.example.trabajo_finalt3.ui.fragments.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.trabajo_finalT3.R
 import com.example.trabajo_finalT3.databinding.FragmentDetailRecipeBinding
 import com.example.trabajo_finalt3.MainActivity
 import com.example.trabajo_finalt3.MyViewModel
-import com.example.trabajo_finalt3.model.data.ListRecipe.RecipeItem
-import com.example.trabajo_finalt3.ui.adapters.SimilarRecipeAdapter
-import com.example.trabajo_finalt3.ui.adapters.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayoutMediator
-
+import com.google.android.material.tabs.TabLayout
 
 class DetailRecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailRecipeBinding
     private val viewModel by activityViewModels<MyViewModel>()
-    private lateinit var adapter: SimilarRecipeAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
+        setupTabs(savedInstanceState)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
-        binding.viewPager.adapter = viewPagerAdapter
-
-        TabLayoutMediator(binding.tablayout, binding.viewPager) { tab, position ->
-            tab.customView = createTabView(position)
-        }.attach()
-
         val id = 632583
-        viewModel.getRecipeInfo(id).observe(viewLifecycleOwner){
+        viewModel.getRecipeInfo(id).observe(viewLifecycleOwner) {
             (requireActivity() as MainActivity).supportActionBar?.title = it.title
             binding.collapsingToolbar.title = it.title
             Glide.with(this).load(it.image).into(binding.ivRecipe)
+        }
+    }
 
+    private fun setupTabs(savedInstanceState: Bundle?) {
+        val tabLayout = binding.tablayout
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(0)))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(1)))
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView(2)))
+
+        // Load the first fragment by default
+        if (savedInstanceState == null) {
+            replaceFragment(IngredientsFragment())
         }
 
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        0 -> replaceFragment(IngredientsFragment())
+                        1 -> replaceFragment(StepsFragment())
+                        2 -> replaceFragment(CardFragment())
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle unselected state if needed
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle reselected state if needed
+            }
+        })
     }
+
     private fun createTabView(position: Int): View {
         val tabView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_layout, null)
         val tabText = tabView.findViewById<TextView>(R.id.tab_text)
@@ -65,4 +82,11 @@ class DetailRecipeFragment : Fragment() {
         }
         return tabView
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
 }
+
