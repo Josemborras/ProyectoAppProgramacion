@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#7C231847"
-        android:fontFamily="@font/indie_flower"
+        android:fontFamily="@font/alata"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"

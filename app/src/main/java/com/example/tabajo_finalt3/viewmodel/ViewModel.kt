@@ -12,7 +12,10 @@ import kotlinx.coroutines.launch
 
 class ViewModel: ViewModel() {
 
-    val selecList = MutableLiveData<TriviaRandom?>()
+//    val selecList = MutableLiveData<TriviaRandom?>()
+
+    //para guardar la lista de recetas por ingredientes
+    // private val ingredienRecipetLiveData = MutableLiveData<RecipeResponse?>()
 
     private val repository by lazy {
         Repository()
@@ -37,9 +40,28 @@ class ViewModel: ViewModel() {
 
     }
 
-//    fun triviaRandomAddVw(trive: TriviaRandom){
-//        selecList.value = trive
-//    }
+    //LIVE DATA PARA DANI
+
+    //para guardar la lista de recetas por nutrientes
+
+    //    fun setRecipeNutrientResponseLiveData(recipes: RecipesByNutrientsResponse){
+            //recipeNutrientResponseLiveData.value = recipes
+    //}
+
+    //Para coger la lista de recetas por nutrientes
+
+    //fun getRecipeNutrientResponse() = recipeNutrientResponseLiveData
+
+    //para guardar la lista de recetas por ingredientes
+
+    //    fun setRecipeIngredientLiveData(recipes: RecipeResponse){
+             //ingredienRecipetLiveData.value = recipes
+    //}
+
+    //Para coger la lista de recetas por ingredientes
+
+    //fun getRecipeIngredientResponse() = ingredienRecipetLiveData
+
 
 
     fun triviaRandomAddVw(): MutableLiveData<TriviaRandom?>{
