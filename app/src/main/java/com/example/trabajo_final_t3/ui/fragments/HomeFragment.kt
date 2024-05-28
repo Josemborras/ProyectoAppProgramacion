@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.databinding.FragmentHomeBinding
 
+
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */

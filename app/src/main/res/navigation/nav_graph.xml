@@ -32,6 +32,20 @@
             app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
+        android:id="@+id/ShoppingListFragment"
+        android:name="com.example.trabajo_finalt3.ui.ShoppingListFragment"
+        android:label="Shopping list"
+        tools:layout="@layout/fragment_shopping_list">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailRecipeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.detail.DetailRecipeFragment"
+        android:label="DetailRecipeFragment" />
+    <fragment
         android:id="@+id/tabLayoutBuscador"
         android:name="com.example.trabajo_final_t3.ui.fragments.TabLayoutBuscador"
         android:label="TabLayoutBuscador" />

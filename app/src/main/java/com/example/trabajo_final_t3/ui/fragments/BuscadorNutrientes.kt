@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorNutrientesBinding
-import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
+import com.example.trabajo_final_t3.viewModel.ViewModel
 
 
 class BuscadorNutrientes : Fragment() {

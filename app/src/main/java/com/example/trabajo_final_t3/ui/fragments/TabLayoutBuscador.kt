@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.trabajo_final_t3.databinding.FragmentTablayoutBuscadorBinding
-import com.example.trabajo_final_t3.ui.adapters.ViewPagerAdapter
+import com.example.trabajo_final_t3.ui.adapters.ViewPagerAdapterBuscador
 import com.google.android.material.tabs.TabLayoutMediator
 
 class TabLayoutBuscador : Fragment() {
@@ -27,7 +27,7 @@ class TabLayoutBuscador : Fragment() {
 
         binding.toolbar.setTitle("Search")
 
-        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+        val viewPagerAdapter = ViewPagerAdapterBuscador(requireActivity())
         binding.viewpager.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.trabajo_final_t3.data.models.Recipe
+import com.example.trabajo_final_t3.data.models.Recipe.Recipe
 import com.example.trabajo_final_t3.databinding.FragmentListadoBinding
 import com.example.trabajo_final_t3.ui.adapters.Adaptadorlistado
 

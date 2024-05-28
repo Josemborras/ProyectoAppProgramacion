@@ -1,6 +1,7 @@
-package com.example.trabajo_final_t3.data.models
+package com.example.trabajo_final_t3.data.models.Recipe
 
 
+import com.example.trabajo_final_t3.data.models.AnalyzedInstruction
 import com.google.gson.annotations.SerializedName
 
 data class Recipe(
@@ -23,7 +24,7 @@ data class Recipe(
     @SerializedName("dishTypes")
     var dishTypes: List<String?>?,
     @SerializedName("extendedIngredients")
-    var extendedIngredients: List<ExtendedIngredient?>?,
+    var extendedIngredients: List<ExtendedIngredient>,
     @SerializedName("gaps")
     var gaps: String?,
     @SerializedName("glutenFree")

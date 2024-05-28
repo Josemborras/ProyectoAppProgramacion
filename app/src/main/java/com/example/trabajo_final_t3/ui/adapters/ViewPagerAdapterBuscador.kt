@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.trabajo_final_t3.ui.fragments.BuscadorIngredientes
 import com.example.trabajo_final_t3.ui.fragments.BuscadorNutrientes
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class ViewPagerAdapterBuscador(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = 2
 

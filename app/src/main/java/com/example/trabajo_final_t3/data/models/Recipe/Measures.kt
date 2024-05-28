@@ -1,4 +1,4 @@
-package com.example.trabajo_final_t3.data.models
+package com.example.trabajo_final_t3.data.models.Recipe
 
 
 import com.google.gson.annotations.SerializedName

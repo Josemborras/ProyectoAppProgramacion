@@ -21,7 +21,8 @@ import com.example.trabajo_final_t3.data.models.ingredients.Resultado
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorIngredientesBinding
 import com.example.trabajo_final_t3.databinding.IngredientesBinding
 import com.example.trabajo_final_t3.ui.adapters.Ingredientes
-import com.example.trabajo_final_t3.ui.viewmodel.ViewModel
+import com.example.trabajo_final_t3.viewModel.ViewModel
+
 
 class BuscadorIngredientes : Fragment() {
 

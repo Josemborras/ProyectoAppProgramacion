@@ -1,6 +1,7 @@
-package com.example.trabajo_final_t3.data.models
+package com.example.trabajo_final_t3.data.models.Recipe
 
 
+import com.example.trabajo_final_t3.data.models.Recipe.Measures
 import com.google.gson.annotations.SerializedName
 
 data class ExtendedIngredient(
@@ -17,7 +18,7 @@ data class ExtendedIngredient(
     @SerializedName("measures")
     var measures: Measures?,
     @SerializedName("meta")
-    var meta: List<String?>?,
+    var meta: List<String?>,
     @SerializedName("name")
     var name: String?,
     @SerializedName("nameClean")
