@@ -7,22 +7,32 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.trabajo_final_t3.ui.HomeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.HomeFragment"
         android:label="HOME"
         tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_HomeFragment_to_firstFragment"
             app:destination="@id/firstFragment" />
-    <fragment
-        android:id="@+id/firstFragment2"
-        android:name="com.example.trabajo_final_t3.ui.fragment.FirstFragment"
-        android:label="fragment_listado"
-        tools:layout="@layout/fragment_listado" />
-</fragment>
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/ShoppingListFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_tabLayoutBuscador"
+            app:destination="@id/tabLayoutBuscador" />
+    </fragment>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.trabajo_final_t3.ui.fragment.FirstFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.FirstFragment"
         android:label="fragment_listado"
-        tools:layout="@layout/fragment_listado" />
+        tools:layout="@layout/fragment_listado" >
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabLayoutBuscador"
+        android:name="com.example.trabajo_final_t3.ui.fragments.TabLayoutBuscador"
+        android:label="TabLayoutBuscador" />
 </navigation>

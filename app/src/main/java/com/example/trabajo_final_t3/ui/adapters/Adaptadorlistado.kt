@@ -1,4 +1,4 @@
-package com.example.trabajo_final_t3.ui.adapter
+package com.example.trabajo_final_t3.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

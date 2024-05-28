@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.tabajo_finalt3"
+        applicationId = "com.example.trabajo_final_t3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -67,8 +66,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation (libs.gson)
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation (libs.converter.moshi)
-     implementation (libs.converter.gson)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+    implementation (libs.converter.gson)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation(libs.junit)

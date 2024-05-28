@@ -1,5 +1,4 @@
-package com.example.trabajo_final_t3.ui.fragment
-
+package com.example.trabajo_final_t3.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.trabajo_final_t3.data.models.Recipe
 import com.example.trabajo_final_t3.databinding.FragmentListadoBinding
-import com.example.trabajo_final_t3.ui.adapter.Adaptadorlistado
+import com.example.trabajo_final_t3.ui.adapters.Adaptadorlistado
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

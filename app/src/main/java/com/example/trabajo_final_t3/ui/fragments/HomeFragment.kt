@@ -1,12 +1,12 @@
-package com.example.trabajo_final_t3.ui
+package com.example.trabajo_final_t3.ui.fragments
 
 import com.example.trabajo_final_t3.viewModel.ViewModel
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.databinding.FragmentHomeBinding
@@ -50,6 +50,9 @@ class HomeFragment : Fragment() {
             }
         }
 
+        binding.buttonSearch.setOnClickListener{
+            findNavController().navigate(R.id.action_HomeFragment_to_tabLayoutBuscador)
+        }
     }
 
     override fun onDestroyView() {

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FlavorSpot"
+rootProject.name = "trabajo_final_t3"
 include(":app")
