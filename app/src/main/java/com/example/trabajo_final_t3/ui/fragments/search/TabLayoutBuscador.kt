@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.trabajo_final_t3.databinding.FragmentTablayoutBuscadorBinding
+import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.ui.adapters.ViewPagerAdapterSearch
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -18,14 +20,13 @@ class TabLayoutBuscador : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTablayoutBuscadorBinding.inflate(layoutInflater, container, false)
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbarSearch, true, findNavController())
+        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        binding.toolbar.setTitle("Search")
 
         val viewPagerAdapter = ViewPagerAdapterSearch(requireActivity())
         binding.viewpager.adapter = viewPagerAdapter

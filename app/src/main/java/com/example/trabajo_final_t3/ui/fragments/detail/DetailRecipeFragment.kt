@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.databinding.FragmentDetailRecipeBinding
@@ -24,6 +25,8 @@ class DetailRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbarDetail, true, findNavController())
+        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         setupTabs(savedInstanceState)
         return binding.root
     }
