@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.ExtendedIngredient
 import com.example.trabajo_final_t3.databinding.FragmentIngredientsBinding
+import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.ui.adapters.IngredientsAdapter
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
 import com.example.trabajo_final_t3.viewModel.MyViewModel
@@ -32,18 +34,30 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-            recipe.id?.let {
-                myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) { recipeComplete ->
-                    recipeComplete?.let {
-                        configRecyclerIngredients(it.extendedIngredients)
+        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
+            if (boolean == true){
+                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
+                    recipeSearch.id?.let {recipeId ->
+                        myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) { recipeComplete ->
+                            recipeComplete?.let {
+                                configRecyclerIngredients(it.extendedIngredients)
+                            }
+                        }
                     }
                 }
-            }
-            recipe.id?.let {
-                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                    configRecyclerSimilar(it)
+            }else{
+                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+                    recipe.id?.let {
+                        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipeSearch ->
+                            recipeSearch.id?.let {recipeId ->
+                                myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) { recipeComplete ->
+                                    recipeComplete?.let {
+                                        configRecyclerIngredients(it.extendedIngredients)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

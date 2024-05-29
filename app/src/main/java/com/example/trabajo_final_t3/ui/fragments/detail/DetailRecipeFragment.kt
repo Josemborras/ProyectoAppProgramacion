@@ -31,41 +31,29 @@ class DetailRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
-//            if (boolean == true){
-//                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
-//                    recipeSearch.id?.let { it ->
-//                        myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) {
-//                            (requireActivity() as MainActivity).supportActionBar?.title = it.title
-//                            binding.collapsingToolbar.title = it.title
-//                            Glide.with(this).load(it.image).into(binding.ivRecipe)
-//                        }
-//                    }
-//                }
-//            }else{
-//                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-//                    recipe.id?.let {
-//                        myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) {recipeRandom ->
-//                            //(requireActivity() as MainActivity).supportActionBar?.title = recipeRandom.title
-//                            binding.collapsingToolbar.title = recipeRandom.title
-//                            Glide.with(this).load(recipeRandom.image).into(binding.ivRecipe)
-//                        }
-//                    }
-//                }
-//            }
-        //}
-
-        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
+            if (boolean == true){
+                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
+                    recipeSearch.id?.let { recipeId ->
+                        myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) {recipe ->
+                            (requireActivity() as MainActivity).supportActionBar?.title = recipe.title
+                            binding.collapsingToolbar.title = recipe.title
+                            Glide.with(this).load(recipe.image).into(binding.ivRecipe)
+                        }
+                    }
+                }
+            }else{
+                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
                     recipe.id?.let {
                         myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) {recipeRandom ->
-                            //(requireActivity() as MainActivity).supportActionBar?.title = recipeRandom.title
+                            (requireActivity() as MainActivity).supportActionBar?.title = recipeRandom.title
                             binding.collapsingToolbar.title = recipeRandom.title
                             Glide.with(this).load(recipeRandom.image).into(binding.ivRecipe)
                         }
                     }
                 }
-
-
+            }
+        }
     }
 
     private fun setupTabs(savedInstanceState: Bundle?) {

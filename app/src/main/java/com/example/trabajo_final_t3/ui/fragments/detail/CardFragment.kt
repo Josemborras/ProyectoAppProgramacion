@@ -29,6 +29,38 @@ class CardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
+            if (boolean == true){
+                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipe ->
+                    recipe.id?.let {
+                        myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
+                            Glide.with(this).load(cardImage?.url).into(binding.imageView)
+                        }
+                    }
+
+                    recipe.id?.let {
+                        myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                            configRecyclerSimilar(it)
+                        }
+                    }
+                }
+            }else{
+                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+                    recipe.id?.let {
+                        myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
+                            Glide.with(this).load(cardImage?.url).into(binding.imageView)
+                        }
+                    }
+
+                    recipe.id?.let {
+                        myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                            configRecyclerSimilar(it)
+                        }
+                    }
+                }
+            }
+        }
+
         myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
             recipe.id?.let {
                 myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
@@ -41,7 +73,6 @@ class CardFragment : Fragment() {
                     configRecyclerSimilar(it)
                 }
             }
-
         }
     }
 

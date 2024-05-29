@@ -33,20 +33,54 @@ class StepsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-            recipe.id?.let {
-                myViewModel.getInstructions(it).observe(viewLifecycleOwner) {
-                    configRecyclerElabs(it)
+        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
+            if (boolean == true){
+                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
+                    recipeSearch.id?.let {recipeId ->
+                        myViewModel.getInstructions(recipeId).observe(viewLifecycleOwner) {
+                            configRecyclerElabs(it)
+                        }
+                    }
+                    recipeSearch.id?.let {recipeId ->
+                        myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
+                            configRecyclerSimilar(it)
+                        }
+                    }
+                }
+            }else{
+                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+                    recipe.id?.let {
+                        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+                            recipe.id?.let {recipeId ->
+                                myViewModel.getInstructions(recipeId).observe(viewLifecycleOwner) {
+                                    configRecyclerElabs(it)
+                                }
+                            }
+                            recipe.id?.let {
+                                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                                    configRecyclerSimilar(it)
+                                }
+                            }
+                        }
+                    }
                 }
             }
-
-            recipe.id?.let {
-                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                    configRecyclerSimilar(it)
-                }
-            }
-
         }
+
+//        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+//            recipe.id?.let {
+//                myViewModel.getInstructions(it).observe(viewLifecycleOwner) {
+//                    configRecyclerElabs(it)
+//                }
+//            }
+//
+//            recipe.id?.let {
+//                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+//                    configRecyclerSimilar(it)
+//                }
+//            }
+//
+//        }
 
     }
 
