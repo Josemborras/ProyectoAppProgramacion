@@ -1,6 +1,5 @@
 package com.example.trabajo_final_t3.data.retrofit
 
-import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
 import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
 import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
@@ -8,6 +7,7 @@ import com.example.trabajo_final_t3.data.models.triviaRandom.TriviaRandom
 import com.example.trabajo_final_t3.data.models.SearchIngredient.IngredientsResponse
 import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.data.models.shoppingList.Item
 import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
 import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
@@ -71,7 +71,7 @@ interface RetrofitInterface {
 
     @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
     @GET("recipes/{id}/similar")
-    suspend fun obtenerRecetasSimilares(@Path("id") id: Int): Response<ArrayList<RecipeItem>>
+    suspend fun obtenerRecetasSimilares(@Path("id") id: Int): Response<ArrayList<RecipesResponseItem>>
 
     @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
     @GET("recipes/{id}/card")

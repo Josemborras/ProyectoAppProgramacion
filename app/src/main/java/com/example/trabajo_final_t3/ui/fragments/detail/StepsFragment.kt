@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentStepsBinding
 import com.example.trabajo_final_t3.ui.adapters.ElabAdapter
@@ -84,8 +84,12 @@ class StepsFragment : Fragment() {
 
     }
 
-    private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
-        adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner)
+    private fun configRecyclerSimilar(list: ArrayList<RecipesResponseItem>) {
+        adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner, object : SimilarRecipeAdapter.MyClick{
+            override fun onClick(receta: RecipesResponseItem) {
+
+            }
+        })
         adapterSimilar.setRecipes(list)
 
         binding.rvSimilar1.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

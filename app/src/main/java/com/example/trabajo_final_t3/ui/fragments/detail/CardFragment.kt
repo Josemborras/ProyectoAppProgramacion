@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentCardBinding
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
 import com.example.trabajo_final_t3.viewModel.MyViewModel
@@ -76,8 +76,12 @@ class CardFragment : Fragment() {
         }
     }
 
-    private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
-        adapter = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner)
+    private fun configRecyclerSimilar(list: ArrayList<RecipesResponseItem>) {
+        adapter = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner,object : SimilarRecipeAdapter.MyClick{
+            override fun onClick(receta: RecipesResponseItem) {
+
+            }
+        })
         adapter.setRecipes(list)
 
         binding.rvSimilar3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

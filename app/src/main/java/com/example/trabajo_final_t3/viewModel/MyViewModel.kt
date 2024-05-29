@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.trabajo_final_t3.data.Repository
-import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
 import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
 import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
@@ -28,7 +27,7 @@ class MyViewModel: ViewModel() {
         Repository()
     }
 
-    private val recipeList = MutableLiveData<ArrayList<RecipeItem>>()
+    private val recipeList = MutableLiveData<ArrayList<RecipesResponseItem>>()
     private val selectedRecipeList = MutableLiveData<RecipesResponseItem>()
     private val stepsRecipe = MutableLiveData<StepsResponse>()
     private val selectedRecipeRandom = MutableLiveData<Recipe>()
@@ -189,7 +188,7 @@ class MyViewModel: ViewModel() {
         }
         return stepsRecipe
     }
-    fun getSimilars(id: Int): MutableLiveData<ArrayList<RecipeItem>>{
+    fun getSimilars(id: Int): MutableLiveData<ArrayList<RecipesResponseItem>>{
         viewModelScope.launch {
             val respuesta = repository.listRecipes(id)
 

@@ -32,5 +32,12 @@ data class RecipesResponseItem(
     @SerializedName("fat")
     val fat: String?,
     @SerializedName("protein")
-    val protein: String?
+    val protein: String?,
+
+    @SerializedName("readyInMinutes")
+    val readyInMinutes: Int?,
+    @SerializedName("servings")
+    val servings: Int?,
+    @SerializedName("sourceUrl")
+    val sourceUrl: String?
 )

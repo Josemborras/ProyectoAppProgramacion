@@ -44,7 +44,11 @@
     <fragment
         android:id="@+id/detailRecipeFragment"
         android:name="com.example.trabajo_final_t3.ui.fragments.detail.DetailRecipeFragment"
-        android:label="DetailRecipeFragment" />
+        android:label="DetailRecipeFragment" >
+        <action
+            android:id="@+id/action_detailRecipeFragment_self"
+            app:destination="@id/detailRecipeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tabLayoutBuscador"
         android:name="com.example.trabajo_final_t3.ui.fragments.search.TabLayoutBuscador"
