@@ -34,8 +34,8 @@ class DetailRecipeFragment : Fragment() {
         myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
             if (boolean == true){
                 myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
-                    recipeSearch.id?.let { recipeId ->
-                        myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) {recipe ->
+                    recipeSearch.id?.let {
+                        myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner){recipe ->
                             (requireActivity() as MainActivity).supportActionBar?.title = recipe.title
                             binding.collapsingToolbar.title = recipe.title
                             Glide.with(this).load(recipe.image).into(binding.ivRecipe)

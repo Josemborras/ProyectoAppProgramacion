@@ -25,7 +25,7 @@ interface RetrofitInterface {
 
     companion object {
         const val API_KEY_DANI = "69b49e24974a4fd88b8e01f793a4e6e6"
-        const val API_KEY_JOSE = ""
+        const val API_KEY_JOSE = "6f08c8334d954a858362da7bf0140500"
         const val API_KEY_SANDRA = ""
         const val API_KEY_MARIA = ""
     }
@@ -36,7 +36,7 @@ interface RetrofitInterface {
      */
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("recipes/random")
     suspend fun rescipesRandom(
@@ -45,7 +45,7 @@ interface RetrofitInterface {
 
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("food/trivia/random")
     suspend fun triviaRandom(): Response<TriviaRandom>
@@ -53,7 +53,7 @@ interface RetrofitInterface {
 
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("recipes/{id}/card")
     suspend fun recipeCard(
@@ -65,19 +65,19 @@ interface RetrofitInterface {
      * peticiones get con sus correspondientes headers
      */
 
-    @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
     @GET("recipes/{id}/information")
     suspend fun obtenerRecipe(@Path("id") id: Int): Response<Recipe>
 
-    @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
     @GET("recipes/{id}/similar")
     suspend fun obtenerRecetasSimilares(@Path("id") id: Int): Response<ArrayList<RecipesResponseItem>>
 
-    @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
     @GET("recipes/{id}/card")
     suspend fun obtenerCardImage(@Path("id") id: Int): Response<RecipeCard>
 
-    @Headers("x-api-key: $API_KEY_DANI","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
     @GET("recipes/{id}/analyzedInstructions")
     suspend fun obtenerInstructions(@Path("id") id: Int): Response<StepsResponse>
 
@@ -99,7 +99,7 @@ interface RetrofitInterface {
 
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("food/ingredients/search")
     suspend fun getIngredients(
@@ -108,7 +108,7 @@ interface RetrofitInterface {
 
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("recipes/findByIngredients")
     suspend fun getRecipesByIngredients(
@@ -117,7 +117,7 @@ interface RetrofitInterface {
 
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("recipes/findByNutrients")
     suspend fun getRecipesByNutrients(
@@ -141,7 +141,7 @@ interface RetrofitInterface {
     //GET
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @GET("mealplanner/{username}/shopping-list")
     suspend fun getShoppingList(
@@ -153,7 +153,7 @@ interface RetrofitInterface {
     //DELETE
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @DELETE("mealplanner/{username}/shopping-list/items/{id}")
     suspend fun deleteItemShoppingList(
@@ -167,7 +167,7 @@ interface RetrofitInterface {
     //POST
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_DANI"
+        "x-api-key: $API_KEY_JOSE"
     )
     @POST("mealplanner/{username}/shopping-list/items")
     suspend fun addItemShoppingList(

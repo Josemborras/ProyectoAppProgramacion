@@ -43,6 +43,10 @@ class SimilarRecipeAdapter(private val myViewModel: MyViewModel, private val lif
                     .into(holder.binding.imageView5)
             }
         }
+
+        holder.itemView.setOnClickListener {
+            listener.onClick(recipes)
+        }
     }
     override fun getItemCount() = lista.size
 

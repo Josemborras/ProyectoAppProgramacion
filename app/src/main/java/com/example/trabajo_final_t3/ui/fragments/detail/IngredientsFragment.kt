@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.ExtendedIngredient
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentIngredientsBinding
@@ -70,7 +72,9 @@ class IngredientsFragment : Fragment() {
     private fun configRecyclerSimilar(list: ArrayList<RecipesResponseItem>) {
         adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner, object : SimilarRecipeAdapter.MyClick{
             override fun onClick(receta: RecipesResponseItem) {
-
+                myViewModel.setBoolean(true)
+                myViewModel.setRecipeSearch(receta)
+                findNavController().navigate(R.id.action_detailRecipeFragment_self)
             }
 
         })
