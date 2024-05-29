@@ -25,7 +25,7 @@ class StepsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentStepsBinding.inflate(inflater, container, false)
         return binding.root
     }

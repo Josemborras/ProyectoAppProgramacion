@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.buttonRandom.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_firstFragment)
         }
@@ -53,6 +52,10 @@ class HomeFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener{
             findNavController().navigate(R.id.action_HomeFragment_to_tabLayoutBuscador)
+        }
+
+        binding.buttonShoppingList.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_ShoppingListFragment)
         }
     }
 

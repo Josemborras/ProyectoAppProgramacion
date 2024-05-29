@@ -1,4 +1,4 @@
-package com.example.trabajo_final_t3.ui.fragments.navigationMenu
+package com.example.trabajo_final_t3.ui.fragments.shoppingList
 
 import android.os.Bundle
 import android.view.LayoutInflater

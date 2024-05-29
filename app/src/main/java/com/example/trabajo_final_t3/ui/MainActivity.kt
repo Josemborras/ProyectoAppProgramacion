@@ -32,12 +32,11 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.HomeFragment,
-                R.id.buscadorIngredientes,
+                R.id.tabLayoutBuscador,
                 R.id.ShoppingListFragment
             )
         )
 
-        //setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
     }
 

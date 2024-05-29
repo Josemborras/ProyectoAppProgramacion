@@ -38,5 +38,4 @@ class TabLayoutBuscador : Fragment() {
             }
         }.attach()
     }
-
 }

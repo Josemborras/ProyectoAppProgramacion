@@ -72,7 +72,7 @@ class BuscadorIngredientes : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun onQueryTextChange(newText: String?): Boolean {
                 // esto se hace cada vez que cambias (escribir, borrar, cortar, pegar...) el texto
-                var suggestions = ArrayList<String>()
+                val suggestions = ArrayList<String>()
 
                 myViewModel.getIngredients(newText.toString()).observe(viewLifecycleOwner){ ingredientsResponse ->
                      ingredientsResponse.results.forEach {result ->
@@ -138,7 +138,7 @@ class BuscadorIngredientes : Fragment() {
         }
 
         binding.btnBuscarReceta.setOnClickListener {
-            findNavController().navigate(R.id.action_tabLayoutBuscador_to_firstFragment)
+            findNavController().navigate(R.id.action_tabLayoutBuscador_to_listRecipesSearch)
 
             myViewModel.getRecipesByIngredients(adaptador.getString()).observe(viewLifecycleOwner){
                 funSetRecipeingredient(it)

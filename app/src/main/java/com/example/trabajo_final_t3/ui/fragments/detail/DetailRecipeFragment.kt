@@ -22,7 +22,7 @@ class DetailRecipeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
         setupTabs(savedInstanceState)
         return binding.root

@@ -6,7 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.trabajo_final_t3.R
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorNutrientesBinding
+import com.example.trabajo_final_t3.ui.adapters.SearchListIngredientsAdapter
 import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 
@@ -14,9 +18,6 @@ class BuscadorNutrientes : Fragment() {
 
     private val myViewModel by activityViewModels<MyViewModel>()
     private lateinit var binding: FragmentBuscadorNutrientesBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -136,9 +137,14 @@ class BuscadorNutrientes : Fragment() {
                 minCalories, maxCalories,
                 80
             ).observe(viewLifecycleOwner){
-                // aquí devuelve la lista de recetas según los datos que ha metido el usuario,
-                // después se guarda en un liveData
+                funSetRecipeingredient(it)
+
+                findNavController().navigate(R.id.action_tabLayoutBuscador_to_listRecipesSearch)
             }
         }
+    }
+
+    private fun funSetRecipeingredient(lista: ListRecipeResponse){
+        myViewModel.setRecipeIngredientLiveData(lista)
     }
 }

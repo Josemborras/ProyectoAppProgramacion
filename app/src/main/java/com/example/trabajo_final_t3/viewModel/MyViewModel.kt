@@ -77,14 +77,10 @@ class MyViewModel: ViewModel() {
 
     }
 
-    //LIVE DATA PARA DANI
+    fun setRecipeNutrientResponseLiveData(recipes: RecipesByNutrientsResponse){
+        val liveData = MutableLiveData<RecipesByNutrientsResponse>()
 
-    //para guardar la lista de recetas por nutrientes
-
-        fun setRecipeNutrientResponseLiveData(recipes: RecipesByNutrientsResponse){
-            val liveData = MutableLiveData<RecipesByNutrientsResponse>()
-
-            liveData.value = recipes
+        liveData.value = recipes
     }
 
     //Para coger la lista de recetas por nutrientes
@@ -93,15 +89,13 @@ class MyViewModel: ViewModel() {
 
     //para guardar la lista de recetas por ingredientes
 
-        fun setRecipeIngredientLiveData(recipes: ListRecipeResponse){
+    fun setRecipeIngredientLiveData(recipes: ListRecipeResponse){
              ingredienRecipetLiveData.value = recipes
     }
 
     //Para coger la lista de recetas por ingredientes
 
     fun getRecipeIngredientResponse() = ingredienRecipetLiveData
-
-
 
     fun triviaRandomAddVw(): MutableLiveData<TriviaRandom?>{
 
@@ -140,7 +134,7 @@ class MyViewModel: ViewModel() {
         selectedRecipeList.value = recipe
     }
 
-    fun getRecipe() = selectedRecipeList
+    // fun getRecipe() = selectedRecipeList
 
     fun getRecipeInfo(id: Int): MutableLiveData<Recipe> {
         val liveData = MutableLiveData<Recipe>()

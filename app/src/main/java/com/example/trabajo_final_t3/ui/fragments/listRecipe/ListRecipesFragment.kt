@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
@@ -25,7 +26,6 @@ class ListRecipesFragment : Fragment() {
 
     private val myViewModel by activityViewModels<com.example.trabajo_final_t3.viewModel.MyViewModel>()
     private lateinit var adaptador: ListRecipesAdapter
-    private lateinit var adaptador2: SearchListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,38 +41,25 @@ class ListRecipesFragment : Fragment() {
 
         //aqui se pone para que si tarda mucho en cargar el viewmodel se muestre y el usuario sepa que se esta cargando la pagina
         binding.swipe.isRefreshing = true
-        //para cambiar el color del circulo
-//        binding.swipe
+        //cambiar el color del swipe
+        binding.swipe.setColorSchemeResources(R.color.green)
 
-        //esta funcion la investige por google para que cuando bajes y te de pereza tener que subir que te suba automaticamente
+        //esta funcion la investigue por google para que cuando bajes y te de pereza tener que subir que te suba automaticamente
         binding.flSubir.setOnClickListener {
             binding.recyclerView.smoothScrollToPosition(0)
         }
 
-        //este es el listener para que cuando tires hacia arriba te recarge el viewmodel
-//        binding.swipe.setOnRefreshListener {
-//            binding.swipe.isRefreshing = true
-//            myViewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
-//                if (it != null) {
-//                    configRecicler(it.recipes)
-//                }
-//
-//                binding.swipe.isRefreshing = false
-//            }
-//        }
+        //este es el listener para que cuando tires hacia arriba te recargue el viewmodel
+        binding.swipe.setOnRefreshListener {
+            binding.swipe.isRefreshing = true
+            myViewModel.recipesRandomAddVw(50).observe(viewLifecycleOwner){
+                if (it != null) {
+                    configRecicler(it.recipes)
+                }
 
-        myViewModel.getRecipeIngredientResponse().observe(viewLifecycleOwner){
-            configRecicler2(it) // juntar las data class
+                binding.swipe.isRefreshing = false
+            }
         }
-
-        //esto lo hemos hecho aqui para comprobar que la llamada de la peticion estuviese bien, la peticion viene de otra clase, y si lo
-        //haciamos desde aqui directamente es mejor, porque asi no nos aria falta llamar al viewmodel desde el adaptador
-
-
-//        viewModel.recipeCardAddvw(4632).observe(viewLifecycleOwner){
-//            var cardimage = it?.url
-//            Glide.with(this).load(cardimage).into(binding.ivPrueba)
-//        }
 
         //se le pasa recipes(RecipesRandom) al configrecicler(configuracion del adaptador)
         //la funcion que viene del viewModel es para pasarle el listado que devuelve al config recicler
@@ -102,32 +89,4 @@ class ListRecipesFragment : Fragment() {
         recyclerView.adapter = adaptador
 
     }
-
-    fun configRecicler2(lista : ListRecipeResponse){
-
-        val recyclerView = binding.recyclerView
-        //aqui se le esta pasando la lista
-        adaptador2 = SearchListAdapter(lista, object : SearchListAdapter.MyClick{
-            override fun onClick(receta: RecipesResponseItem) {
-                myViewModel.setRecipe(receta)
-            }
-
-        })
-        //disenio de como se vera el recilcer view cuando los ejecutemos
-        val disenio = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        binding.recyclerView.layoutManager = disenio
-        recyclerView.adapter = adaptador2
-
-    }
-
-//    val observer = Observer<CharacterResponse?> {
-//        binding.swipe.isRefreshing = false
-//        val info = it?.info
-//        info?.pages?.let { totalPage = it }
-//
-//
-//        val personajes = it?.results
-//        adaptador.refrescarListado(personajes)
-//
-//    }
 }

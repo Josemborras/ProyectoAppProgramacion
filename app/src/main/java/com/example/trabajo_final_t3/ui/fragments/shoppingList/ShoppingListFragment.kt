@@ -16,7 +16,6 @@ import com.example.trabajo_final_t3.databinding.FragmentShoppingListBinding
 import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.viewModel.MyViewModel
 import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
-import com.example.trabajo_final_t3.ui.fragments.navigationMenu.BottomSheet
 import com.example.trabajo_finalt3.ui.adapter.AislesAdapter
 
 /**
@@ -32,8 +31,8 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
     private val viewModel by activityViewModels<MyViewModel>()
 
     //inicializar el bottomSheet y su listener
-    lateinit var bottomSheet: BottomSheet
-    lateinit var listener: BottomSheet.BottomSheetListener
+    private lateinit var bottomSheet: BottomSheet
+    private lateinit var listener: BottomSheet.BottomSheetListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
     ): View {
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
         //usar las funciones creadas en MainActivity para cargar el toolbar y cambiar su titulo
-        (requireActivity() as MainActivity).changeToolbar(binding.toolbarShoppingList, false, findNavController())
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbarShoppingList, true, findNavController())
         (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
     }

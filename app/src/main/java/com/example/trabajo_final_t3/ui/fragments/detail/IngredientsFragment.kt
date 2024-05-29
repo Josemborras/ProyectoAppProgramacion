@@ -24,7 +24,7 @@ class IngredientsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentIngredientsBinding.inflate(inflater, container, false)
         return binding.root
     }
