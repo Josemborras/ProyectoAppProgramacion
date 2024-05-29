@@ -1,27 +1,25 @@
 package com.example.trabajo_final_t3.data.retrofit
 
-import com.example.trabajo_final_t3.data.models.CardImage.CardImage
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
-import com.example.trabajo_final_t3.data.models.Recipe.Recipe
-import com.example.trabajo_final_t3.data.models.RecipeCard
-import com.example.trabajo_final_t3.data.models.RecipesRandom
-import com.example.trabajo_final_t3.data.models.Steps.StepsResponse
-import com.example.trabajo_final_t3.data.models.TriviaRandom
-import com.example.trabajo_final_t3.data.models.ingredients.IngredientsResponse
-import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
-import com.example.trabajo_final_t3.data.models.recipesbynutrients.RecipesByNutrientsResponse
+import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
+import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
+import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
+import com.example.trabajo_final_t3.data.models.triviaRandom.TriviaRandom
+import com.example.trabajo_final_t3.data.models.SearchIngredient.IngredientsResponse
+import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
+import com.example.trabajo_final_t3.data.models.shoppingList.Item
+import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Path
-import retrofit2.http.Query
-import com.example.trabajo_finalt3.data.models.Item
-import com.example.trabajo_finalt3.data.models.PostItem
-import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
-import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RetrofitInterface {
 
@@ -68,7 +66,7 @@ interface RetrofitInterface {
 
     @Headers("x-api-key: 6ae3b4a55ffc4189ba718e387513a9f2","Content-Type: application/json")
     @GET("recipes/{id}/card")
-    suspend fun obtenerCardImage(@Path("id") id: Int): Response<CardImage>
+    suspend fun obtenerCardImage(@Path("id") id: Int): Response<RecipeCard>
 
     @Headers("x-api-key: 6ae3b4a55ffc4189ba718e387513a9f2","Content-Type: application/json")
     @GET("recipes/{id}/analyzedInstructions")
@@ -102,7 +100,7 @@ interface RetrofitInterface {
     @GET("recipes/findByIngredients")
     suspend fun getRecipesByIngredients(
         @Query("ingredients") ingredientes: String
-    ): Response<RecipeResponse>
+    ): Response<ListRecipeResponse>
 
     @Headers(
         "Content-Type: application/json",
@@ -119,7 +117,7 @@ interface RetrofitInterface {
         @Query("minCalories") minCalories: Int,
         @Query("maxCalories") maxCalories: Int,
         @Query("number") number: Int,
-    ): Response<RecipesByNutrientsResponse>
+    ): Response<ListRecipeResponse>
 
 
     /**

@@ -3,10 +3,15 @@ package com.example.trabajo_final_t3.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trabajo_final_t3.data.models.Recipe.ExtendedIngredient
+import com.example.trabajo_final_t3.data.models.AllRecipeInfo.ExtendedIngredient
 import com.example.trabajo_final_t3.databinding.HolderIngredientBinding
 
 class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.IngredientHolder>() {
+
+    /*
+     * Adaptador para el listado de ingredientes
+     * para las recetas
+     * */
 
     private var lista = ArrayList<ExtendedIngredient>()
 

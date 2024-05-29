@@ -1,15 +1,14 @@
 package com.example.trabajo_final_t3.ui.fragments.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
-import com.example.trabajo_final_t3.data.models.Steps.StepsResponseItem
+import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentStepsBinding
 import com.example.trabajo_final_t3.ui.adapters.ElabAdapter
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter

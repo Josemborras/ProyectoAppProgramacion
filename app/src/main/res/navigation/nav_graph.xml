@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.trabajo_final_t3.ui.fragments.HomeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.home.HomeFragment"
         android:label="HOME"
         tools:layout="@layout/fragment_home">
 
@@ -23,9 +23,9 @@
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.trabajo_final_t3.ui.fragments.FirstFragment"
-        android:label="fragment_listado"
-        tools:layout="@layout/fragment_listado" >
+        android:name="com.example.trabajo_final_t3.ui.fragments.listRecipe.ListRecipesFragment"
+        android:label="ListRecipe"
+        tools:layout="@layout/fragment_listado">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
@@ -47,6 +47,10 @@
         android:label="DetailRecipeFragment" />
     <fragment
         android:id="@+id/tabLayoutBuscador"
-        android:name="com.example.trabajo_final_t3.ui.fragments.TabLayoutBuscador"
-        android:label="TabLayoutBuscador" />
+        android:name="com.example.trabajo_final_t3.ui.fragments.search.TabLayoutBuscador"
+        android:label="TabLayoutBuscador" >
+        <action
+            android:id="@+id/action_tabLayoutBuscador_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </fragment>
 </navigation>

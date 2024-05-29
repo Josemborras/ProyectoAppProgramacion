@@ -3,10 +3,15 @@ package com.example.trabajo_final_t3.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajo_final_t3.data.models.StepsRecipe.Step
 import com.example.trabajo_final_t3.databinding.HolderStepsBinding
-import com.example.trabajo_final_t3.data.models.Steps.Step
 
 class StepAdapter : RecyclerView.Adapter<StepAdapter.StepsHolder>() {
+
+    /*
+     * Adaptador para el listado los pasos de cada elaboración
+     * de una receta
+     * */
 
     private var lista = ArrayList<Step>()
 

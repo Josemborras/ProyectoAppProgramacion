@@ -5,11 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajo_final_t3.data.models.StepsRecipe.Step
+import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponseItem
 import com.example.trabajo_final_t3.databinding.HolderElabBinding
-import com.example.trabajo_final_t3.data.models.Steps.Step
-import com.example.trabajo_final_t3.data.models.Steps.StepsResponseItem
 
 class ElabAdapter : RecyclerView.Adapter<ElabAdapter.ElabHolder>() {
+
+    /*
+     * Adaptador para listar las elaboraciones de cada recetas
+     * */
 
     private var lista = ArrayList<StepsResponseItem>()
     private lateinit var adapterStep: StepAdapter

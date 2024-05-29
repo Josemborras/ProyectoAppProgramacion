@@ -5,21 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.trabajo_final_t3.data.Repository
-import com.example.trabajo_final_t3.data.models.RecipeCard
-import com.example.trabajo_final_t3.data.models.RecipesRandom
-import com.example.trabajo_final_t3.data.models.TriviaRandom
-import com.example.trabajo_final_t3.data.models.ingredients.IngredientsResponse
-import com.example.trabajo_final_t3.data.models.ingredients.Resultado
-import com.example.trabajo_final_t3.data.models.recipesbynutrients.RecipesByNutrientsResponse
-import com.example.trabajo_final_t3.data.models.CardImage.CardImage
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
-import com.example.trabajo_final_t3.data.models.Recipe.Recipe
-import com.example.trabajo_final_t3.data.models.Steps.StepsResponse
-import com.example.trabajo_final_t3.data.models.recipes.RecipeResponse
-import com.example.trabajo_finalt3.data.models.Item
-import com.example.trabajo_finalt3.data.models.PostItem
-import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
-import com.example.trabajo_finalt3.data.models.ResponseGetShoppingList
+import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
+import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
+import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
+import com.example.trabajo_final_t3.data.models.triviaRandom.TriviaRandom
+import com.example.trabajo_final_t3.data.models.SearchIngredient.IngredientsResponse
+import com.example.trabajo_final_t3.data.models.SearchIngredient.RecipeResultSearch
+import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
+import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
+import com.example.trabajo_final_t3.data.models.SearchRecipesByNutrients.RecipesByNutrientsResponse
+import com.example.trabajo_final_t3.data.models.shoppingList.Item
+import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
 import kotlinx.coroutines.launch
 
 class MyViewModel: ViewModel() {
@@ -29,23 +29,24 @@ class MyViewModel: ViewModel() {
     }
 
     private val recipeList = MutableLiveData<ArrayList<RecipeItem>>()
-    private val selectedRecipeList = MutableLiveData<RecipeItem>()
-    private val cardImageRecipe = MutableLiveData<CardImage>()
+    private val selectedRecipeList = MutableLiveData<RecipesResponseItem>()
     private val stepsRecipe = MutableLiveData<StepsResponse>()
 
     // respuesta del servidor
     private val ingrResponseLiveData = MutableLiveData<IngredientsResponse>()
     // livedata que contiene mi lista de ingredientes seleccionados
-    private var ingrListLiveData = MutableLiveData<ArrayList<Resultado>>()
+    private var ingrListLiveData = MutableLiveData<ArrayList<RecipeResultSearch>>()
 
     // lista de recetas que devuelve la petición de getRecipesByIngredients
-    private val recipesListLiveData = MutableLiveData<RecipeResponse>()
+    private val recipesListLiveData = MutableLiveData<ListRecipeResponse>()
 
     // lista de recetas que devuelve la petición de getRecipesByNutrients
-    private val recipesByNutrientsListLiveData = MutableLiveData<RecipesByNutrientsResponse>()
+    private val recipesByNutrientsListLiveData = MutableLiveData<ListRecipeResponse>()
 
     // liveData para guardar las sugerencias que se muestran en el buscador
     private var suggestions = MutableLiveData<IngredientsResponse>()
+
+    private var ingredienRecipetLiveData = MutableLiveData<ListRecipeResponse>()
 
     init {
         // init se encarga de inicializar valores la primera vez que se crea el livedata
@@ -80,23 +81,25 @@ class MyViewModel: ViewModel() {
 
     //para guardar la lista de recetas por nutrientes
 
-    //    fun setRecipeNutrientResponseLiveData(recipes: RecipesByNutrientsResponse){
-            //recipeNutrientResponseLiveData.value = recipes
-    //}
+        fun setRecipeNutrientResponseLiveData(recipes: RecipesByNutrientsResponse){
+            val liveData = MutableLiveData<RecipesByNutrientsResponse>()
+
+            liveData.value = recipes
+    }
 
     //Para coger la lista de recetas por nutrientes
 
-    //fun getRecipeNutrientResponse() = recipeNutrientResponseLiveData
+    //fun getRecipeNutrientResponse() =
 
     //para guardar la lista de recetas por ingredientes
 
-    //    fun setRecipeIngredientLiveData(recipes: RecipeResponse){
-             //ingredienRecipetLiveData.value = recipes
-    //}
+        fun setRecipeIngredientLiveData(recipes: ListRecipeResponse){
+             ingredienRecipetLiveData.value = recipes
+    }
 
     //Para coger la lista de recetas por ingredientes
 
-    //fun getRecipeIngredientResponse() = ingredienRecipetLiveData
+    fun getRecipeIngredientResponse() = ingredienRecipetLiveData
 
 
 
@@ -118,8 +121,7 @@ class MyViewModel: ViewModel() {
 
     }
 
-    fun recipeCardAddvw(id: Int): MutableLiveData<RecipeCard?> {
-
+    fun recipeCardAddvm(id: Int): MutableLiveData<RecipeCard?> {
         val liveData = MutableLiveData<RecipeCard?>()
 
         viewModelScope.launch {
@@ -130,13 +132,11 @@ class MyViewModel: ViewModel() {
                     liveData.postValue(it)
                 }
             }
-
         }
         return liveData
-
     }
 
-    fun setRecipe(recipe: RecipeItem) {
+    fun setRecipe(recipe: RecipesResponseItem) {
         selectedRecipeList.value = recipe
     }
 
@@ -153,23 +153,6 @@ class MyViewModel: ViewModel() {
             }
         }
         return liveData
-    }
-
-
-    fun getCardImage(id: Int): MutableLiveData<CardImage>{
-        viewModelScope.launch {
-            val respuesta = repository.getCardImage(id)
-
-            val code = respuesta.code()
-
-            if (code == 200){
-                val cardImage = respuesta.body()
-                cardImage?.let {
-                    cardImageRecipe.postValue(it)
-                }
-            }
-        }
-        return cardImageRecipe
     }
 
     fun getInstructions(id: Int): MutableLiveData<StepsResponse>{
@@ -221,31 +204,31 @@ class MyViewModel: ViewModel() {
 
     fun getIngredienteResult() = ingrListLiveData
 
-    fun filterList(name: String): MutableLiveData<ArrayList<Resultado>> {
-        val filteredResult = MutableLiveData<ArrayList<Resultado>>()
+    fun filterList(name: String): MutableLiveData<ArrayList<RecipeResultSearch>> {
+        val filteredResult = MutableLiveData<ArrayList<RecipeResultSearch>>()
 
         ingrResponseLiveData.value?.let { response ->
             filteredResult.value = response.results.filter { result ->
                 result.name == name
-            } as ArrayList<Resultado>
+            } as ArrayList<RecipeResultSearch>
         }
 
         return filteredResult
     }
 
-    fun addIngredienteResult(ingrediente: Resultado) {
+    fun addIngredienteResult(ingrediente: RecipeResultSearch) {
         val list = ingrListLiveData.value
         list?.add(ingrediente)
         list?.let { ingrListLiveData.postValue(it) }
     }
 
-    fun removeIngredientResult(ingrediente: Resultado) {
+    fun removeIngredientResult(ingrediente: RecipeResultSearch) {
         val list = ingrListLiveData.value
         list?.remove(ingrediente)
         list?.let { ingrListLiveData.postValue(it) }
     }
 
-    fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<RecipeResponse>{
+    fun getRecipesByIngredients(ingredientsNames: String): MutableLiveData<ListRecipeResponse>{
         viewModelScope.launch {
             val response = repository.getRecipesByIngredients(ingredientsNames)
 
@@ -259,7 +242,7 @@ class MyViewModel: ViewModel() {
         return recipesListLiveData
     }
 
-    fun getRecipesByNutrients(minCarbs: Int, maxCarbs: Int, minProtein: Int, maxProtein: Int, minFat: Int, maxFat: Int, minCalories: Int, maxCalories: Int, number: Int): MutableLiveData<RecipesByNutrientsResponse>{
+    fun getRecipesByNutrients(minCarbs: Int, maxCarbs: Int, minProtein: Int, maxProtein: Int, minFat: Int, maxFat: Int, minCalories: Int, maxCalories: Int, number: Int): MutableLiveData<ListRecipeResponse>{
 
         viewModelScope.launch {
             val response = repository.getRecipesByNutrients(minCarbs, maxCarbs, minProtein, maxProtein, minFat, maxFat, minCalories, maxCalories, number)

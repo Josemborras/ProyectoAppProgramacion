@@ -1,11 +1,11 @@
 package com.example.trabajo_final_t3.data
 
-import com.example.trabajo_final_t3.data.models.CardImage.CardImage
-import com.example.trabajo_final_t3.data.models.Recipe.Recipe
+import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
+import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
 import com.example.trabajo_final_t3.data.retrofit.RetrofitObjeto
-import com.example.trabajo_finalt3.data.models.Item
-import com.example.trabajo_finalt3.data.models.PostItem
-import com.example.trabajo_finalt3.data.models.ResponseDeleteItem
+import com.example.trabajo_final_t3.data.models.shoppingList.Item
+import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
 import retrofit2.Response
 
 
@@ -20,7 +20,7 @@ class Repository {
     suspend fun getRecipe(id: Int): Response<Recipe> {
         return RetrofitObjeto.retrofitInterface.obtenerRecipe(id)
     }
-    suspend fun getCardImage(id: Int): Response<CardImage> {
+    suspend fun getCardImage(id: Int): Response<RecipeCard> {
         return RetrofitObjeto.retrofitInterface.obtenerCardImage(id)
     }
     suspend fun listRecipes(id: Int) = RetrofitObjeto.retrofitInterface.obtenerRecetasSimilares(id)

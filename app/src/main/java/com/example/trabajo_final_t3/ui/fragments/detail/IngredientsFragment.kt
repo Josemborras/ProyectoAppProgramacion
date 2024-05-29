@@ -1,14 +1,14 @@
 package com.example.trabajo_final_t3.ui.fragments.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trabajo_final_t3.data.models.Recipe.ExtendedIngredient
 import com.example.trabajo_final_t3.data.models.ListRecipe.RecipeItem
+import com.example.trabajo_final_t3.data.models.AllRecipeInfo.ExtendedIngredient
 import com.example.trabajo_final_t3.databinding.FragmentIngredientsBinding
 import com.example.trabajo_final_t3.ui.adapters.IngredientsAdapter
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
