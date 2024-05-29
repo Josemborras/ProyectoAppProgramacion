@@ -45,7 +45,7 @@ class ItemsAdapter(val listener: Listener) : RecyclerView.Adapter<ItemsAdapter.I
         }
     }
 
-    //para darle valores a la lista o sobreescribirlos
+    //para darle valores al ArrayList o sobreescribirlos
     fun newList(newList: List<Item>){
         list.clear()
         list.addAll(newList)

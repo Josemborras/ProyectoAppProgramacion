@@ -55,9 +55,9 @@ class BottomSheet(listener: BottomSheetListener) : BottomSheetDialogFragment() {
 
             if(!item.isNullOrEmpty()){
                 val postItem = if(!list.isNullOrEmpty()){
-                    PostItem(list, item, true) //si la variable de la lista no esta vacia
+                    PostItem(list, item, true) //si la variable del nombre de la seccion no esta vacia
                 } else {
-                    PostItem(null, item, true) //si la variable de la lista esta vacia
+                    PostItem(null, item, true) //si la variable del nombre de la seccion esta vacia
                 }
 
                 //se llama al metodo del viewmodel para guardar un elemento nuevo

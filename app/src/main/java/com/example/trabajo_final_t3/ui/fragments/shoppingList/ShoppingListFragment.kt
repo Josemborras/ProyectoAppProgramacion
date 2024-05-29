@@ -61,7 +61,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         binding.swipeShoppingList.isRefreshing = true
         viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
 
-        //recargar el listado al hacer el gesto ed swipe
+        //recargar el listado al tirar de la lista
         binding.swipeShoppingList.setOnRefreshListener {
             binding.swipeShoppingList.isRefreshing = true
             viewModel.getShoppingList().observe(viewLifecycleOwner, observer)
@@ -74,7 +74,7 @@ class ShoppingListFragment : Fragment(), BottomSheet.BottomSheetListener {
         }
     }
 
-    //observador para cuando se llama a la peticion de mostrar el listado
+    //observador para cuando se llama a la peticion de obtener el listado
     private val observer = Observer<ResponseGetShoppingList>{
         it.aisles?.let {list ->
             aislesAdapter.newList(list)

@@ -11,8 +11,8 @@ import com.example.trabajo_final_t3.databinding.HolderAisleBinding
 /**
  * @author Sandra Martinez
  *  * [Adapter] AdapterAisles
- *  Este es el adaptador para las listas que agrupan los ingredientes de la lista de la compra.
- *  Tiene dentro otro RecyclerView para listar los ingredientes
+ *  Este es el adaptador para las secciones que agrupan los ingredientes de la lista de la compra.
+ *  Tiene dentro otro RecyclerView para listar los ingredientes corerspondientes a la seccion
  */
 class AislesAdapter(val listener: Listener) : RecyclerView.Adapter<AislesAdapter.AislesHolder>() {
     private val list = ArrayList<Aisle>()
@@ -38,10 +38,10 @@ class AislesAdapter(val listener: Listener) : RecyclerView.Adapter<AislesAdapter
     }
 
     override fun onBindViewHolder(holder: AislesHolder, position: Int) {
-        //cargar el titulo de la lista
+        //cargar el titulo de la seccion
         holder.binding.TVlistTitle.text = list[position].aisle
 
-        //configurar el recyclerview que tiene esta celda y cargar la lista de su adaptador
+        //configurar el recyclerview que tiene esta celda y cargar el ArrayList de su adaptador
         itemsAdapter = ItemsAdapter(object : ItemsAdapter.Listener{
             override fun onClickListener(idItem: Int) {
                 listener.onClickListener(idItem)
@@ -56,7 +56,7 @@ class AislesAdapter(val listener: Listener) : RecyclerView.Adapter<AislesAdapter
         }
     }
 
-    //para darle valores a la lista o sobreescribirlos
+    //para darle valores al ArrayList o sobreescribirlos
     fun newList(newList: List<Aisle>){
         list.clear()
         list.addAll(newList)
