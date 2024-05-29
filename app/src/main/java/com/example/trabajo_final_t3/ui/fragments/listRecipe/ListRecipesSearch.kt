@@ -52,7 +52,7 @@ class ListRecipesSearch : Fragment()  {
         adaptador2 = SearchListAdapter(lista, object : SearchListAdapter.MyClick{
             override fun onClick(receta: RecipesResponseItem) {
                 myViewModel.setBoolean(true)
-                myViewModel.setRecipe(receta)
+                myViewModel.setRecipeSearch(receta)
                 findNavController().navigate(R.id.action_listRecipesSearch_to_detailRecipeFragment)
             }
 
