@@ -6,20 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
-import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
-import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentListadoBinding
 import com.example.trabajo_final_t3.ui.adapters.ListRecipesAdapter
-import com.example.trabajo_final_t3.ui.adapters.SearchListAdapter
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class ListRecipesFragment : Fragment() {
+class ListRecipesRandom : Fragment() {
 
     private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
@@ -34,7 +32,6 @@ class ListRecipesFragment : Fragment() {
         _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,7 +76,9 @@ class ListRecipesFragment : Fragment() {
         //aqui se le esta pasando la lista
         adaptador = ListRecipesAdapter(lista, object : ListRecipesAdapter.MyClick{
             override fun onClick(receta: Recipe) {
-
+                myViewModel.setBoolean(false)
+                myViewModel.setRecipeRandom(receta)
+                findNavController().navigate(R.id.action_firstFragment_to_detailRecipeFragment)
             }
 
         })

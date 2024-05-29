@@ -32,15 +32,20 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 632583
-        myViewModel.getRecipeInfo(id).observe(viewLifecycleOwner) { recipeComplete ->
-            recipeComplete?.let {
-                configRecyclerIngredients(it.extendedIngredients)
-            }
-        }
 
-        myViewModel.getSimilars(id).observe(viewLifecycleOwner){
-            configRecyclerSimilar(it)
+        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+            recipe.id?.let {
+                myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) { recipeComplete ->
+                    recipeComplete?.let {
+                        configRecyclerIngredients(it.extendedIngredients)
+                    }
+                }
+            }
+            recipe.id?.let {
+                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                    configRecyclerSimilar(it)
+                }
+            }
         }
     }
 

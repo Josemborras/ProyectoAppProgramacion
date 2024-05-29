@@ -31,6 +31,19 @@ class MyViewModel: ViewModel() {
     private val recipeList = MutableLiveData<ArrayList<RecipeItem>>()
     private val selectedRecipeList = MutableLiveData<RecipesResponseItem>()
     private val stepsRecipe = MutableLiveData<StepsResponse>()
+    private val selectedRecipeRandom = MutableLiveData<Recipe>()
+    private val selectedRecipeSearch = MutableLiveData<RecipesResponseItem>()
+    private val livedataBoolean = MutableLiveData<Boolean>()
+
+    fun setBoolean(boolean: Boolean){
+        livedataBoolean.value = boolean
+    }
+
+    fun getBoolean(): MutableLiveData<Boolean> {
+        return livedataBoolean
+    }
+
+    private val selectedRecipe = MutableLiveData<RecipesResponseItem>()
 
     // respuesta del servidor
     private val ingrResponseLiveData = MutableLiveData<IngredientsResponse>()
@@ -58,6 +71,18 @@ class MyViewModel: ViewModel() {
 
     //para guardar la lista de recetas por ingredientes
     // private val ingredienRecipetLiveData = MutableLiveData<RecipeResponse?>()
+
+    fun setRecipeRandom(recipe: Recipe){
+        selectedRecipeRandom.value = recipe
+    }
+
+    fun getRecipeRandom() = selectedRecipeRandom
+
+    fun setRecipeSearch(recipe: RecipesResponseItem){
+        selectedRecipeSearch.value = recipe
+    }
+
+    fun getRecipeSearch() = selectedRecipeSearch
 
     fun recipesRandomAddVw(number: Int): MutableLiveData<RecipesRandom?> {
 

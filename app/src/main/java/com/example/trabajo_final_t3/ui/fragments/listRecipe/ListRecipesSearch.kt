@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentListSearchBinding
@@ -49,7 +51,9 @@ class ListRecipesSearch : Fragment()  {
         //aqui se le esta pasando la lista
         adaptador2 = SearchListAdapter(lista, object : SearchListAdapter.MyClick{
             override fun onClick(receta: RecipesResponseItem) {
+                myViewModel.setBoolean(true)
                 myViewModel.setRecipe(receta)
+                findNavController().navigate(R.id.action_listRecipesSearch_to_detailRecipeFragment)
             }
 
         })

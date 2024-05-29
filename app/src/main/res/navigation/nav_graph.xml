@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.trabajo_final_t3.ui.fragments.listRecipe.ListRecipesFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.listRecipe.ListRecipesRandom"
         android:label="ListRecipe"
         tools:layout="@layout/fragment_listado">
         <action

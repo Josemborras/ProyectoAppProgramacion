@@ -29,13 +29,19 @@ class CardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 632583
-        myViewModel.recipeCardAddvm(id).observe(viewLifecycleOwner){ cardImage ->
-            Glide.with(this).load(cardImage?.url).into(binding.imageView)
-        }
+        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+            recipe.id?.let {
+                myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
+                    Glide.with(this).load(cardImage?.url).into(binding.imageView)
+                }
+            }
 
-        myViewModel.getSimilars(id).observe(viewLifecycleOwner){
-            configRecyclerSimilar(it)
+            recipe.id?.let {
+                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                    configRecyclerSimilar(it)
+                }
+            }
+
         }
     }
 

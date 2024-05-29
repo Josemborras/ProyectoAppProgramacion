@@ -40,17 +40,5 @@ class ListRecipesAdapter(val recetas: ArrayList<Recipe>, val listener: MyClick):
         holder.itemView.setOnClickListener {
             listener.onClick(listRecetas)
         }
-
-
     }
-
-
-//    fun refrescarListado(lista: List<RecipesRandom?>?){
-//        recetas.clear()
-//        if(lista != null){
-//            recetas.addAll(lista)
-//        }
-//        notifyItemRangeChanged(0, itemCount)
-//    }
-
 }

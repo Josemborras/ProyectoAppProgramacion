@@ -24,7 +24,7 @@ import retrofit2.http.Query
 interface RetrofitInterface {
 
     companion object {
-        const val API_KEY_DANI = "6ae3b4a55ffc4189ba718e387513a9f2"
+        const val API_KEY_DANI = "90b3b4e1f1e64864943fe169af738877"
     }
     @Headers(
         "Content-Type: application/json",

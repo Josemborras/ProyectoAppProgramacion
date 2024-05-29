@@ -33,14 +33,21 @@ class StepsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = 632583
-        myViewModel.getInstructions(id).observe(viewLifecycleOwner) {
-            configRecyclerElabs(it)
+        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
+            recipe.id?.let {
+                myViewModel.getInstructions(it).observe(viewLifecycleOwner) {
+                    configRecyclerElabs(it)
+                }
+            }
+
+            recipe.id?.let {
+                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
+                    configRecyclerSimilar(it)
+                }
+            }
+
         }
 
-        myViewModel.getSimilars(id).observe(viewLifecycleOwner){
-            configRecyclerSimilar(it)
-        }
     }
 
     private fun configRecyclerSimilar(list: ArrayList<RecipeItem>) {
