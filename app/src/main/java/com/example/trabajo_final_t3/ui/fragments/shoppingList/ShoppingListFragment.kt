@@ -11,11 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trabajo_final_t3.R
+import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
 import com.example.trabajo_final_t3.databinding.DialogBinding
 import com.example.trabajo_final_t3.databinding.FragmentShoppingListBinding
 import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.viewModel.MyViewModel
-import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
 import com.example.trabajo_finalt3.ui.adapter.AislesAdapter
 
 /**

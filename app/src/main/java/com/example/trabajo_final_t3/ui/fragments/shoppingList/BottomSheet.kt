@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
 import com.example.trabajo_final_t3.databinding.ModalBottomSheetBinding
 import com.example.trabajo_final_t3.viewModel.MyViewModel
-import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Timer

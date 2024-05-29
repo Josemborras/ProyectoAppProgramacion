@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.databinding.FragmentBuscadorNutrientesBinding
-import com.example.trabajo_final_t3.ui.adapters.SearchListIngredientsAdapter
 import com.example.trabajo_final_t3.viewModel.MyViewModel
 
 

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
-import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.databinding.FragmentceldarecetaBinding
 
 // el listado lo metemos dentro como parametro para cuando llamemos al adaptador pasar el listado

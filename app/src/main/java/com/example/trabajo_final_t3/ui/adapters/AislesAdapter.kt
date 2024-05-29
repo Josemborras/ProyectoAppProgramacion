@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.trabajo_final_t3.databinding.HolderAisleBinding
 import com.example.trabajo_final_t3.data.models.shoppingList.Aisle
+import com.example.trabajo_final_t3.databinding.HolderAisleBinding
 
 /**
  * @author Sandra Martinez

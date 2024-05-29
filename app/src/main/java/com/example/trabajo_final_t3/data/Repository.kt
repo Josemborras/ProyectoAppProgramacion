@@ -1,11 +1,10 @@
 package com.example.trabajo_final_t3.data
 
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
-import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
-import com.example.trabajo_final_t3.data.retrofit.RetrofitObjeto
 import com.example.trabajo_final_t3.data.models.shoppingList.Item
 import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
 import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
+import com.example.trabajo_final_t3.data.retrofit.RetrofitObjeto
 import retrofit2.Response
 
 

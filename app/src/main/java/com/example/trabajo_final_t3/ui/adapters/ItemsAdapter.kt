@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.trabajo_final_t3.databinding.HolderItemBinding
 import com.example.trabajo_final_t3.data.models.shoppingList.Item
+import com.example.trabajo_final_t3.databinding.HolderItemBinding
 
 /**
  * @author Sandra Martinez

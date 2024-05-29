@@ -6,19 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.trabajo_final_t3.data.Repository
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
-import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
-import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
-import com.example.trabajo_final_t3.data.models.triviaRandom.TriviaRandom
 import com.example.trabajo_final_t3.data.models.SearchIngredient.IngredientsResponse
 import com.example.trabajo_final_t3.data.models.SearchIngredient.RecipeResultSearch
-import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.data.models.SearchRecipesByNutrients.RecipesByNutrientsResponse
+import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponse
+import com.example.trabajo_final_t3.data.models.recipeCard.RecipeCard
+import com.example.trabajo_final_t3.data.models.recipeRandom.RecipesRandom
 import com.example.trabajo_final_t3.data.models.shoppingList.Item
 import com.example.trabajo_final_t3.data.models.shoppingList.PostItem
 import com.example.trabajo_final_t3.data.models.shoppingList.ResponseDeleteItem
 import com.example.trabajo_final_t3.data.models.shoppingList.ResponseGetShoppingList
+import com.example.trabajo_final_t3.data.models.triviaRandom.TriviaRandom
 import kotlinx.coroutines.launch
 
 class MyViewModel: ViewModel() {
