@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trabajo_finalt3"
+    namespace = "com.example.trabajo_final_t3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trabajo_finalt3"
+        applicationId = "com.example.trabajo_final_t3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
