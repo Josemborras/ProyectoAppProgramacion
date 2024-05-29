@@ -13,9 +13,7 @@
 
         <action
             android:id="@+id/action_HomeFragment_to_firstFragment"
-            app:destination="@id/firstFragment"
-            app:popUpTo="@id/HomeFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/firstFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_tabLayoutBuscador"
             app:destination="@id/tabLayoutBuscador"

@@ -21,7 +21,7 @@ class TabLayoutBuscador : Fragment() {
     ): View {
         binding = FragmentTablayoutBuscadorBinding.inflate(layoutInflater, container, false)
         (requireActivity() as MainActivity).changeToolbar(binding.toolbarSearch, true, findNavController())
-        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
+        (requireActivity() as MainActivity).changeToolbarTitle("Search")
         return binding.root
     }
 
