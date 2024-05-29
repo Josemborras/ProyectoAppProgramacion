@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.navContainer) as NavHost
          navController = navHost.navController
 
-
         //Para sincronizar nuestro menu
         appBarConfiguration = AppBarConfiguration(
             setOf(

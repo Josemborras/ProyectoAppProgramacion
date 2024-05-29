@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.AllRecipeInfo.Recipe
 import com.example.trabajo_final_t3.databinding.FragmentListadoBinding
+import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.ui.adapters.ListRecipesAdapter
 
 /**
@@ -30,6 +31,8 @@ class ListRecipesRandom : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListadoBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbar2, true, findNavController())
+        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         return binding.root
     }
 
