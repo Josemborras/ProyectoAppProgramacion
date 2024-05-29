@@ -20,9 +20,7 @@ class Repository {
     suspend fun getRecipe(id: Int): Response<Recipe> {
         return RetrofitObjeto.retrofitInterface.obtenerRecipe(id)
     }
-    suspend fun getCardImage(id: Int): Response<RecipeCard> {
-        return RetrofitObjeto.retrofitInterface.obtenerCardImage(id)
-    }
+
     suspend fun listRecipes(id: Int) = RetrofitObjeto.retrofitInterface.obtenerRecetasSimilares(id)
 
     suspend fun getInstructions(id: Int) = RetrofitObjeto.retrofitInterface.obtenerInstructions(id)

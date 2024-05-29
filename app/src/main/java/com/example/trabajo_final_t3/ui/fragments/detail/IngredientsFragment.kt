@@ -43,6 +43,9 @@ class IngredientsFragment : Fragment() {
                                 configRecyclerIngredients(it.extendedIngredients)
                             }
                         }
+                        myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
+                            configRecyclerSimilar(it)
+                        }
                     }
                 }
             }else{
@@ -54,6 +57,9 @@ class IngredientsFragment : Fragment() {
                                     recipeComplete?.let {
                                         configRecyclerIngredients(it.extendedIngredients)
                                     }
+                                }
+                                myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
+                                    configRecyclerSimilar(it)
                                 }
                             }
                         }
