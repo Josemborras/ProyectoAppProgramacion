@@ -21,8 +21,8 @@
             app:collapsedTitleTextColor="@color/yellow"
             app:contentScrim="@color/green"
             app:expandedTitleMarginEnd="48dp"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleTextColor="#000000"
+            app:expandedTitleMarginStart="24dp"
+            app:expandedTitleTextColor="@color/yellow"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -30,8 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:alpha="0.8"
                 app:srcCompat="@drawable/ic_launcher_background" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1E000000" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbarDetail"
