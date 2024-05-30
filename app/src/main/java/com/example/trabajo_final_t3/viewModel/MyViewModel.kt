@@ -33,6 +33,8 @@ class MyViewModel: ViewModel() {
     private val selectedRecipeRandom = MutableLiveData<Recipe>()
     private val selectedRecipeSearch = MutableLiveData<RecipesResponseItem>()
     private val livedataBoolean = MutableLiveData<Boolean>()
+    private val selectedRecipeFragment = MutableLiveData<Recipe>()
+    private val listSimilar = MutableLiveData<ArrayList<RecipesResponseItem>>()
 
     fun setBoolean(boolean: Boolean){
         livedataBoolean.value = boolean
@@ -82,6 +84,18 @@ class MyViewModel: ViewModel() {
     }
 
     fun getRecipeSearch() = selectedRecipeSearch
+
+    fun setRecipeFragment(recipe: Recipe){
+        selectedRecipeFragment.value = recipe
+    }
+
+    fun getRecipeFragment() = selectedRecipeFragment
+
+    fun setListSimilar(similars: ArrayList<RecipesResponseItem>){
+        listSimilar.value = similars
+    }
+
+    fun getListSimilar() = listSimilar
 
     fun recipesRandomAddVw(number: Int): MutableLiveData<RecipesRandom?> {
 

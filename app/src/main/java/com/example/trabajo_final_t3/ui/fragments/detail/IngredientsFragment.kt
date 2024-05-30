@@ -34,38 +34,12 @@ class IngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
-            if (boolean == true){
-                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
-                    recipeSearch.id?.let {recipeId ->
-                        myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) { recipeComplete ->
-                            recipeComplete?.let {
-                                configRecyclerIngredients(it.extendedIngredients)
-                            }
-                        }
-                        myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
-                            configRecyclerSimilar(it)
-                        }
-                    }
-                }
-            }else{
-                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-                    recipe.id?.let {
-                        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipeSearch ->
-                            recipeSearch.id?.let {recipeId ->
-                                myViewModel.getRecipeInfo(recipeId).observe(viewLifecycleOwner) { recipeComplete ->
-                                    recipeComplete?.let {
-                                        configRecyclerIngredients(it.extendedIngredients)
-                                    }
-                                }
-                                myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
-                                    configRecyclerSimilar(it)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        myViewModel.getRecipeFragment().observe(viewLifecycleOwner){recipe->
+            configRecyclerIngredients(recipe.extendedIngredients)
+            recipe.id?.let { myViewModel.getSimilars(it).observe(viewLifecycleOwner){listSimilars ->
+                myViewModel.setListSimilar(listSimilars)
+                configRecyclerSimilar(listSimilars)
+            } }
         }
     }
 
@@ -76,10 +50,8 @@ class IngredientsFragment : Fragment() {
                 myViewModel.setRecipeSearch(receta)
                 findNavController().navigate(R.id.action_detailRecipeFragment_self)
             }
-
         })
         adapterSimilar.setRecipes(list)
-
         binding.rvSimilar2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvSimilar2.adapter = adapterSimilar
     }

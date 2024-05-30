@@ -26,7 +26,9 @@ interface RetrofitInterface {
     companion object {
         const val API_KEY_DANI = "e6babe78c3164d15a137f94b95196593"
         const val API_KEY_DANI_DOS = "6f08c8334d954a858362da7bf0140500"
-        const val API_KEY_JOSE = ""
+        const val API_KEY_JOSE = "69b49e24974a4fd88b8e01f793a4e6e6"
+        const val API_KEY_JOSE_DOS = "5e5385644ccb4f4ca7e6079366cc4f7b"
+        const val API_KEY_JOSE_TRES = "7509ee3ea4c44ff08dd7ff26ff8a22fc"
         const val API_KEY_SANDRA = "90b3b4e1f1e64864943fe169af738877"
         const val API_KEY_SANDRA_DOS = "0a3d1774dec74565a4565e2877d195ac"
         const val API_KEY_MARIA = "8bd01298d80e4b8f90b5985392f9fb1b"
@@ -71,15 +73,15 @@ interface RetrofitInterface {
     @GET("recipes/{id}/information")
     suspend fun obtenerRecipe(@Path("id") id: Int): Response<Recipe>
 
-    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE_DOS","Content-Type: application/json")
     @GET("recipes/{id}/similar")
     suspend fun obtenerRecetasSimilares(@Path("id") id: Int): Response<ArrayList<RecipesResponseItem>>
 
-    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE_TRES","Content-Type: application/json")
     @GET("recipes/{id}/card")
     suspend fun obtenerCardImage(@Path("id") id: Int): Response<RecipeCard>
 
-    @Headers("x-api-key: $API_KEY_JOSE","Content-Type: application/json")
+    @Headers("x-api-key: $API_KEY_JOSE_TRES","Content-Type: application/json")
     @GET("recipes/{id}/analyzedInstructions")
     suspend fun obtenerInstructions(@Path("id") id: Int): Response<StepsResponse>
 

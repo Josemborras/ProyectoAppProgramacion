@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentCardBinding
 import com.example.trabajo_final_t3.ui.adapters.SimilarRecipeAdapter
@@ -17,7 +19,7 @@ class CardFragment : Fragment() {
 
     private lateinit var binding: FragmentCardBinding
     private val myViewModel by activityViewModels<MyViewModel>()
-    private lateinit var adapter: SimilarRecipeAdapter
+    private lateinit var adapterSimilar: SimilarRecipeAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,62 +31,27 @@ class CardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
-            if (boolean == true){
-                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipe ->
-                    recipe.id?.let {
-                        myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
-                            Glide.with(this).load(cardImage?.url).into(binding.imageView)
-                        }
-                    }
+        myViewModel.getRecipeFragment().observe(viewLifecycleOwner){recipe ->
+            recipe.id?.let { myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){recipeCard ->
+                Glide.with(this).load(recipeCard?.url).into(binding.imageView)
+            } }
 
-                    recipe.id?.let {
-                        myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                            configRecyclerSimilar(it)
-                        }
-                    }
-                }
-            }else{
-                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-                    recipe.id?.let {
-                        myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
-                            Glide.with(this).load(cardImage?.url).into(binding.imageView)
-                        }
-                    }
-
-                    recipe.id?.let {
-                        myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                            configRecyclerSimilar(it)
-                        }
-                    }
-                }
-            }
-        }
-
-        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-            recipe.id?.let {
-                myViewModel.recipeCardAddvm(it).observe(viewLifecycleOwner){ cardImage ->
-                    Glide.with(this).load(cardImage?.url).into(binding.imageView)
-                }
-            }
-
-            recipe.id?.let {
-                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                    configRecyclerSimilar(it)
-                }
+            myViewModel.getListSimilar().observe(viewLifecycleOwner){listSimilars ->
+                configRecyclerSimilar(listSimilars)
             }
         }
     }
 
     private fun configRecyclerSimilar(list: ArrayList<RecipesResponseItem>) {
-        adapter = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner,object : SimilarRecipeAdapter.MyClick{
+        adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner, object : SimilarRecipeAdapter.MyClick{
             override fun onClick(receta: RecipesResponseItem) {
-
+                myViewModel.setBoolean(true)
+                myViewModel.setRecipeSearch(receta)
+                findNavController().navigate(R.id.action_detailRecipeFragment_self)
             }
         })
-        adapter.setRecipes(list)
-
+        adapterSimilar.setRecipes(list)
         binding.rvSimilar3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvSimilar3.adapter = adapter
+        binding.rvSimilar3.adapter = adapterSimilar
     }
 }

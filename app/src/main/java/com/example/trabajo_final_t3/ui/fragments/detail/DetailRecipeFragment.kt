@@ -40,19 +40,17 @@ class DetailRecipeFragment : Fragment() {
                     recipeSearch.id?.let {
                         myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner){recipe ->
                             (requireActivity() as MainActivity).supportActionBar?.title = recipe.title
-                            binding.collapsingToolbar.title = recipe.title
                             Glide.with(this).load(recipe.image).into(binding.ivRecipe)
+                            myViewModel.setRecipeFragment(recipe)
                         }
                     }
                 }
             }else{
                 myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
                     recipe.id?.let {
-                        myViewModel.getRecipeInfo(it).observe(viewLifecycleOwner) {recipeRandom ->
-                            (requireActivity() as MainActivity).supportActionBar?.title = recipeRandom.title
-                            binding.collapsingToolbar.title = recipeRandom.title
-                            Glide.with(this).load(recipeRandom.image).into(binding.ivRecipe)
-                        }
+                        (requireActivity() as MainActivity).supportActionBar?.title = recipe.title
+                        Glide.with(this).load(recipe.image).into(binding.ivRecipe)
+                        myViewModel.setRecipeFragment(recipe)
                     }
                 }
             }

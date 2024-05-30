@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.data.models.StepsRecipe.StepsResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentStepsBinding
@@ -33,65 +35,27 @@ class StepsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myViewModel.getBoolean().observe(viewLifecycleOwner){boolean ->
-            if (boolean == true){
-                myViewModel.getRecipeSearch().observe(viewLifecycleOwner){recipeSearch ->
-                    recipeSearch.id?.let {recipeId ->
-                        myViewModel.getInstructions(recipeId).observe(viewLifecycleOwner) {
-                            configRecyclerElabs(it)
-                        }
-                    }
-                    recipeSearch.id?.let {recipeId ->
-                        myViewModel.getSimilars(recipeId).observe(viewLifecycleOwner){
-                            configRecyclerSimilar(it)
-                        }
-                    }
+        myViewModel.getRecipeFragment().observe(viewLifecycleOwner){recipe ->
+            recipe.id?.let {id ->
+                myViewModel.getInstructions(id).observe(viewLifecycleOwner) {steps ->
+                    configRecyclerElabs(steps)
                 }
-            }else{
-                myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-                    recipe.id?.let {
-                        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-                            recipe.id?.let {recipeId ->
-                                myViewModel.getInstructions(recipeId).observe(viewLifecycleOwner) {
-                                    configRecyclerElabs(it)
-                                }
-                            }
-                            recipe.id?.let {
-                                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-                                    configRecyclerSimilar(it)
-                                }
-                            }
-                        }
-                    }
+                myViewModel.getListSimilar().observe(viewLifecycleOwner){listSimilars ->
+                    configRecyclerSimilar(listSimilars)
                 }
             }
         }
-
-//        myViewModel.getRecipeRandom().observe(viewLifecycleOwner){recipe ->
-//            recipe.id?.let {
-//                myViewModel.getInstructions(it).observe(viewLifecycleOwner) {
-//                    configRecyclerElabs(it)
-//                }
-//            }
-//
-//            recipe.id?.let {
-//                myViewModel.getSimilars(it).observe(viewLifecycleOwner){
-//                    configRecyclerSimilar(it)
-//                }
-//            }
-//
-//        }
-
     }
 
     private fun configRecyclerSimilar(list: ArrayList<RecipesResponseItem>) {
         adapterSimilar = SimilarRecipeAdapter(myViewModel, viewLifecycleOwner, object : SimilarRecipeAdapter.MyClick{
             override fun onClick(receta: RecipesResponseItem) {
-
+                myViewModel.setBoolean(true)
+                myViewModel.setRecipeSearch(receta)
+                findNavController().navigate(R.id.action_detailRecipeFragment_self)
             }
         })
         adapterSimilar.setRecipes(list)
-
         binding.rvSimilar1.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvSimilar1.adapter = adapterSimilar
     }

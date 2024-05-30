@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        android:theme="@style/ToolbarColoredBackArrow"
         app:layout_scrollFlags="scroll|enterAlways">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -16,10 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            app:collapsedTitleTextColor="@color/white"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:collapsedTitleTextColor="@color/yellow"
             app:contentScrim="@color/green"
             app:expandedTitleMarginEnd="48dp"
             app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextColor="#000000"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -27,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:alpha="0.8"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <com.google.android.material.appbar.MaterialToolbar
