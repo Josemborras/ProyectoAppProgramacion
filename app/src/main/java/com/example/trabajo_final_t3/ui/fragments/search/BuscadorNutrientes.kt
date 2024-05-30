@@ -147,7 +147,7 @@ class BuscadorNutrientes : Fragment() {
                 maxFat == 0 ||
                 maxCalories == 0
             ) {
-                Toast.makeText(context, "No hay recetas para estos nutrientes", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "No recipes found for these nutritional values", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             } else {
                 myViewModel.getRecipesByNutrients(
