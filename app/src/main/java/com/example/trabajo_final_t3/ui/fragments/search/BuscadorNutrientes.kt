@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,28 +30,34 @@ class BuscadorNutrientes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // variables para guardar los numberPickers
+        val npMinProtein = binding.nPMinProtein
+        val npMaxProtein = binding.nPMaxProtein
+        val npMinFat = binding.nPMinFat
+        val npMaxFat = binding.nPMaxFat
+        val npMinCarbs = binding.nPMinCarbs
+        val npMaxCarbs = binding.nPMaxCarbs
+        val npMinCalories = binding.nPMinCalories
+        val npMaxCalories = binding.nPMaxCalories
+
         // aquí se le dan valores mínimos y máximos a cada number picker.
+        npMinProtein.minValue = 0
+        npMinProtein.maxValue = 100
 
-        binding.nPMinProtein.minValue = 0
-        binding.nPMinProtein.maxValue = 100
+        npMaxProtein.minValue = 0
+        npMaxProtein.maxValue = 100
 
-        binding.nPMaxProtein.minValue = 0
-        binding.nPMaxProtein.maxValue = 100
-        // binding.nPMaxProtein.value = 100
+        npMinFat.minValue = 0
+        npMinFat.maxValue = 100
 
-        binding.nPMinFat.minValue = 0
-        binding.nPMinFat.maxValue = 100
+        npMaxFat.minValue = 0
+        npMaxFat.maxValue = 100
 
-        binding.nPMaxFat.minValue = 0
-        binding.nPMaxFat.maxValue = 100
-        // binding.nPMaxFat.value = 100
+        npMinCarbs.minValue = 0
+        npMinCarbs.maxValue = 100
 
-        binding.nPMinCarbs.minValue = 0
-        binding.nPMinCarbs.maxValue = 100
-
-        binding.nPMaxCarbs.minValue = 0
-        binding.nPMaxCarbs.maxValue = 100
-        // binding.nPMaxCarbs.value = 100
+        npMaxCarbs.minValue = 0
+        npMaxCarbs.maxValue = 100
 
         /*
          * esto hace que los valores de los number pickers de calorías mínimas
@@ -60,17 +67,16 @@ class BuscadorNutrientes : Fragment() {
         // values = ["0", "10", "20", "30", "40", +76 more]
         val values = Array(81) { i -> (i * 10).toString() }
 
-        binding.nPMinCalories.minValue = 0
-        binding.nPMinCalories.maxValue = values.size - 1
-        binding.nPMinCalories.displayedValues = values
+        npMinCalories.minValue = 0
+        npMinCalories.maxValue = values.size - 1
+        npMinCalories.displayedValues = values
 
-        binding.nPMaxCalories.minValue = 0
-        binding.nPMaxCalories.maxValue = values.size - 1
-        binding.nPMaxCalories.displayedValues = values
+        npMaxCalories.minValue = 0
+        npMaxCalories.maxValue = values.size - 1
+        npMaxCalories.displayedValues = values
         // binding.nPMaxCalories.value = values.size - 1
 
         binding.btnSearchRecipeByNutrients.setOnClickListener {
-
             /*
              * al pulsar el botón para buscar las recetas por los nutrientes
              * se guardan los valores de los number pickers en sus variables
@@ -81,64 +87,80 @@ class BuscadorNutrientes : Fragment() {
              * de los number pickers también se cambiarán
              * */
 
-            var minCarbs = binding.nPMinCarbs.value
-            var maxCarbs = binding.nPMaxCarbs.value
+            var minCarbs = npMinCarbs.value
+            var maxCarbs = npMaxCarbs.value
+
+            var minProtein = npMinProtein.value
+            var maxProtein = npMaxProtein.value
+
+            var minFat = npMinFat.value
+            var maxFat = npMaxFat.value
+
+            var minCalories = npMinCalories.value
+            var maxCalories = npMaxCalories.value * 10
 
             if (minCarbs > maxCarbs) {
                 val temp = maxCarbs
                 maxCarbs = minCarbs
                 minCarbs = temp
 
-                binding.nPMinCarbs.value = minCarbs
-                binding.nPMaxCarbs.value = maxCarbs
+                npMinCarbs.value = minCarbs
+                npMaxCarbs.value = maxCarbs
             }
-
-            var minProtein = binding.nPMinProtein.value
-            var maxProtein = binding.nPMaxProtein.value
 
             if (minProtein > maxProtein) {
                 val temp = maxProtein
                 maxProtein = minProtein
                 minProtein = temp
 
-                binding.nPMinProtein.value = minProtein
-                binding.nPMaxProtein.value = maxProtein
+                npMinProtein.value = minProtein
+                npMaxProtein.value = maxProtein
             }
-
-            var minFat = binding.nPMinFat.value
-            var maxFat = binding.nPMaxFat.value
 
             if (minFat > maxFat) {
                 val temp = maxFat
                 maxFat = minFat
                 minFat = temp
 
-                binding.nPMinFat.value = minFat
-                binding.nPMaxFat.value = maxFat
+                npMinFat.value = minFat
+                npMaxFat.value = maxFat
             }
-
-            var minCalories = binding.nPMinCalories.value
-            var maxCalories = binding.nPMaxCalories.value
 
             if (minCalories > maxCalories) {
                 val temp = maxCalories
                 maxCalories = minCalories
                 minCalories = temp
 
-                binding.nPMinCalories.value = minCalories
-                binding.nPMaxCalories.value = maxCalories
+                npMaxCalories.value = minCalories
+                npMaxCalories.value = maxCalories
             }
 
-            myViewModel.getRecipesByNutrients(
-                minCarbs, maxCarbs,
-                minProtein, maxProtein,
-                minFat, maxFat,
-                minCalories, maxCalories,
-                80
-            ).observe(viewLifecycleOwner){
-                funSetRecipeingredient(it)
 
-                findNavController().navigate(R.id.action_tabLayoutBuscador_to_listRecipesSearch)
+            /*
+             * este if es para comprobar si los valores son diferentes
+             * de 0, si lo son hará la petición y pasará a la lista de recetas,
+             * si son iguales a 0 manda un toast
+             * */
+            if (
+                maxProtein == 0 ||
+                maxCarbs == 0 ||
+                maxFat == 0 ||
+                maxCalories == 0
+            ) {
+                Toast.makeText(context, "No hay recetas para estos nutrientes", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else {
+                myViewModel.getRecipesByNutrients(
+                    minCarbs, maxCarbs,
+                    minProtein, maxProtein,
+                    minFat, maxFat,
+                    minCalories, maxCalories,
+                    80
+                ).observe(viewLifecycleOwner){
+                    funSetRecipeingredient(it)
+
+                    findNavController().navigate(R.id.action_tabLayoutBuscador_to_listRecipesSearch)
+                }
             }
         }
     }
