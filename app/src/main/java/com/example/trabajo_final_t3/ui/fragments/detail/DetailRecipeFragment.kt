@@ -26,7 +26,6 @@ class DetailRecipeFragment : Fragment() {
     ): View {
         binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
         (requireActivity() as MainActivity).changeToolbar(binding.toolbarDetail, true, findNavController())
-        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
         setupTabs(savedInstanceState)
         return binding.root
     }

@@ -13,6 +13,7 @@ import com.example.trabajo_final_t3.R
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.ListRecipeResponse
 import com.example.trabajo_final_t3.data.models.SearchRecipesByIngredients.RecipesResponseItem
 import com.example.trabajo_final_t3.databinding.FragmentListSearchBinding
+import com.example.trabajo_final_t3.ui.MainActivity
 import com.example.trabajo_final_t3.ui.adapters.SearchListAdapter
 
 class ListRecipesSearch : Fragment()  {
@@ -27,6 +28,8 @@ class ListRecipesSearch : Fragment()  {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListSearchBinding.inflate(inflater, container, false)
+        (requireActivity() as MainActivity).changeToolbar(binding.toolbarSearch, true, findNavController())
+            (requireActivity() as MainActivity).changeToolbarTitle("Search Results")
         return binding.root
     }
 

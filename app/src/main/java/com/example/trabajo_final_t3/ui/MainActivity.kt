@@ -2,9 +2,11 @@ package com.example.trabajo_final_t3.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.trabajo_final_t3.R
@@ -37,7 +39,20 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            val id = destination.id
+            //PARA QUE NO SE MUESTRE EL MENÚ INFERIOR CUANDO SE CAMBIA A FRAGMENTS QUE NO ESTAN EN LA NAVEGACION INFERIOR
+            if(id == R.id.HomeFragment || id == R.id.tabLayoutBuscador || id == R.id.ShoppingListFragment){
+                binding.bottomNav.isVisible = true
+            } else{
+                binding.bottomNav.isVisible = false
+            }
+        }
     }
+
+    //para que la flecha hacia atrás del actionBar funcione
+    override fun onSupportNavigateUp() = navController.navigateUp(appBarConfiguration)
 
     //metodo para cambiar el toolbar desde cada fragment (no son todos iguales)
     fun changeToolbar(toolbarNew: androidx.appcompat.widget.Toolbar, showBack: Boolean, navController: NavController){

@@ -32,7 +32,7 @@ class ListRecipesRandom : Fragment() {
     ): View {
         _binding = FragmentListadoBinding.inflate(inflater, container, false)
         (requireActivity() as MainActivity).changeToolbar(binding.toolbar2, true, findNavController())
-        (requireActivity() as MainActivity).changeToolbarTitle("Shopping List")
+        (requireActivity() as MainActivity).changeToolbarTitle("Random Recipes")
         return binding.root
     }
 
