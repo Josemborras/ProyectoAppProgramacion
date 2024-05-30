@@ -12,7 +12,7 @@ import com.example.trabajo_final_t3.databinding.FragmentceldarecetaBinding
 class SearchListAdapter(val recetas: ListRecipeResponse, val listener: MyClick): RecyclerView.Adapter<SearchListAdapter.disenioPlantilla>(){
 
     /*
-     * Adaptador para el listado de recetas que se obtienen del buscador
+     * Adaptador para el listado de recetas que se obtienen del buscador. Se creo este adaptador porque la lista de recetas que obtenia Daniel de su busqueda y la que obtenia Maria de la lista aleatoria eran objetos distintos. Este es para el objeto de Daniel
      * */
 
     inner class disenioPlantilla(val binding: FragmentceldarecetaBinding) :
@@ -40,17 +40,5 @@ class SearchListAdapter(val recetas: ListRecipeResponse, val listener: MyClick):
         holder.itemView.setOnClickListener {
             listener.onClick(listRecetas)
         }
-
-
     }
-
-
-//    fun refrescarListado(lista: List<RecipesRandom?>?){
-//        recetas.clear()
-//        if(lista != null){
-//            recetas.addAll(lista)
-//        }
-//        notifyItemRangeChanged(0, itemCount)
-//    }
-
 }
