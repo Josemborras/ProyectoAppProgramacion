@@ -143,7 +143,7 @@ interface RetrofitInterface {
     //GET
     @Headers(
         "Content-Type: application/json",
-        "x-api-key: $API_KEY_SANDRA"
+        "x-api-key: $API_KEY_SANDRA_DOS"
     )
     @GET("mealplanner/{username}/shopping-list")
     suspend fun getShoppingList(
