@@ -20,7 +20,7 @@
             android:background="@color/green"
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:theme="@style/ToolbarColoredBackArrow"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="@color/yellow" />
 
@@ -34,7 +34,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:clickable="true"
-        android:src="@android:drawable/arrow_up_float"
+        android:src="@drawable/baseline_arrow_upward_24"
         app:backgroundTint="#B3A8F3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
