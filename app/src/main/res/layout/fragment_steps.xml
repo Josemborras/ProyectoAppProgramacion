@@ -24,7 +24,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:alpha="0.3"
-                app:srcCompat="@drawable/foodies___vegan_recipe" />
+                app:srcCompat="@drawable/foodies_fragment_steps" />
 
             <TextView
                 android:id="@+id/textView2"
