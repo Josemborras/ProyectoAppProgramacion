@@ -7,22 +7,60 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.tabajo_finalt3.ui.HomeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.home.HomeFragment"
         android:label="HOME"
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/ShoppingListFragment" />
+            android:id="@+id/action_HomeFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_tabLayoutBuscador"
+            app:destination="@id/tabLayoutBuscador"
+            app:popUpTo="@id/HomeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ShoppingListFragment"
+            app:destination="@id/ShoppingListFragment"
+            app:popUpTo="@id/HomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.listRecipe.ListRecipesRandom"
+        android:label="ListRecipe"
+        tools:layout="@layout/fragment_listado">
+        <action
+            android:id="@+id/action_firstFragment_to_detailRecipeFragment"
+            app:destination="@id/detailRecipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/ShoppingListFragment"
-        android:name="com.example.tabajo_finalt3.ui.ShoppingListFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.shoppingList.ShoppingListFragment"
         android:label="Shopping list"
-        tools:layout="@layout/fragment_shopping_list">
-
+        tools:layout="@layout/fragment_shopping_list"/>
+    <fragment
+        android:id="@+id/detailRecipeFragment"
+        android:name="com.example.trabajo_final_t3.ui.fragments.detail.DetailRecipeFragment"
+        android:label="DetailRecipeFragment" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/HomeFragment" />
+            android:id="@+id/action_detailRecipeFragment_self"
+            app:destination="@id/detailRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabLayoutBuscador"
+        android:name="com.example.trabajo_final_t3.ui.fragments.search.TabLayoutBuscador"
+        android:label="TabLayoutBuscador" >
+        <action
+            android:id="@+id/action_tabLayoutBuscador_to_listRecipesSearch"
+            app:destination="@id/listRecipesSearch" />
+    </fragment>
+    <fragment
+        android:id="@+id/listRecipesSearch"
+        android:name="com.example.trabajo_final_t3.ui.fragments.listRecipe.ListRecipesSearch"
+        android:label="ListRecipesSearch" >
+        <action
+            android:id="@+id/action_listRecipesSearch_to_detailRecipeFragment"
+            app:destination="@id/detailRecipeFragment" />
     </fragment>
 </navigation>

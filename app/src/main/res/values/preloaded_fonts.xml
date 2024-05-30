@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alata</item>
+        <item>@font/handlee</item>
+        <item>@font/indie_flower</item>
         <item>@font/lexend_bold</item>
         <item>@font/lexend_light</item>
         <item>@font/lexend_semibold</item>
