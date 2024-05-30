@@ -10,19 +10,30 @@ import retrofit2.Response
 
 class Repository {
 
+    /**
+     * @author Maria Belen
+     */
+
     suspend fun recipesRandomAdd(number: Int) = RetrofitObjeto.retrofitInterface.rescipesRandom(number)
 
     suspend fun triviaRandomAdd() = RetrofitObjeto.retrofitInterface.triviaRandom()
 
     suspend fun recipeCard(id: Int) = RetrofitObjeto.retrofitInterface.recipeCard(id)
 
+    /**
+     * @author Jose
+     */
+
     suspend fun getRecipe(id: Int): Response<Recipe> {
         return RetrofitObjeto.retrofitInterface.obtenerRecipe(id)
     }
-
     suspend fun listRecipes(id: Int) = RetrofitObjeto.retrofitInterface.obtenerRecetasSimilares(id)
 
     suspend fun getInstructions(id: Int) = RetrofitObjeto.retrofitInterface.obtenerInstructions(id)
+
+    /**
+     * @author Daniel
+     */
 
     suspend fun getIngredients(ingredientName: String) = RetrofitObjeto.retrofitInterface.getIngredients(ingredientName)
 
